@@ -1,19 +1,15 @@
 package componentesUI;
 
 import javax.swing.JPanel;
-
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-
-import javax.swing.JFrame;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
 
 public class Chat extends JPanel {
-
     private JTextArea areaChat;
     private JScrollPane scrollChat;
     private JLabel labelNome;
@@ -45,7 +41,7 @@ public class Chat extends JPanel {
         botDesconectar = new JButton();
         botDesconectar.setText("Desconectar");
         
-        GroupLayout layoutChat = new GroupLayout()
+        GroupLayout layoutChat = new GroupLayout(this);
 
         layoutChat.setHorizontalGroup(
             layoutChat.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -65,5 +61,21 @@ public class Chat extends JPanel {
                         .addComponent(botDesconectar, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
+        
+        layoutChat.setVerticalGroup(
+            layoutChat.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(GroupLayout.Alignment.TRAILING, layoutChat.createSequentialGroup()
+                .addGap(465, 465, 465)
+                .addComponent(scrollChat, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layoutChat.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(areaEntrada, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botDesconectar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botEnviar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        
+        setLayout(layoutChat);
     }
 }
