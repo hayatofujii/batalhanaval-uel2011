@@ -1,21 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package nucleo;
 
 import java.util.Scanner;
 
-/**
- *
- * @author hayato
- */
 public class CampoMinado {
     
     private Jogador player1, player2;
     
-    public CampoMinado()
-    {
+    public CampoMinado() {
        String nome;
        Scanner teclado = new Scanner(System.in);
 
