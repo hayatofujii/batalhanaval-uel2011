@@ -7,7 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.GroupLayout;
-import javax.swing.LayoutStyle;
 
 public class Chat extends JPanel {
     private JTextArea areaChat;
@@ -15,7 +14,6 @@ public class Chat extends JPanel {
     private JLabel labelNome;
     private JTextField areaEntrada;
     private JButton botEnviar;
-    private JButton botDesconectar;
 
     public Chat() {        
         areaChat = new JTextArea();
@@ -37,43 +35,30 @@ public class Chat extends JPanel {
 
         botEnviar = new JButton();
         botEnviar.setText("Enviar");
-
-        botDesconectar = new JButton();
-        botDesconectar.setText("Desconectar");
-        
+   
         GroupLayout layoutChat = new GroupLayout(this);
 
         layoutChat.setHorizontalGroup(
             layoutChat.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layoutChat.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layoutChat.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(layoutChat.createSequentialGroup()
-                        .addComponent(scrollChat, GroupLayout.DEFAULT_SIZE, 812, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layoutChat.createSequentialGroup()
-                        .addComponent(labelNome)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                        .addComponent(areaEntrada, GroupLayout.PREFERRED_SIZE, 557, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botEnviar,GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botDesconectar, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                .addComponent(labelNome, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(areaEntrada, GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botEnviar, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+            )
+            .addComponent(scrollChat, GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
         );
         
         layoutChat.setVerticalGroup(
             layoutChat.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, layoutChat.createSequentialGroup()
-                .addGap(465, 465, 465)
-                .addComponent(scrollChat, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+            .addGroup(layoutChat.createSequentialGroup()
+                .addComponent(scrollChat, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layoutChat.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(areaEntrada, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botDesconectar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botEnviar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(botEnviar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
         );
         
         setLayout(layoutChat);

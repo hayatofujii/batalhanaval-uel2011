@@ -5,15 +5,13 @@ import componentesUI.Chat;
 
 import javax.swing.JPanel;
 import javax.swing.JFrame;
-import java.awt.FlowLayout;
-import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
 
 public class ConfigGrid {
+    JPanel painel;
     
     Chat chat;
     Grid grid;
-    
-    JPanel painel;
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(
@@ -23,7 +21,8 @@ public class ConfigGrid {
                     public void run() {
                         mostrar();
                     }
-                });
+                }
+        );
     }
 
     private static void mostrar() {
@@ -46,16 +45,36 @@ public class ConfigGrid {
 
     public ConfigGrid() {
         painel = new JPanel();
-        
-        // fazer layout do painel principal
-        painel.setLayout(new FlowLayout());
-        painel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        
-        chat = new Chat();
-        painel.add(chat);
-        
+
         grid = new Grid();
-        painel.add(grid);
+        chat = new Chat();
+
+        GroupLayout layoutConfigGrid = new GroupLayout(painel);
+        
+        layoutConfigGrid.setHorizontalGroup(
+            layoutConfigGrid.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(layoutConfigGrid.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layoutConfigGrid.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(chat, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(grid, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                )
+                .addContainerGap()
+             )
+        );
+        
+        layoutConfigGrid.setVerticalGroup(
+            layoutConfigGrid.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(layoutConfigGrid.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(grid, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chat, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+            )
+        );
+        
+        painel.setLayout(layoutConfigGrid);
                 
     }
 }
