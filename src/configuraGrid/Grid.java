@@ -1,9 +1,13 @@
 package configuraGrid;
 
+import javax.swing.JPanel;
 import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
 import java.awt.Insets;
+import javax.swing.BorderFactory;
 import java.awt.Color;
-import javax.swing.*;
 
 public class Grid extends JPanel {
     

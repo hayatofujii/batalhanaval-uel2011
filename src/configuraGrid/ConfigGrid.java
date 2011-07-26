@@ -1,16 +1,20 @@
 package configuraGrid;
 
+import componentesUI.Grid;
+import componentesUI.Chat;
+
 import javax.swing.JPanel;
 import javax.swing.JFrame;
-import javax.swing.JComponent;
 import java.awt.FlowLayout;
 import javax.swing.BorderFactory;
 
-public class ConfigGrid extends JPanel {
-
-    private Grid grid;
-    private Chat chat;
+public class ConfigGrid {
     
+    Chat chat;
+    Grid grid;
+    
+    JPanel painel;
+
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(
                 new Runnable() {
@@ -28,12 +32,12 @@ public class ConfigGrid extends JPanel {
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janela.setResizable(false);
 
-        // instancia uma janela
-        JComponent conf = new ConfigGrid();
-        conf.setOpaque(true);
+        // instancia uma janela ConfigGrid
+        ConfigGrid conf = new ConfigGrid();
+        conf.painel.setOpaque(true);
 
-        // seta a janela para mostrar somente o grid
-        janela.setContentPane(conf);
+        // seta a janela para mostrar somente o ConfigGrid
+        janela.setContentPane(conf.painel);
 
         // mostrar frame
         janela.pack();
@@ -41,15 +45,17 @@ public class ConfigGrid extends JPanel {
     }
 
     public ConfigGrid() {
-        // layout da FRAME
-        super(new FlowLayout());
-        setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
-
-        // invocar grid
-        grid = new Grid();
-        add(grid);
+        painel = new JPanel();
         
-        //chat = new Chat();
-//      add(chat);
+        // fazer layout do painel principal
+        painel.setLayout(new FlowLayout());
+        painel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        
+        chat = new Chat();
+        painel.add(chat);
+        
+        grid = new Grid();
+        painel.add(grid);
+                
     }
 }
