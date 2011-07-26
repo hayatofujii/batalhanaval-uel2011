@@ -1,11 +1,10 @@
 package configuraGrid;
 
-import componentesUI.Grid;
 import componentesUI.Chat;
+import componentesUI.Grid;
 
 import javax.swing.JPanel;
 import javax.swing.JFrame;
-import javax.swing.GroupLayout;
 
 public class ConfigGrid {
     JPanel painel;
@@ -15,21 +14,22 @@ public class ConfigGrid {
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(
-                new Runnable() {
+            new Runnable() {
 
-                    @Override
-                    public void run() {
-                        mostrar();
-                    }
+                @Override
+                public void run() {
+                    mostrar();
                 }
+            }
         );
     }
 
     private static void mostrar() {
         // frame
         JFrame janela = new JFrame("Batalha Naval");
+        janela.setSize(800, 600);
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        janela.setResizable(false);
+        janela.setResizable(true);
 
         // instancia uma janela ConfigGrid
         ConfigGrid conf = new ConfigGrid();
@@ -39,7 +39,6 @@ public class ConfigGrid {
         janela.setContentPane(conf.painel);
 
         // mostrar frame
-        janela.pack();
         janela.setVisible(true);
     }
 
@@ -48,33 +47,14 @@ public class ConfigGrid {
 
         grid = new Grid();
         chat = new Chat();
-
-        GroupLayout layoutConfigGrid = new GroupLayout(painel);
         
-        layoutConfigGrid.setHorizontalGroup(
-            layoutConfigGrid.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layoutConfigGrid.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layoutConfigGrid.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(chat, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(grid, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                )
-                .addContainerGap()
-             )
-        );
+        painel.setLayout(null);
         
-        layoutConfigGrid.setVerticalGroup(
-            layoutConfigGrid.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layoutConfigGrid.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(grid, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(chat, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap()
-            )
-        );
+        painel.add(grid);
+        painel.add(chat);
         
-        painel.setLayout(layoutConfigGrid);
-                
+        grid.setBounds(50, 34, 350, 350);
+        //chat.setBounds(0, 0, 800, 600);
+        chat.setBounds(50, 403, 717, 138);
     }
 }

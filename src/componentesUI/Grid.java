@@ -2,16 +2,13 @@ package componentesUI;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
-
 import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import java.awt.Insets;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 
-
 public class Grid extends JPanel {
-    
     JButton[][] botoes;
 
     public Grid() {
@@ -31,11 +28,9 @@ public class Grid extends JPanel {
                 botoes[i][j].setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
                 botoes[i][j].setIcon(icon);
 
-                // colocar o botão ao painel
+                // colocar o botão no painel
                 add(botoes[i][j]);
             }
         }
-
     }
-
 }
