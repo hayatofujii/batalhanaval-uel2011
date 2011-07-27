@@ -44,7 +44,6 @@ public class Chat extends JPanel {
         add(scrollChat);
 
         labelNome = new JLabel();
-        // reposicionar isso
         labelNome.setBounds(0, 115, 87, 23);
         labelNome.setText(_nome);
         add(labelNome);
@@ -76,14 +75,10 @@ public class Chat extends JPanel {
     
     public class eventoAreaEntrada implements KeyListener {
         @Override
-        public void keyTyped(KeyEvent ev) {
-            
-        }
+        public void keyTyped(KeyEvent ev) {}
         
         @Override
-        public void keyPressed(KeyEvent ev) {
-            
-        }
+        public void keyPressed(KeyEvent ev) {}
         
         @Override
         public void keyReleased(KeyEvent ev) {
