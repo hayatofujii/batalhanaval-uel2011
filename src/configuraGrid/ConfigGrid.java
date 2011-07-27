@@ -11,6 +11,7 @@ public class ConfigGrid {
     
     Chat chat;
     Grid grid;
+    Grid grid2;
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(
@@ -29,7 +30,7 @@ public class ConfigGrid {
         JFrame janela = new JFrame("Batalha Naval");
         janela.setSize(800, 600);
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        janela.setResizable(true);
+        janela.setResizable(false);
 
         // instancia uma janela ConfigGrid
         ConfigGrid conf = new ConfigGrid();
@@ -46,15 +47,17 @@ public class ConfigGrid {
         painel = new JPanel();
 
         grid = new Grid();
+        grid2 = new Grid();
         chat = new Chat();
         
         painel.setLayout(null);
         
         painel.add(grid);
+        painel.add(grid2);
         painel.add(chat);
         
         grid.setBounds(50, 34, 350, 350);
-        //chat.setBounds(0, 0, 800, 600);
-        chat.setBounds(50, 403, 717, 138);
+        grid2.setBounds(475, 34, 200, 200);
+        chat.setBounds(50, 403, 695, 138);
     }
 }

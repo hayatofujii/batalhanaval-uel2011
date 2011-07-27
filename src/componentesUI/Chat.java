@@ -27,16 +27,16 @@ public class Chat extends JPanel {
 
         scrollChat = new JScrollPane();
         scrollChat.setViewportView(areaChat);
-        scrollChat.setBounds(0, 0, 717, 108);
+        scrollChat.setBounds(0, 0, 695, 108);
         add(scrollChat);
 
         areaEntrada = new JTextField();
-        areaEntrada.setBounds(0, 115, 620, 23);
+        areaEntrada.setBounds(0, 115, 598, 23);
         add(areaEntrada);
 
         botEnviar = new JButton();
         botEnviar.setText("Enviar");
-        botEnviar.setBounds(621, 115, 95, 22);
+        botEnviar.setBounds(599, 115, 95, 22);
         add(botEnviar);
     }
 }
