@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 
 public class Chat extends JPanel {
@@ -23,7 +25,7 @@ public class Chat extends JPanel {
     private JButton botEnviar;
     private JLabel labelNome;
     
-    public Chat (String _nome) {
+    public Chat(String _nome) {
         setLayout(null);
         
         areaChat = new JTextArea();
@@ -43,33 +45,54 @@ public class Chat extends JPanel {
 
         labelNome = new JLabel();
         // reposicionar isso
-        labelNome.setBounds(0, 0, 30, 23);
+        labelNome.setBounds(0, 115, 87, 23);
         labelNome.setText(_nome);
         add(labelNome);
         
         areaEntrada = new JTextField();
-        areaEntrada.setBounds(0, 115, 598, 23);
+        areaEntrada.addKeyListener(new eventoAreaEntrada());
+        areaEntrada.setBounds(93, 115, 499, 23);
         add(areaEntrada);
 
         botEnviar = new JButton();
         botEnviar.setText("Enviar");
 
-        botEnviar.addActionListener(new eventosBotEnviar());
+        botEnviar.addActionListener(new eventoBotEnviar());
         botEnviar.setBounds(599, 115, 95, 22);
         add(botEnviar);
     }
-        
-    // por enquanto ele só faz um self loop: adiciona a frase pra janela de chat
-    // * enviar ao apertar Enter
-    // * IPC da Rede (GerenciaRede.java -> fazer parte do pacote núcleo)
-    public class eventosBotEnviar implements ActionListener {
-
+    
+    // adiciona a frase à janela de chat
+    // * IPC da rede (GerenciaRede.java -> fazer parte do pacote núcleo)
+    public class eventoBotEnviar implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ev) {
             areaChat.append(labelNome.getText() + ": " + areaEntrada.getText() + "\n");
 
             areaEntrada.setText("");
             areaEntrada.requestFocus();
+        }
+    }
+    
+    public class eventoAreaEntrada implements KeyListener {
+        @Override
+        public void keyTyped(KeyEvent ev) {
+            
+        }
+        
+        @Override
+        public void keyPressed(KeyEvent ev) {
+            
+        }
+        
+        @Override
+        public void keyReleased(KeyEvent ev) {
+            if(ev.getKeyCode() == KeyEvent.VK_ENTER) {
+                areaChat.append(labelNome.getText() + ": " + areaEntrada.getText() + "\n");
+
+                areaEntrada.setText("");
+                areaEntrada.requestFocus();
+            }
         }
     }
 }
