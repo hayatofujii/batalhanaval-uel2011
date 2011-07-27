@@ -48,7 +48,7 @@ public class ConfigGrid {
 
         grid = new Grid();
         grid2 = new Grid();
-        chat = new Chat("Nome1");
+        chat = new Chat("Paulo Henrique");
         
         painel.setLayout(null);
         
@@ -56,7 +56,7 @@ public class ConfigGrid {
         painel.add(grid2);
         painel.add(chat);
         
-        grid.setBounds(50, 50, 350, 350);
+        grid.setBounds(50, 34, 350, 350);
         grid2.setBounds(475, 34, 200, 200);
         chat.setBounds(50, 403, 695, 138);
     }
