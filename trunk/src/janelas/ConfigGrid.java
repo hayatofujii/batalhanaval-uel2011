@@ -7,22 +7,22 @@ import javax.swing.JPanel;
 
 public class ConfigGrid extends JPanel {
     Chat chat;
-    Grid grid;
-    Grid grid2;
+    Grid grid, mini;
 
     public ConfigGrid() {
         grid = new Grid();
-        grid2 = new Grid();
+        mini = new Grid();
         chat = new Chat("Paulo Henrique");
         
         setLayout(null);
         
-        add(grid);
-        add(grid2);
-        add(chat);
-        
         grid.setBounds(50, 34, 350, 350);
-        grid2.setBounds(475, 34, 200, 200);
+        add(grid);
+                
+        mini.setBounds(475, 34, 200, 200);
+        add(mini);
+        
         chat.setBounds(50, 403, 695, 138);
+        add(chat);
     }
 }
