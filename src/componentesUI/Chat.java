@@ -21,9 +21,9 @@ import java.awt.event.KeyListener;
 public class Chat extends JPanel {
     private JTextArea areaChat;
     private JScrollPane scrollChat;
+    private JButton botNome;
     private JTextField areaEntrada;
     private JButton botEnviar;
-    private JLabel labelNome;
     
     public Chat(String _nome) {
         setLayout(null);
@@ -40,13 +40,12 @@ public class Chat extends JPanel {
         scrollChat = new JScrollPane(areaChat);
         scrollChat.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollChat.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollChat.setBounds(0, 0, 695, 108);
+        scrollChat.setBounds(0, 0, 700, 110);
         add(scrollChat);
 
-        labelNome = new JLabel();
-        labelNome.setBounds(0, 115, 87, 23);
-        labelNome.setText(_nome);
-        add(labelNome);
+        botNome = new JButton(_nome);
+        botNome.setBounds(0, 115, 87, 23);
+        add(botNome);
         
         areaEntrada = new JTextField();
         areaEntrada.addKeyListener(new eventoAreaEntrada());
@@ -63,13 +62,18 @@ public class Chat extends JPanel {
     
     // adiciona a frase à janela de chat
     // * IPC da rede (GerenciaRede.java -> fazer parte do pacote núcleo)
+    // * Bug: enviando mensagem vazia
+    private void enviarMensagem (String _msg) {
+        areaChat.append(_msg +" \n");
+        
+        areaEntrada.setText("");
+        areaEntrada.requestFocus();
+    }
+    
     public class eventoBotEnviar implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ev) {
-            areaChat.append(labelNome.getText() + ": " + areaEntrada.getText() + "\n");
-
-            areaEntrada.setText("");
-            areaEntrada.requestFocus();
+            enviarMensagem(botNome.getText() + ": " + areaEntrada.getText());
         }
     }
     
@@ -83,10 +87,7 @@ public class Chat extends JPanel {
         @Override
         public void keyReleased(KeyEvent ev) {
             if(ev.getKeyCode() == KeyEvent.VK_ENTER) {
-                areaChat.append(labelNome.getText() + ": " + areaEntrada.getText() + "\n");
-
-                areaEntrada.setText("");
-                areaEntrada.requestFocus();
+                enviarMensagem(botNome.getText() + ": " + areaEntrada.getText());
             }
         }
     }

@@ -1,13 +1,12 @@
 package janelas;
 
 import componentesUI.FormConexao;
-
 import javax.swing.JPanel;
 
-public class ConfigConexao extends JPanel {
+public class EmJogo extends JPanel {
     FormConexao form;
     
-    public ConfigConexao() {
+    public EmJogo() {
         setLayout(null);
         
         form = new FormConexao();
