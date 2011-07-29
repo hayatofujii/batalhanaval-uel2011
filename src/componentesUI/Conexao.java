@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SpringLayout;
 
 public class Conexao extends JPanel {
     private JTabbedPane abas;
@@ -25,6 +26,7 @@ public class Conexao extends JPanel {
         
         labelIP = new JLabel("IP:");
         labelPorta = new JLabel("Porta:");
+        campoPorta = new JTextField();
         
         labelNome = new JLabel("Nome:");
         campoNome = new JTextField();
@@ -41,16 +43,24 @@ public class Conexao extends JPanel {
     private void montarFormServidor()
     {
         formServidor = new JPanel();
-        formServidor.setLayout(null);
+        formServidor.setLayout(new SpringLayout());
+        
+        formServidor.add(labelIP);
         
         // mudar isso para mostrar IPs, precisa de um subsistema de rede
         // reposicionar
         JLabel mostraIP = new JLabel("255.255.255.255 em 255.555.255.255");
         mostraIP.setBounds(0, 0, 210, 23);
         formServidor.add(mostraIP);
+        labelIP.setLabelFor(mostraIP);
+        
+        formServidor.add(labelPorta);
+        formServidor.add(campoPorta);
+        labelPorta.setLabelFor(campoPorta);
         
         formServidor.add(labelNome);
         formServidor.add(campoNome);
+        labelNome.setLabelFor(campoNome);
         
         abas.addTab("Servidor", formServidor);
     }
