@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import java.awt.Cursor;
+import java.awt.Insets;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JTextField;
@@ -23,6 +24,8 @@ public class Chat extends JPanel {
     public Chat(String _nome) {
         setLayout(null);
         
+        setPreferredSize(new Dimension(700, 300));
+                
         // areaChat
         areaChat = new JTextArea();
         areaChat.setEditable(false);
@@ -43,6 +46,7 @@ public class Chat extends JPanel {
         
         // botNome
         botNome = new JButton(_nome);
+        botNome.setMargin(new Insets(0, 0, 0, 0));
         
         // tamanho e posicionamento botNome
         botNome.setPreferredSize(new Dimension(100, 22));
