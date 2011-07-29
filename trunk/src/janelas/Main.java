@@ -1,13 +1,8 @@
 package janelas;
 
-
 import javax.swing.SwingUtilities;
-
 import javax.swing.JFrame;
 import java.awt.Dimension;
-
-
-import componentesUI.Chat;
 
 public class Main {
     private static final int MAX_LARGURA = 800;
