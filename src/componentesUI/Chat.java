@@ -30,24 +30,24 @@ public class Chat extends JPanel {
         areaChat.setAutoscrolls(false);
         areaChat.setBorder(null);
         areaChat.setCursor(new Cursor(Cursor.TEXT_CURSOR));
-
+        
         scrollChat = new JScrollPane(areaChat);
         scrollChat.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollChat.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         
         // tamanho e posicionamento areaChat
         scrollChat.setPreferredSize(new Dimension(700, 100));
-        Dimension tamChat = scrollChat.getPreferredSize();
-        scrollChat.setBounds(0, 0, tamChat.width, tamChat.height);
+        Dimension tamAreaChat = scrollChat.getPreferredSize();
+        scrollChat.setBounds(0, 0, tamAreaChat.width, tamAreaChat.height);
         add(scrollChat);
-
+        
         // botNome
         botNome = new JButton(_nome);
         
         // tamanho e posicionamento botNome
         botNome.setPreferredSize(new Dimension(100, 22));
         Dimension tamBotNome = botNome.getPreferredSize();
-        botNome.setBounds(0, 8 + tamChat.height, tamBotNome.width, tamBotNome.height);
+        botNome.setBounds(0, 8 + tamAreaChat.height, tamBotNome.width, tamBotNome.height);
         add(botNome);
         
         // areaEntrada
@@ -56,10 +56,10 @@ public class Chat extends JPanel {
         
         // tamanho e posicionamento areaEntrada
         areaEntrada.setPreferredSize(new Dimension(522, 23));
-        Dimension tamAreaEntr = areaEntrada.getPreferredSize();
-        areaEntrada.setBounds(tamBotNome.width, 8 + tamChat.height, tamAreaEntr.width, tamAreaEntr.height);
+        Dimension tamAreaEntrada = areaEntrada.getPreferredSize();
+        areaEntrada.setBounds(tamBotNome.width, 8 + tamAreaChat.height, tamAreaEntrada.width, tamAreaEntrada.height);
         add(areaEntrada);
-
+        
         // botEnviar
         botEnviar = new JButton("Enviar");
         botEnviar.addActionListener(new eventoBotEnviar());
@@ -67,16 +67,15 @@ public class Chat extends JPanel {
         // tamanho e posicionamento botEnviar
         botEnviar.setPreferredSize(new Dimension(70, 22));
         Dimension tamBotEnviar = botEnviar.getPreferredSize();
-        botEnviar.setBounds(8 + tamBotNome.width + tamAreaEntr.width, 8 + tamChat.height, tamBotEnviar.width, tamBotEnviar.height);
+        botEnviar.setBounds(8 + tamBotNome.width + tamAreaEntrada.width, 8 + tamAreaChat.height, tamBotEnviar.width, tamBotEnviar.height);
         add(botEnviar);
-
     }
     
     // adiciona a frase à janela de chat
     // * IPC da rede (GerenciaRede.java -> fazer parte do pacote núcleo)
     // * Bug: enviando mensagem vazia
     private void enviarMensagem (String _msg) {
-        areaChat.append(_msg +" \n");
+        areaChat.append(_msg + "\n");
         
         areaEntrada.setText("");
         areaEntrada.requestFocus();
@@ -104,4 +103,3 @@ public class Chat extends JPanel {
         }
     }
 }
-
