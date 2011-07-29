@@ -1,5 +1,6 @@
 package componentesUI;
 
+import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import java.awt.Cursor;
@@ -22,7 +23,8 @@ public class Chat extends JPanel {
     public Chat(String _nome) {
         setLayout(null);
         
-        areaChat = new JTextArea(5, 20);
+        // areaChat
+        areaChat = new JTextArea();
         areaChat.setEditable(false);
         areaChat.setLineWrap(true);
         areaChat.setAutoscrolls(false);
@@ -32,23 +34,42 @@ public class Chat extends JPanel {
         scrollChat = new JScrollPane(areaChat);
         scrollChat.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollChat.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollChat.setBounds(0, 0, 700, 110);
+        
+        // tamanho e posicionamento areaChat
+        scrollChat.setPreferredSize(new Dimension(700, 100));
+        Dimension tamChat = scrollChat.getPreferredSize();
+        scrollChat.setBounds(0, 0, tamChat.width, tamChat.height);
         add(scrollChat);
 
+        // botNome
         botNome = new JButton(_nome);
-        botNome.setBounds(0, 115, 87, 23);
+        
+        // tamanho e posicionamento botNome
+        botNome.setPreferredSize(new Dimension(100, 22));
+        Dimension tamBotNome = botNome.getPreferredSize();
+        botNome.setBounds(0, 8 + tamChat.height, tamBotNome.width, tamBotNome.height);
         add(botNome);
         
+        // areaEntrada
         areaEntrada = new JTextField();
         areaEntrada.addKeyListener(new eventoAreaEntrada());
-        areaEntrada.setBounds(93, 115, 499, 23);
+        
+        // tamanho e posicionamento areaEntrada
+        areaEntrada.setPreferredSize(new Dimension(522, 23));
+        Dimension tamAreaEntr = areaEntrada.getPreferredSize();
+        areaEntrada.setBounds(tamBotNome.width, 8 + tamChat.height, tamAreaEntr.width, tamAreaEntr.height);
         add(areaEntrada);
 
+        // botEnviar
         botEnviar = new JButton("Enviar");
-
         botEnviar.addActionListener(new eventoBotEnviar());
-        botEnviar.setBounds(599, 115, 95, 22);
+        
+        // tamanho e posicionamento botEnviar
+        botEnviar.setPreferredSize(new Dimension(70, 22));
+        Dimension tamBotEnviar = botEnviar.getPreferredSize();
+        botEnviar.setBounds(8 + tamBotNome.width + tamAreaEntr.width, 8 + tamChat.height, tamBotEnviar.width, tamBotEnviar.height);
         add(botEnviar);
+
     }
     
     // adiciona a frase à janela de chat
