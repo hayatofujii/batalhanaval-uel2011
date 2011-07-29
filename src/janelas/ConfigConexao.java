@@ -1,16 +1,16 @@
 package janelas;
 
-import componentesUI.FormConexao;
+import componentesUI.Conexao;
 
 import javax.swing.JPanel;
 
 public class ConfigConexao extends JPanel {
-    FormConexao form;
+    Conexao form;
     
     public ConfigConexao() {
         setLayout(null);
         
-        form = new FormConexao();
+        form = new Conexao();
         form.setBounds(200, 150, 400, 300);      
         add(form);
     }

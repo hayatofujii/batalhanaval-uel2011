@@ -1,22 +1,16 @@
 package componentesUI;
 
 import javax.swing.JPanel;
-
 import javax.swing.JTextArea;
 import java.awt.Cursor;
-
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-
-import javax.swing.JLabel;
 import javax.swing.JTextField;
-
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 
 public class Chat extends JPanel {
     private JTextArea areaChat;
@@ -28,9 +22,7 @@ public class Chat extends JPanel {
     public Chat(String _nome) {
         setLayout(null);
         
-        areaChat = new JTextArea();
-        areaChat.setRows(5);
-        areaChat.setColumns(20);
+        areaChat = new JTextArea(5, 20);
         areaChat.setEditable(false);
         areaChat.setLineWrap(true);
         areaChat.setAutoscrolls(false);
@@ -52,8 +44,7 @@ public class Chat extends JPanel {
         areaEntrada.setBounds(93, 115, 499, 23);
         add(areaEntrada);
 
-        botEnviar = new JButton();
-        botEnviar.setText("Enviar");
+        botEnviar = new JButton("Enviar");
 
         botEnviar.addActionListener(new eventoBotEnviar());
         botEnviar.setBounds(599, 115, 95, 22);
@@ -70,14 +61,14 @@ public class Chat extends JPanel {
         areaEntrada.requestFocus();
     }
     
-    public class eventoBotEnviar implements ActionListener {
+    private class eventoBotEnviar implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ev) {
             enviarMensagem(botNome.getText() + ": " + areaEntrada.getText());
         }
     }
     
-    public class eventoAreaEntrada implements KeyListener {
+    private class eventoAreaEntrada implements KeyListener {
         @Override
         public void keyTyped(KeyEvent ev) {}
         
