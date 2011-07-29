@@ -4,6 +4,7 @@ import componentesUI.Chat;
 import componentesUI.Grid;
 
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class ConfigGrid extends JPanel {
     Chat chat;
@@ -14,6 +15,8 @@ public class ConfigGrid extends JPanel {
         chat = new Chat("Paulo Henrique");
 
         setLayout(null);
+        
+        setBorder(new EmptyBorder(30, 30, 30, 30));
 
         grid.setBounds(50, 34, 350, 350);
         add(grid);
