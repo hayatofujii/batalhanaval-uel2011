@@ -2,26 +2,33 @@ package janelas;
 
 import componentesUI.Chat;
 import componentesUI.Grid;
-
+import java.awt.Dimension;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 public class ConfigGrid extends JPanel {
     Chat chat;
-    Grid grid;
+    Grid grid, mini;
 
     public ConfigGrid() {
         grid = new Grid();
+        mini = new Grid();
         chat = new Chat("Paulo Henrique");
-
-        setLayout(null);
         
-        setBorder(new EmptyBorder(30, 30, 30, 30));
-
-        grid.setBounds(50, 34, 350, 350);
+        setLayout(null);
+        setPreferredSize(new Dimension(800, 600));
+        
+        grid.setPreferredSize(new Dimension(350, 350));
+        Dimension tamGrid = grid.getPreferredSize();
+        grid.setBounds(50, 50, tamGrid.width, tamGrid.height);
         add(grid);
-       
-        chat.setBounds(50, 403, 695, 138);
+        
+        mini.setPreferredSize(new Dimension(200, 200));
+        Dimension tamMini = mini.getPreferredSize();
+        mini.setBounds(125 + tamGrid.width, 50, tamMini.width, tamMini.height);
+        add(mini);
+        
+        Dimension tamChat = chat.getPreferredSize();
+        chat.setBounds(50, tamGrid.height + 58, tamChat.width, tamChat.height);
         add(chat);
     }
 }

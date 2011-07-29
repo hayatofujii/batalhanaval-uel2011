@@ -23,9 +23,8 @@ public class Chat extends JPanel {
     
     public Chat(String _nome) {
         setLayout(null);
-        
         setPreferredSize(new Dimension(700, 300));
-                
+        
         // areaChat
         areaChat = new JTextArea();
         areaChat.setEditable(false);
@@ -50,6 +49,7 @@ public class Chat extends JPanel {
         
         // tamanho e posicionamento botNome
         botNome.setPreferredSize(new Dimension(100, 22));
+        botNome.setToolTipText("Editar nome");
         Dimension tamBotNome = botNome.getPreferredSize();
         botNome.setBounds(0, 8 + tamAreaChat.height, tamBotNome.width, tamBotNome.height);
         add(botNome);
@@ -59,9 +59,9 @@ public class Chat extends JPanel {
         areaEntrada.addKeyListener(new eventoAreaEntrada());
         
         // tamanho e posicionamento areaEntrada
-        areaEntrada.setPreferredSize(new Dimension(522, 23));
+        areaEntrada.setPreferredSize(new Dimension(513, 23));
         Dimension tamAreaEntrada = areaEntrada.getPreferredSize();
-        areaEntrada.setBounds(tamBotNome.width, 8 + tamAreaChat.height, tamAreaEntrada.width, tamAreaEntrada.height);
+        areaEntrada.setBounds(tamBotNome.width + 8, 8 + tamAreaChat.height, tamAreaEntrada.width, tamAreaEntrada.height);
         add(areaEntrada);
         
         // botEnviar
@@ -71,14 +71,14 @@ public class Chat extends JPanel {
         // tamanho e posicionamento botEnviar
         botEnviar.setPreferredSize(new Dimension(70, 22));
         Dimension tamBotEnviar = botEnviar.getPreferredSize();
-        botEnviar.setBounds(8 + tamBotNome.width + tamAreaEntrada.width, 8 + tamAreaChat.height, tamBotEnviar.width, tamBotEnviar.height);
+        botEnviar.setBounds(16 + tamBotNome.width + tamAreaEntrada.width, 8 + tamAreaChat.height, tamBotEnviar.width, tamBotEnviar.height);
         add(botEnviar);
     }
     
     // adiciona a frase à janela de chat
     // * IPC da rede (GerenciaRede.java -> fazer parte do pacote núcleo)
     // * Bug: enviando mensagem vazia
-    private void enviarMensagem (String _msg) {
+    private void enviarMensagem(String _msg) {
         areaChat.append(_msg + "\n");
         
         areaEntrada.setText("");
@@ -88,7 +88,8 @@ public class Chat extends JPanel {
     private class eventoBotEnviar implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ev) {
-            enviarMensagem(botNome.getText() + ": " + areaEntrada.getText());
+            if(!areaEntrada.getText().equals(""))
+                enviarMensagem(botNome.getText() + ": " + areaEntrada.getText());
         }
     }
     
@@ -101,9 +102,9 @@ public class Chat extends JPanel {
         
         @Override
         public void keyReleased(KeyEvent ev) {
-            if(ev.getKeyCode() == KeyEvent.VK_ENTER) {
-                enviarMensagem(botNome.getText() + ": " + areaEntrada.getText());
-            }
+            if(ev.getKeyCode() == KeyEvent.VK_ENTER)
+                if(!areaEntrada.getText().equals(""))
+                    enviarMensagem(botNome.getText() + ": " + areaEntrada.getText());
         }
     }
 }
