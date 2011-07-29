@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import java.awt.Insets;
 import java.awt.Color;
 import javax.swing.BorderFactory;
+import java.awt.Dimension;
 
 public class Grid extends JPanel {
     private JButton[][] botoes;
