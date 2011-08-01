@@ -7,11 +7,10 @@ import javax.swing.JPanel;
 
 public class ConfigGrid extends JPanel {
     Chat chat;
-    Grid grid, mini;
+    Grid grid;
 
     public ConfigGrid() {
         grid = new Grid();
-        mini = new Grid();
         chat = new Chat("Paulo Henrique");
         
         setLayout(null);
@@ -21,11 +20,6 @@ public class ConfigGrid extends JPanel {
         Dimension tamGrid = grid.getPreferredSize();
         grid.setBounds(50, 50, tamGrid.width, tamGrid.height);
         add(grid);
-        
-        mini.setPreferredSize(new Dimension(200, 200));
-        Dimension tamMini = mini.getPreferredSize();
-        mini.setBounds(125 + tamGrid.width, 50, tamMini.width, tamMini.height);
-        add(mini);
         
         Dimension tamChat = chat.getPreferredSize();
         chat.setBounds(50, tamGrid.height + 58, tamChat.width, tamChat.height);
