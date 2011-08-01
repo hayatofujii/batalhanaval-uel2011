@@ -26,17 +26,13 @@ public class Main {
         janela.setPreferredSize(new Dimension(MAX_LARGURA, MAX_ALTURA));
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janela.setResizable(false);
-
-        // instancia uma janela ConfigGrid
-        ConfigGrid confGrid = new ConfigGrid();
-        confGrid.setOpaque(true);
-        
+    
         // instancia uma janela ConfigConexao
-        //ConfigConexao confConexao = new ConfigConexao();
-        //confConexao.setOpaque(true);
+        ConfigConexao confConexao = new ConfigConexao();
+        confConexao.setOpaque(true);
         
         // seta a janela para mostrar somente o Config
-        janela.setContentPane(confGrid);
+        janela.setContentPane(confConexao);
 
         // mostrar frame
         janela.pack();

@@ -1,11 +1,12 @@
 package componentesUI;
 
-import java.awt.BorderLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.SpringLayout;
 
 public class Conexao extends JPanel {
     private JTabbedPane abas;
@@ -22,15 +23,18 @@ public class Conexao extends JPanel {
     
     public Conexao() {
         abas = new JTabbedPane();
-        setLayout(new BorderLayout());
+        setLayout(null);
+        setPreferredSize(new Dimension(400, 300));
         
         labelIP = new JLabel("IP:");
+        campoIP = new JTextField();
+        
         labelPorta = new JLabel("Porta:");
         campoPorta = new JTextField();
         
         labelNome = new JLabel("Nome:");
         campoNome = new JTextField();
-        
+     
         montarFormCliente();
         montarFormServidor();
         
@@ -43,16 +47,14 @@ public class Conexao extends JPanel {
     private void montarFormServidor()
     {
         formServidor = new JPanel();
-        formServidor.setLayout(new SpringLayout());
+        formServidor.setLayout(null);
         
         formServidor.add(labelIP);
-        
-        // mudar isso para mostrar IPs, precisa de um subsistema de rede
-        // reposicionar
-        JLabel mostraIP = new JLabel("255.255.255.255 em 255.555.255.255");
-        mostraIP.setBounds(0, 0, 210, 23);
-        formServidor.add(mostraIP);
-        labelIP.setLabelFor(mostraIP);
+        campoIP.setText("255.255.255.255");
+        campoIP.setEditable(false);
+        campoIP.setEnabled(false);
+        formServidor.add(campoIP);
+        labelIP.setLabelFor(campoIP);
         
         formServidor.add(labelPorta);
         formServidor.add(campoPorta);
@@ -68,6 +70,21 @@ public class Conexao extends JPanel {
     private void montarFormCliente() {
         formCliente = new JPanel();
         formCliente.setLayout(null);
+        
+        formCliente.add(labelIP);
+        campoIP.setText("");
+        campoIP.setEditable(true);
+        campoIP.setEnabled(true);
+        formCliente.add(campoIP);
+        labelIP.setLabelFor(campoIP);
+        
+        formCliente.add(labelPorta);
+        formCliente.add(campoPorta);
+        labelPorta.setLabelFor(campoPorta);
+        
+        formCliente.add(labelNome);
+        formCliente.add(campoNome);
+        labelNome.setLabelFor(campoNome);
         
         abas.addTab("Cliente", formCliente);
     }

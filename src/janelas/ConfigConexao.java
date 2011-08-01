@@ -1,6 +1,7 @@
 package janelas;
 
 import componentesUI.Conexao;
+import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
@@ -11,7 +12,8 @@ public class ConfigConexao extends JPanel {
         setLayout(null);
         
         form = new Conexao();
-        form.setBounds(200, 150, 400, 300);      
+        Dimension tam = form.getPreferredSize();
+        form.setBounds(200, 150, tam.width, tam.height);      
         add(form);
     }
 }
