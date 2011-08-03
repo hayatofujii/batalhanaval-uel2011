@@ -1,10 +1,11 @@
 package componentesUI;
 
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import java.awt.Dimension;
-
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -23,7 +24,7 @@ public class Conexao extends JPanel {
     
     public Conexao() {
         abas = new JTabbedPane();
-        setLayout(null);
+        setLayout(new BorderLayout());
         setPreferredSize(new Dimension(400, 300));
         
         labelIP = new JLabel("IP:");
