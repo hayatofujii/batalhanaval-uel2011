@@ -20,13 +20,16 @@ public class Main {
     }
 
     private static void mostrar() {
-   
         // frame
         JFrame janela = new JFrame("Batalha Naval");
         janela.setPreferredSize(new Dimension(MAX_LARGURA, MAX_ALTURA));
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janela.setResizable(false);
-    
+
+        // instancia uma janela ConfigGrid
+        //ConfigGrid confGrid = new ConfigGrid();
+        //confGrid.setOpaque(true);
+        
         // instancia uma janela ConfigConexao
         ConfigConexao confConexao = new ConfigConexao();
         confConexao.setOpaque(true);
