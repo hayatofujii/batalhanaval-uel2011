@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 public class EmJogo extends JPanel {
     Chat chat;
     Grid grid, mini;
-
+    
     public EmJogo() {
         grid = new Grid();
         mini = new Grid();
