@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import nucleo.Conexao;
 
 public class Chat extends JPanel {
     private JTextArea areaChat;
@@ -79,7 +80,10 @@ public class Chat extends JPanel {
     // * IPC da rede (GerenciaRede.java -> fazer parte do pacote núcleo)
     // * Bug: enviando mensagem vazia
     private void enviarMensagem(String _msg) {
-        areaChat.append(_msg + "\n");
+        Conexao con = Conexao.getConexao();
+        
+        colocaMensagemAreaChat(_msg);
+        con.enviarMensagem(_msg);
         
         areaEntrada.setText("");
         areaEntrada.requestFocus();
@@ -90,7 +94,12 @@ public class Chat extends JPanel {
         public void actionPerformed(ActionEvent ev) {
             if(!areaEntrada.getText().equals(""))
                 enviarMensagem(botNome.getText() + ": " + areaEntrada.getText());
+
         }
+    }
+    
+    public void colocaMensagemAreaChat(String _msg) {
+        areaChat.append(_msg + "\n");
     }
     
     private class eventoAreaEntrada implements KeyListener {

@@ -31,7 +31,7 @@ public class Main {
         //confGrid.setOpaque(true);
         
         // instancia uma janela ConfigConexao
-        ConfigConexao confConexao = new ConfigConexao();
+        EmJogo confConexao = new EmJogo();
         confConexao.setOpaque(true);
         
         // seta a janela para mostrar somente o Config
