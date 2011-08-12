@@ -4,16 +4,17 @@ import componentesUI.Chat;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Conexao {
     private static Conexao conexao;
     private Socket soqueteCliente;
-    private ServerSocket soqueteServer;
-    private int portaConexao;
+    private ServerSocket soqueteServidor;
     private InputStreamReader streamReader;
     private BufferedReader reader;
+    private PrintWriter writer;
     private String entrada;
     private String saida;
     
@@ -31,6 +32,21 @@ public class Conexao {
         } catch(IOException ex) {
             ex.printStackTrace();
         }*/
+    }
+    
+    public void inicializarCliente(String _endereco, int _porta) throws IOException {
+        soqueteCliente = new Socket(_endereco, _porta);
+        streamReader = new InputStreamReader(soqueteCliente.getInputStream());
+        reader = new BufferedReader(streamReader);
+        writer = new PrintWriter(soqueteCliente.getOutputStream());
+    }
+    
+    public void inicializarServidor(int _porta) throws IOException {
+        soqueteServidor = new ServerSocket(_porta);
+        soqueteCliente = soqueteServidor.accept();
+        streamReader = new InputStreamReader(soqueteCliente.getInputStream());
+        reader = new BufferedReader(streamReader);
+        writer = new PrintWriter(soqueteCliente.getOutputStream());
     }
     
     public void enviarMensagem(String _msg) {
