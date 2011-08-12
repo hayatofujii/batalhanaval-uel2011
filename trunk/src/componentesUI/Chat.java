@@ -16,13 +16,21 @@ import java.awt.event.KeyListener;
 import nucleo.Conexao;
 
 public class Chat extends JPanel {
+    private static Chat chat;
     private JTextArea areaChat;
     private JScrollPane scrollChat;
     private JButton botNome;
     private JTextField areaEntrada;
     private JButton botEnviar;
     
-    public Chat(String _nome) {
+    public static Chat getChat() {
+        if(chat == null) {
+            chat = new Chat();
+        }
+        return chat;
+    }
+    
+    public Chat() {
         setLayout(null);
         setPreferredSize(new Dimension(700, 300));
         
@@ -45,7 +53,7 @@ public class Chat extends JPanel {
         add(scrollChat);
         
         // botNome
-        botNome = new JButton(_nome);
+        botNome = new JButton("");
         botNome.setMargin(new Insets(0, 0, 0, 0));
         
         // tamanho e posicionamento botNome
@@ -80,10 +88,8 @@ public class Chat extends JPanel {
     // * IPC da rede (GerenciaRede.java -> fazer parte do pacote núcleo)
     // * Bug: enviando mensagem vazia
     private void enviarMensagem(String _msg) {
-        Conexao con = Conexao.getConexao();
-        
         colocaMensagemAreaChat(_msg);
-        con.enviarMensagem(_msg);
+        Conexao.getConexao().enviarMensagem(_msg);
         
         areaEntrada.setText("");
         areaEntrada.requestFocus();
@@ -94,7 +100,6 @@ public class Chat extends JPanel {
         public void actionPerformed(ActionEvent ev) {
             if(!areaEntrada.getText().equals(""))
                 enviarMensagem(botNome.getText() + ": " + areaEntrada.getText());
-
         }
     }
     
