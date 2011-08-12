@@ -1,32 +1,33 @@
 package nucleo;
 
 public class Jogador {
+    private static Jogador jogador;
     private String nome;
-    private byte pontos;
-    private Grid campo;
-
-    public Jogador(String _nome) {
-        this.nome = _nome;
-        this.pontos = 0;
-        this.campo = new Grid();
-    }
+    private int pontos;
     
-    public int pegaCampo(int posX, int posY) {
-        return campo.abreCampo(posX, posY);
-    }
-    
-    public void refazCampo() {
-        this.campo.limpa();
+    public static Jogador getJogador() {
+        if(jogador == null)
+            jogador = new Jogador();
+        return jogador;
     }
 
+    private Jogador() {
+        pontos = 0;
+    }
+    
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
     public String getNome() {
         return nome;
     }
-
-    public byte getPontos() {
+    
+    public int getPontos() {
         return pontos;
     }
     
+    /*
     public void fazJogada(Jogador oponente, int posX, int posY) {
         int rodadaSeguida = 0;
         boolean sair = false;
@@ -40,4 +41,5 @@ public class Jogador {
                 sair = true;
         } while(!sair);
     }
+    */
 }

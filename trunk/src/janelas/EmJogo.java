@@ -12,7 +12,7 @@ public class EmJogo extends JPanel {
     public EmJogo() {
         grid = new Grid();
         mini = new Grid();
-        chat = new Chat();
+        chat = Chat.getChat();
         
         setLayout(null);
         setPreferredSize(new Dimension(800, 600));
