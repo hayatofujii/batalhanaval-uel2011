@@ -5,8 +5,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import javax.swing.JOptionPane;
 
 public class Conexao {
     private static Conexao conexao;
@@ -47,6 +49,7 @@ public class Conexao {
     }
     
     public class EventoRecebeMensagem implements Runnable {
+        @Override
         public void run() {
             try {
                 while((entrada = reader.readLine()) != null) {
@@ -56,5 +59,18 @@ public class Conexao {
                 ex.printStackTrace();
             }
         }
+    }
+    
+    public String detectarIP() {
+        String enderecoIP = null;
+        try {        
+            enderecoIP = InetAddress.getLocalHost().getHostAddress();
+            if(enderecoIP.equals("127.0.0.1")) {
+                JOptionPane.showMessageDialog(null, "Não há conexão de rede disponível.", "Alerta", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+        return enderecoIP;
     }
 }

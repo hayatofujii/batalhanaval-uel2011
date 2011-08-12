@@ -94,7 +94,7 @@ public class PainelConexao extends JPanel {
         
         labelNome.setLabelFor(campoNome);
         
-        labelStatus = new JLabel("Status:");
+        labelStatus = new JLabel();
         labelStatus.setPreferredSize(new Dimension(40, 17));
         Dimension tamStatus = labelStatus.getPreferredSize();
         labelStatus.setBounds(8, 102, tamStatus.width, tamStatus.height);
@@ -126,7 +126,6 @@ public class PainelConexao extends JPanel {
         campoIPSv.setPreferredSize(new Dimension(98, 17));
         Dimension tamCampoIPSv = campoIPSv.getPreferredSize();
         campoIPSv.setBounds(52, 8, tamCampoIPSv.width, tamCampoIPSv.height);
-        campoIPSv.setText("255.255.255.255");
         campoIPSv.setEditable(false);
         formServidor.add(campoIPSv);
         
@@ -160,8 +159,8 @@ public class PainelConexao extends JPanel {
         
         labelNomeSv.setLabelFor(campoNomeSv);
         
-        labelStatusSv = new JLabel("Status:");
-        labelStatusSv.setPreferredSize(new Dimension(40, 17));
+        labelStatusSv = new JLabel();
+        labelStatusSv.setPreferredSize(new Dimension(184, 17));
         Dimension tamStatusSv = labelStatusSv.getPreferredSize();
         labelStatusSv.setBounds(8, 102, tamStatusSv.width, tamStatusSv.height);
         formServidor.add(labelStatusSv);
@@ -175,6 +174,20 @@ public class PainelConexao extends JPanel {
         formServidor.add(botConectarSv);
         
         abas.addTab("Servidor", formServidor);
+        
+        atualizaIP();
+    }
+    
+    private void atualizaIP()
+    {
+        atualizaStatusSv("Detectando IP da máquina...");
+        campoIPSv.setText(Conexao.getConexao().detectarIP());
+        atualizaStatusSv("");
+    }
+    
+    public void atualizaStatusSv(String _msg)
+    {
+        labelStatusSv.setText(_msg);
     }
     
     private class eventoBotConectar implements ActionListener {
