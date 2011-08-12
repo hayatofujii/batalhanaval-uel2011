@@ -29,8 +29,8 @@ public class Chat extends JPanel {
         }
         return chat;
     }
-    
-    public Chat() {
+        
+    private Chat() {
         setLayout(null);
         setPreferredSize(new Dimension(700, 300));
         
@@ -95,16 +95,20 @@ public class Chat extends JPanel {
         areaEntrada.requestFocus();
     }
     
+    public void colocaMensagemAreaChat(String _msg) {
+        areaChat.append(_msg + "\n");
+    }
+    
+    public void setBotNome(String _nome) {
+        botNome.setText(_nome);
+    }
+    
     private class eventoBotEnviar implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ev) {
             if(!areaEntrada.getText().equals(""))
                 enviarMensagem(botNome.getText() + ": " + areaEntrada.getText());
         }
-    }
-    
-    public void colocaMensagemAreaChat(String _msg) {
-        areaChat.append(_msg + "\n");
     }
     
     private class eventoAreaEntrada implements KeyListener {

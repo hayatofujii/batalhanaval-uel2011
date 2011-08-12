@@ -25,14 +25,7 @@ public class Conexao {
         return conexao;
     }
     
-    private Conexao() {/*
-        try {
-            streamReader = new InputStreamReader(soqueteCliente.getInputStream());
-            reader = new BufferedReader(streamReader);
-        } catch(IOException ex) {
-            ex.printStackTrace();
-        }*/
-    }
+    private Conexao() {}
     
     public void inicializarCliente(String _endereco, int _porta) throws IOException {
         soqueteCliente = new Socket(_endereco, _porta);

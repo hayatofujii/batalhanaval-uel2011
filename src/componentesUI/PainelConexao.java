@@ -1,5 +1,6 @@
 package componentesUI;
 
+import nucleo.Conexao;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -7,11 +8,13 @@ import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import nucleo.Jogador;
 
-public class Conexao extends JPanel {
+public class PainelConexao extends JPanel {
     private JTabbedPane abas;
     private JPanel formServidor;
     private JPanel formCliente;
@@ -34,7 +37,7 @@ public class Conexao extends JPanel {
     private JLabel labelStatusSv;
     private JButton botConectarSv;
     
-    public Conexao() {
+    public PainelConexao() {
         abas = new JTabbedPane();
         setLayout(new BorderLayout());
         
@@ -177,14 +180,24 @@ public class Conexao extends JPanel {
     private class eventoBotConectar implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ev) {
-            
+            try {
+                Conexao.getConexao().inicializarCliente(campoIP.getText(), Integer.parseInt(campoPorta.getText()));
+                Jogador.getJogador().setNome(campoNome.getText());
+            } catch(IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
     
     private class eventoBotConectarSv implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ev) {
-            
+            try {
+                Conexao.getConexao().inicializarServidor(Integer.parseInt(campoPorta.getText()));
+                Jogador.getJogador().setNome(campoNome.getText());
+            } catch(IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 }

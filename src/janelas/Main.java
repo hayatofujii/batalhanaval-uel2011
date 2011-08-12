@@ -1,10 +1,12 @@
 package janelas;
+import nucleo.Jogador;
 
 import javax.swing.SwingUtilities;
 import javax.swing.JFrame;
 import java.awt.Dimension;
 
 public class Main {
+    private Jogador jogador;
     private static JFrame janela;
     
     private static final int MAX_LARGURA = 800;
