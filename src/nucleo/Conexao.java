@@ -1,5 +1,6 @@
 package nucleo;
 
+import componentesUI.Chat;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,7 +16,14 @@ public class Conexao {
     private BufferedReader reader;
     private String entrada;
     private String saida;
-
+    
+    public static Conexao getConexao() {
+        if(conexao == null) {
+            conexao = new Conexao();
+        }
+        return conexao;
+    }
+    
     private Conexao() {/*
         try {
             streamReader = new InputStreamReader(soqueteCliente.getInputStream());
@@ -24,23 +32,16 @@ public class Conexao {
             ex.printStackTrace();
         }*/
     }
-
-    public static Conexao getConexao() {
-        if(conexao == null) {
-            conexao = new Conexao();
-        }
-        return conexao;
-    }
     
-    public static void enviarMensagem(String _msg) {
-        //System.out.println(_msg);
+    public void enviarMensagem(String _msg) {
+        System.out.println(_msg);
     }
     
     public class EventoRecebeMensagem implements Runnable {
         public void run() {
             try {
                 while((entrada = reader.readLine()) != null) {
-                    // append na área de chat
+                    Chat.getChat().colocaMensagemAreaChat(entrada);
                 }
             } catch(IOException ex) {
                 ex.printStackTrace();
