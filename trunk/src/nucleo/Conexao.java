@@ -1,6 +1,8 @@
 package nucleo;
 
 import componentesUI.Chat;
+import componentesUI.PainelConexao;
+import janelas.ConfigConexao;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,6 +11,8 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Conexao {
@@ -38,6 +42,9 @@ public class Conexao {
     public void inicializarServidor(int _porta) throws IOException {
         // precisamos de um try/catch/finally para pegar caso a porta já esteja sendo usada
         soqueteServidor = new ServerSocket(_porta);
+        
+        Thread aceita = new Thread(new EventoAceitaConexao());
+        aceita.start();
     }
     
     public void aceitaCliente() throws IOException {
@@ -55,7 +62,30 @@ public class Conexao {
         System.out.println(_msg);
     }
     
-    public class EventoRecebeMensagem implements Runnable {
+    // REVISAR CÓDIGO URGENTE
+    public class EventoAceitaConexao implements Runnable {
+
+        boolean desconectado = true;
+
+        @Override
+        public void run() {
+            while (desconectado) {
+                try {
+                    if ((soqueteCliente = soqueteServidor.accept()) != null)
+                    {
+                        desconectado = false;
+                        inicializarFluxos();
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+    }
+
+    }
+    
+    public class eventoRecebeMensagem implements Runnable {
         @Override
         public void run() {
             try {
