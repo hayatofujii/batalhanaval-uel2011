@@ -1,5 +1,6 @@
 package componentesUI;
 
+import janelas.Main;
 import nucleo.Conexao;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
@@ -178,15 +179,13 @@ public class PainelConexao extends JPanel {
         atualizaIP();
     }
     
-    private void atualizaIP()
-    {
+    private void atualizaIP() {
         atualizaStatusSv("Detectando IP da máquina...");
         campoIPSv.setText(Conexao.getConexao().detectarIP());
         atualizaStatusSv("");
     }
     
-    public void atualizaStatusSv(String _msg)
-    {
+    public void atualizaStatusSv(String _msg) {
         labelStatusSv.setText(_msg);
     }
     
@@ -194,8 +193,9 @@ public class PainelConexao extends JPanel {
         @Override
         public void actionPerformed(ActionEvent ev) {
             try {
-                Conexao.getConexao().inicializarCliente(campoIP.getText(), Integer.parseInt(campoPorta.getText()));
+                Conexao.getConexao().conectarCliente(campoIP.getText(), Integer.parseInt(campoPorta.getText()));
                 Jogador.getJogador().setNome(campoNome.getText());
+                Main.atualizaPainelConfigGrid();
             } catch(IOException ex) {
                 ex.printStackTrace();
             }
@@ -206,10 +206,11 @@ public class PainelConexao extends JPanel {
         @Override
         public void actionPerformed(ActionEvent ev) {
             try {
-                Conexao.getConexao().inicializarServidor(3333);
-                        
-                        //(Integer.parseInt(campoPorta.getText()));
-                Jogador.getJogador().setNome(campoNome.getText());
+                Conexao.getConexao().inicializarServidor(Integer.parseInt(campoPortaSv.getText()));
+                Jogador.getJogador().setNome(campoNomeSv.getText());
+                Conexao.getConexao().aceitaCliente();
+                
+                Main.atualizaPainelConfigGrid();
             } catch(IOException ex) {
                 ex.printStackTrace();
             }

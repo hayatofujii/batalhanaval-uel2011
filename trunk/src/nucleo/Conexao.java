@@ -30,26 +30,22 @@ public class Conexao {
     
     private Conexao() {}
     
-    public void conectarCliente(String _endereco, int _porta) throws UnknownHostException, IOException
-    {
+    public void conectarCliente(String _endereco, int _porta) throws IOException, UnknownHostException {
         soqueteCliente = new Socket(_endereco, _porta);
-        inicializarComunicacao();
-
+        inicializarFluxos();
     }
     
     public void inicializarServidor(int _porta) throws IOException {
         // precisamos de um try/catch/finally para pegar caso a porta já esteja sendo usada
         soqueteServidor = new ServerSocket(_porta);
-        
-        // esse accept tá travando o programa inteiro
-        // vamo ter que jogar esse accept + inicializarComunicação numa thread separada
-        // ++ fazer o botão de inicializar ficar desativado ligar essa thread
-        //soqueteCliente = soqueteServidor.accept();
-        //inicializarComunicacaoo();
     }
     
-    public void inicializarComunicacao() throws IOException
-    {
+    public void aceitaCliente() throws IOException {
+        soqueteCliente = soqueteServidor.accept();
+        inicializarFluxos();
+    }
+    
+    public void inicializarFluxos() throws IOException {
         streamReader = new InputStreamReader(soqueteCliente.getInputStream());
         reader = new BufferedReader(streamReader);
         writer = new PrintWriter(soqueteCliente.getOutputStream());
@@ -76,9 +72,8 @@ public class Conexao {
         String enderecoIP = null;
         try {        
             enderecoIP = InetAddress.getLocalHost().getHostAddress();
-            if(enderecoIP.equals("127.0.0.1")) {
+            if(enderecoIP.equals("127.0.0.1"))
                 JOptionPane.showMessageDialog(null, "Não há conexão de rede disponível.", "Alerta", JOptionPane.WARNING_MESSAGE);
-            }
         } catch(Exception ex) {
             ex.printStackTrace();
         }
