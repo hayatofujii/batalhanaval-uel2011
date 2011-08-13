@@ -1,8 +1,7 @@
 package nucleo;
 
 import componentesUI.Chat;
-import componentesUI.PainelConexao;
-import janelas.ConfigConexao;
+import janelas.Main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,6 +16,7 @@ import javax.swing.JOptionPane;
 
 public class Conexao {
     private static Conexao conexao;
+    private static Thread aceita;
     private Socket soqueteCliente;
     private ServerSocket soqueteServidor;
     private InputStreamReader streamReader;
@@ -26,10 +26,13 @@ public class Conexao {
     private String saida;
     
     public static Conexao getConexao() {
-        if(conexao == null) {
+        if(conexao == null)
             conexao = new Conexao();
-        }
         return conexao;
+    }
+    
+    public static Thread getAceita() {
+        return aceita;
     }
     
     private Conexao() {}
@@ -43,7 +46,7 @@ public class Conexao {
         // precisamos de um try/catch/finally para pegar caso a porta já esteja sendo usada
         soqueteServidor = new ServerSocket(_porta);
         
-        Thread aceita = new Thread(new EventoAceitaConexao());
+        aceita = new Thread(new EventoAceitaConexao());
         aceita.start();
     }
     
@@ -62,30 +65,26 @@ public class Conexao {
         System.out.println(_msg);
     }
     
-    // REVISAR CÓDIGO URGENTE
     public class EventoAceitaConexao implements Runnable {
-
         boolean desconectado = true;
 
         @Override
         public void run() {
-            while (desconectado) {
+            while(desconectado) {
                 try {
-                    if ((soqueteCliente = soqueteServidor.accept()) != null)
-                    {
+                    if((soqueteCliente = soqueteServidor.accept()) != null) {
                         desconectado = false;
                         inicializarFluxos();
+                        Main.atualizaPainelConfigGrid();
                     }
-                } catch (IOException ex) {
+                } catch(IOException ex) {
                     ex.printStackTrace();
                 }
             }
-
-    }
-
+        }
     }
     
-    public class eventoRecebeMensagem implements Runnable {
+    public class EventoRecebeMensagem implements Runnable {
         @Override
         public void run() {
             try {

@@ -1,5 +1,4 @@
 package janelas;
-import java.awt.Color;
 import nucleo.Jogador;
 
 import javax.swing.SwingUtilities;

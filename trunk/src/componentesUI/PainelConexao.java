@@ -1,6 +1,8 @@
 package componentesUI;
 
 import janelas.Main;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import nucleo.Conexao;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
@@ -206,11 +208,9 @@ public class PainelConexao extends JPanel {
         @Override
         public void actionPerformed(ActionEvent ev) {
             try {
-                Conexao.getConexao().inicializarServidor(Integer.parseInt(campoPortaSv.getText()));
+                atualizaStatusSv("Aguardando cliente...");
                 Jogador.getJogador().setNome(campoNomeSv.getText());
-                Conexao.getConexao().aceitaCliente();
-                
-                Main.atualizaPainelConfigGrid();
+                Conexao.getConexao().inicializarServidor(Integer.parseInt(campoPortaSv.getText()));
             } catch(IOException ex) {
                 ex.printStackTrace();
             }
