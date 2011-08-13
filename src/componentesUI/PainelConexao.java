@@ -206,7 +206,9 @@ public class PainelConexao extends JPanel {
         @Override
         public void actionPerformed(ActionEvent ev) {
             try {
-                Conexao.getConexao().inicializarServidor(Integer.parseInt(campoPorta.getText()));
+                Conexao.getConexao().inicializarServidor(3333);
+                        
+                        //(Integer.parseInt(campoPorta.getText()));
                 Jogador.getJogador().setNome(campoNome.getText());
             } catch(IOException ex) {
                 ex.printStackTrace();
