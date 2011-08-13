@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import javax.swing.JOptionPane;
 
 public class Conexao {
@@ -29,16 +30,26 @@ public class Conexao {
     
     private Conexao() {}
     
-    public void inicializarCliente(String _endereco, int _porta) throws IOException {
+    public void conectarCliente(String _endereco, int _porta) throws UnknownHostException, IOException
+    {
         soqueteCliente = new Socket(_endereco, _porta);
-        streamReader = new InputStreamReader(soqueteCliente.getInputStream());
-        reader = new BufferedReader(streamReader);
-        writer = new PrintWriter(soqueteCliente.getOutputStream());
+        inicializarComunicacao();
+
     }
     
     public void inicializarServidor(int _porta) throws IOException {
+        // precisamos de um try/catch/finally para pegar caso a porta já esteja sendo usada
         soqueteServidor = new ServerSocket(_porta);
-        soqueteCliente = soqueteServidor.accept();
+        
+        // esse accept tá travando o programa inteiro
+        // vamo ter que jogar esse accept + inicializarComunicação numa thread separada
+        // ++ fazer o botão de inicializar ficar desativado ligar essa thread
+        //soqueteCliente = soqueteServidor.accept();
+        //inicializarComunicacaoo();
+    }
+    
+    public void inicializarComunicacao() throws IOException
+    {
         streamReader = new InputStreamReader(soqueteCliente.getInputStream());
         reader = new BufferedReader(streamReader);
         writer = new PrintWriter(soqueteCliente.getOutputStream());
