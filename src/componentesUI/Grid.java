@@ -16,27 +16,59 @@ public class Grid extends JPanel {
     private ImageIcon sea_tile = new ImageIcon(getClass().getResource("../imagensGrid/sea-tile.jpg"));
     private ImageIcon sea_tile_temp = new ImageIcon(getClass().getResource("../imagensGrid/sea-tile-temp.jpg"));
     
+    //barco 1 - vertical
     private ImageIcon b11_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b11-c-b-v.jpg"));
     private ImageIcon b12_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b12-c-b-v.jpg"));
     private ImageIcon b13_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b13-c-b-v.jpg"));
     private ImageIcon b14_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b14-c-b-v.jpg"));
     private ImageIcon b15_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b15-c-b-v.jpg"));
     
+    //barco 1 - horizontal
+    private ImageIcon b11_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b11-c-b-h.jpg"));
+    private ImageIcon b12_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b12-c-b-h.jpg"));
+    private ImageIcon b13_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b13-c-b-h.jpg"));
+    private ImageIcon b14_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b14-c-b-h.jpg"));
+    private ImageIcon b15_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b15-c-b-h.jpg"));
+    
+    //barco 2 - vertical
     private ImageIcon b21_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b21-c-b-v.jpg"));
     private ImageIcon b22_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b22-c-b-v.jpg"));
     private ImageIcon b23_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b23-c-b-v.jpg"));
     private ImageIcon b24_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b24-c-b-v.jpg"));
     
+    //barco 2 - horizontal
+    private ImageIcon b21_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b21-c-b-h.jpg"));
+    private ImageIcon b22_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b22-c-b-h.jpg"));
+    private ImageIcon b23_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b23-c-b-h.jpg"));
+    private ImageIcon b24_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b24-c-b-h.jpg"));
+    
+    //barco 3 - vertical
     private ImageIcon b31_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b31-c-b-v.jpg"));
     private ImageIcon b32_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b32-c-b-v.jpg"));
     private ImageIcon b33_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b33-c-b-v.jpg"));
     
+    //barco 3 - horizontal
+    private ImageIcon b31_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b31-c-b-h.jpg"));
+    private ImageIcon b32_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b32-c-b-h.jpg"));
+    private ImageIcon b33_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b33-c-b-h.jpg"));
+    
+    //barco 4 - vertical
     private ImageIcon b41_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b41-c-b-v.jpg"));
     private ImageIcon b42_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b42-c-b-v.jpg"));
     private ImageIcon b43_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b43-c-b-v.jpg"));
     
+    //barco 4 - horizontal
+    private ImageIcon b41_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b41-c-b-h.jpg"));
+    private ImageIcon b42_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b42-c-b-h.jpg"));
+    private ImageIcon b43_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b43-c-b-h.jpg"));
+    
+    // barco 5 - vertical
     private ImageIcon b51_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b51-c-b-v.jpg"));
     private ImageIcon b52_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b52-c-b-v.jpg"));
+    
+    //barco 5 - horizontal
+    private ImageIcon b51_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b51-c-b-h.jpg"));
+    private ImageIcon b52_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b52-c-b-h.jpg"));
     
     // botões
     private JButton[][] botoes;
@@ -204,15 +236,15 @@ public class Grid extends JPanel {
                                         return;
                                     }
                                 }
-                                botoes[i][j].setIcon(b11_c_b_v);
+                                botoes[i][j].setIcon(b11_c_b_h);
                                 botoes[i][j].repaint();
-                                botoes[i][j + 1].setIcon(b12_c_b_v);
+                                botoes[i][j + 1].setIcon(b12_c_b_h);
                                 botoes[i][j + 1].repaint();
-                                botoes[i][j + 2].setIcon(b13_c_b_v);
+                                botoes[i][j + 2].setIcon(b13_c_b_h);
                                 botoes[i][j + 2].repaint();
-                                botoes[i][j + 3].setIcon(b14_c_b_v);
+                                botoes[i][j + 3].setIcon(b14_c_b_h);
                                 botoes[i][j + 3].repaint();
-                                botoes[i][j + 4].setIcon(b15_c_b_v);
+                                botoes[i][j + 4].setIcon(b15_c_b_h);
                                 botoes[i][j + 4].repaint();
                                 atualizaMouseListener(new EventoBotaoGrid_Barco2());
                             }
@@ -318,7 +350,7 @@ public class Grid extends JPanel {
                                 botoes[i + 2][j].repaint();
                                 botoes[i + 3][j].setIcon(b24_c_b_v);
                                 botoes[i + 3][j].repaint();
-                                // atualizaMouseListener
+                                atualizaMouseListener(new EventoBotaoGrid_Barco3());
                             }
                         } else {
                             if(j <= 6) {
@@ -327,15 +359,15 @@ public class Grid extends JPanel {
                                         return;
                                     }
                                 }
-                                botoes[i][j].setIcon(b21_c_b_v);
+                                botoes[i][j].setIcon(b21_c_b_h);
                                 botoes[i][j].repaint();
-                                botoes[i][j + 1].setIcon(b22_c_b_v);
+                                botoes[i][j + 1].setIcon(b22_c_b_h);
                                 botoes[i][j + 1].repaint();
-                                botoes[i][j + 2].setIcon(b23_c_b_v);
+                                botoes[i][j + 2].setIcon(b23_c_b_h);
                                 botoes[i][j + 2].repaint();
-                                botoes[i][j + 3].setIcon(b24_c_b_v);
+                                botoes[i][j + 3].setIcon(b24_c_b_h);
                                 botoes[i][j + 3].repaint();
-                                // atualizaMouseListener
+                                atualizaMouseListener(new EventoBotaoGrid_Barco3());
                             }
                         }
                         return;
@@ -344,4 +376,355 @@ public class Grid extends JPanel {
             }
         }
     }
+
+    private class EventoBotaoGrid_Barco3 extends MouseAdapter {
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            for(int i = 0; i < 10; i++) {
+                for(int j = 0; j < 10; j++) {
+                    if(e.getSource() == botoes[i][j]) {
+                        if(vertical == true) {
+                            if(i <= 7) {
+                                for(int k = 0; k < 3; k++) {
+                                    if(botoes[i + k][j].getIcon() != sea_tile) {
+                                        return;
+                                    }
+                                }
+                                for(int k = 0; k < 3; k++) {
+                                    botoes[i + k][j].setIcon(sea_tile_temp);
+                                    botoes[i + k][j].repaint();
+                                }
+                            }
+                        }
+                        else {
+                            if(j <= 7) {
+                                for(int k = 0; k < 3; k++) {
+                                    if(botoes[i][j + k].getIcon() != sea_tile) {
+                                        return;
+                                    }
+                                }
+                                for(int k = 0; k < 3; k++) {
+                                    botoes[i][j + k].setIcon(sea_tile_temp);
+                                    botoes[i][j + k].repaint();
+                                }
+                            }
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+        
+        @Override
+        public void mouseExited(MouseEvent e) {
+            for(int i = 0; i < 10; i++) {
+                for(int j = 0; j < 10; j++) {
+                    if(e.getSource() == botoes[i][j]) {
+                        if(vertical == true) {
+                            if(i <= 7) {
+                                for(int k = 0; k < 3; k++) {
+                                    if(botoes[i + k][j].getIcon() != sea_tile_temp) {
+                                        return;
+                                    }
+                                }
+                                for(int k = 0; k < 3; k++) {
+                                    botoes[i + k][j].setIcon(sea_tile);
+                                    botoes[i + k][j].repaint();
+                                }
+                            }
+                        } else {
+                            if(j <= 7) {
+                                for(int k = 0; k < 3; k++) {
+                                    if(botoes[i][j + k].getIcon() != sea_tile_temp) {
+                                        return;
+                                    }
+                                }
+                                for(int k = 0; k < 3; k++) {
+                                    botoes[i][j + k].setIcon(sea_tile);
+                                    botoes[i][j + k].repaint();
+                                }
+                            }
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+        
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            for(int i = 0; i < 10; i++) {
+                for(int j = 0; j < 10; j++) {
+                    if(e.getSource() == botoes[i][j]) {
+                        if(vertical == true) {
+                            if(i <= 7) {
+                                for(int k = 0; k < 3; k++) {
+                                    if(botoes[i + k][j].getIcon() != sea_tile_temp) {
+                                        return;
+                                    }
+                                }
+                                botoes[i][j].setIcon(b31_c_b_v);
+                                botoes[i][j].repaint();
+                                botoes[i + 1][j].setIcon(b32_c_b_v);
+                                botoes[i + 1][j].repaint();
+                                botoes[i + 2][j].setIcon(b33_c_b_v);
+                                botoes[i + 2][j].repaint();
+                                atualizaMouseListener(new EventoBotaoGrid_Barco4());
+                            }
+                        } else {
+                            if(j <= 7) {
+                                for(int k = 0; k < 3; k++) {
+                                    if(botoes[i][j + k].getIcon() != sea_tile_temp) {
+                                        return;
+                                    }
+                                }
+                                botoes[i][j].setIcon(b31_c_b_h);
+                                botoes[i][j].repaint();
+                                botoes[i][j + 1].setIcon(b32_c_b_h);
+                                botoes[i][j + 1].repaint();
+                                botoes[i][j + 2].setIcon(b33_c_b_h);
+                                botoes[i][j + 2].repaint();
+                                atualizaMouseListener(new EventoBotaoGrid_Barco4());
+                            }
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+    }
+        
+    private class EventoBotaoGrid_Barco4 extends MouseAdapter {
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            for(int i = 0; i < 10; i++) {
+                for(int j = 0; j < 10; j++) {
+                    if(e.getSource() == botoes[i][j]) {
+                        if(vertical == true) {
+                            if(i <= 7) {
+                                for(int k = 0; k < 3; k++) {
+                                    if(botoes[i + k][j].getIcon() != sea_tile) {
+                                        return;
+                                    }
+                                }
+                                for(int k = 0; k < 3; k++) {
+                                    botoes[i + k][j].setIcon(sea_tile_temp);
+                                    botoes[i + k][j].repaint();
+                                }
+                            }
+                        }
+                        else {
+                            if(j <= 7) {
+                                for(int k = 0; k < 3; k++) {
+                                    if(botoes[i][j + k].getIcon() != sea_tile) {
+                                        return;
+                                    }
+                                }
+                                for(int k = 0; k < 3; k++) {
+                                    botoes[i][j + k].setIcon(sea_tile_temp);
+                                    botoes[i][j + k].repaint();
+                                }
+                            }
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+        
+        @Override
+        public void mouseExited(MouseEvent e) {
+            for(int i = 0; i < 10; i++) {
+                for(int j = 0; j < 10; j++) {
+                    if(e.getSource() == botoes[i][j]) {
+                        if(vertical == true) {
+                            if(i <= 7) {
+                                for(int k = 0; k < 3; k++) {
+                                    if(botoes[i + k][j].getIcon() != sea_tile_temp) {
+                                        return;
+                                    }
+                                }
+                                for(int k = 0; k < 3; k++) {
+                                    botoes[i + k][j].setIcon(sea_tile);
+                                    botoes[i + k][j].repaint();
+                                }
+                            }
+                        } else {
+                            if(j <= 7) {
+                                for(int k = 0; k < 3; k++) {
+                                    if(botoes[i][j + k].getIcon() != sea_tile_temp) {
+                                        return;
+                                    }
+                                }
+                                for(int k = 0; k < 3; k++) {
+                                    botoes[i][j + k].setIcon(sea_tile);
+                                    botoes[i][j + k].repaint();
+                                }
+                            }
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+        
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            for(int i = 0; i < 10; i++) {
+                for(int j = 0; j < 10; j++) {
+                    if(e.getSource() == botoes[i][j]) {
+                        if(vertical == true) {
+                            if(i <= 7) {
+                                for(int k = 0; k < 3; k++) {
+                                    if(botoes[i + k][j].getIcon() != sea_tile_temp) {
+                                        return;
+                                    }
+                                }
+                                botoes[i][j].setIcon(b41_c_b_v);
+                                botoes[i][j].repaint();
+                                botoes[i + 1][j].setIcon(b42_c_b_v);
+                                botoes[i + 1][j].repaint();
+                                botoes[i + 2][j].setIcon(b43_c_b_v);
+                                botoes[i + 2][j].repaint();
+                                atualizaMouseListener(new EventoBotaoGrid_Barco5());
+                            }
+                        } else {
+                            if(j <= 7) {
+                                for(int k = 0; k < 3; k++) {
+                                    if(botoes[i][j + k].getIcon() != sea_tile_temp) {
+                                        return;
+                                    }
+                                }
+                                botoes[i][j].setIcon(b41_c_b_h);
+                                botoes[i][j].repaint();
+                                botoes[i][j + 1].setIcon(b42_c_b_h);
+                                botoes[i][j + 1].repaint();
+                                botoes[i][j + 2].setIcon(b43_c_b_h);
+                                botoes[i][j + 2].repaint();
+                                atualizaMouseListener(new EventoBotaoGrid_Barco5());
+                            }
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+        
+    }    
+ 
+    private class EventoBotaoGrid_Barco5 extends MouseAdapter {
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            for(int i = 0; i < 10; i++) {
+                for(int j = 0; j < 10; j++) {
+                    if(e.getSource() == botoes[i][j]) {
+                        if(vertical == true) {
+                            if(i <= 8) {
+                                for(int k = 0; k < 2; k++) {
+                                    if(botoes[i + k][j].getIcon() != sea_tile) {
+                                        return;
+                                    }
+                                }
+                                for(int k = 0; k < 2; k++) {
+                                    botoes[i + k][j].setIcon(sea_tile_temp);
+                                    botoes[i + k][j].repaint();
+                                }
+                            }
+                        }
+                        else {
+                            if(j <= 8) {
+                                for(int k = 0; k < 2; k++) {
+                                    if(botoes[i][j + k].getIcon() != sea_tile) {
+                                        return;
+                                    }
+                                }
+                                for(int k = 0; k < 2; k++) {
+                                    botoes[i][j + k].setIcon(sea_tile_temp);
+                                    botoes[i][j + k].repaint();
+                                }
+                            }
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+        
+        @Override
+        public void mouseExited(MouseEvent e) {
+            for(int i = 0; i < 10; i++) {
+                for(int j = 0; j < 10; j++) {
+                    if(e.getSource() == botoes[i][j]) {
+                        if(vertical == true) {
+                            if(i <= 8) {
+                                for(int k = 0; k < 2; k++) {
+                                    if(botoes[i + k][j].getIcon() != sea_tile_temp) {
+                                        return;
+                                    }
+                                }
+                                for(int k = 0; k < 2; k++) {
+                                    botoes[i + k][j].setIcon(sea_tile);
+                                    botoes[i + k][j].repaint();
+                                }
+                            }
+                        } else {
+                            if(j <= 8) {
+                                for(int k = 0; k < 2; k++) {
+                                    if(botoes[i][j + k].getIcon() != sea_tile_temp) {
+                                        return;
+                                    }
+                                }
+                                for(int k = 0; k < 2; k++) {
+                                    botoes[i][j + k].setIcon(sea_tile);
+                                    botoes[i][j + k].repaint();
+                                }
+                            }
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+        
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            for(int i = 0; i < 10; i++) {
+                for(int j = 0; j < 10; j++) {
+                    if(e.getSource() == botoes[i][j]) {
+                        if(vertical == true) {
+                            if(i <= 8) {
+                                for(int k = 0; k < 2; k++) {
+                                    if(botoes[i + k][j].getIcon() != sea_tile_temp) {
+                                        return;
+                                    }
+                                }
+                                botoes[i][j].setIcon(b51_c_b_v);
+                                botoes[i][j].repaint();
+                                botoes[i + 1][j].setIcon(b52_c_b_v);
+                                botoes[i + 1][j].repaint();
+                                // fim da configuracao be barcos
+                            }
+                        } else {
+                            if(j <= 8) {
+                                for(int k = 0; k < 2; k++) {
+                                    if(botoes[i][j + k].getIcon() != sea_tile_temp) {
+                                        return;
+                                    }
+                                }
+                                botoes[i][j].setIcon(b51_c_b_h);
+                                botoes[i][j].repaint();
+                                botoes[i][j + 1].setIcon(b52_c_b_h);
+                                botoes[i][j + 1].repaint();
+                                // fim da configuracao de barcos
+
+                            }
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+        
+    }
+
 }
