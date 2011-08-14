@@ -3,9 +3,12 @@ package janelas;
 import componentesUI.Grid;
 import java.awt.Dimension;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 public class ConfigGrid extends JPanel {
     Grid grid;
+    JRadioButton vertical;
+    JRadioButton horizontal;
     
     public ConfigGrid() {
         grid = new Grid();
