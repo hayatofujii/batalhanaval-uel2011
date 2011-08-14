@@ -23,7 +23,12 @@ public class Grid extends JPanel {
     private MouseListener mouseListener;
     
     // sentido do barco a ser inserido
-    private boolean vertical;
+    private static boolean vertical;
+    
+    // setter para a variável booleana vertical
+    public static void setBooleanVertical(boolean valor) {
+        vertical = valor;
+    }
     
     public Grid() {
         // grid
