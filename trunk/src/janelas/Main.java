@@ -5,11 +5,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.JFrame;
 import java.awt.Dimension;
 
+
 public class Main {
-    private Jogador jogador;
     private static JFrame janela;
-    private static ConfigConexao confConexao;
+    
     private static ConfigGrid confGrid;
+    private static ConfigConexao confConex;
     
     private static final int MAX_LARGURA = 800;
     private static final int MAX_ALTURA = 600;
@@ -25,45 +26,36 @@ public class Main {
         );
     }
     
-    public static JFrame getJFrame() {
-        if(janela == null)
-            janela = new JFrame("Batalha Naval");
-        return janela;
+    public static void mostraConfigConexao()
+    {
+        confConex = new ConfigConexao();
+        confConex.setOpaque(true);
+        janela.add(confConex);
+        
+        confConex.revalidate();
     }
-    
-    public static ConfigConexao getConfigConexao() {
-        if(confConexao == null)
-            confConexao = new ConfigConexao();
-        return confConexao;
-    }
-    
-    public static ConfigGrid getConfigGrid() {
-        if(confGrid == null)
-            confGrid = new ConfigGrid();
-        return confGrid;
-    }
-    
-    public static void atualizaPainelConfigGrid() {
-        janela.remove(confConexao);
-        confGrid = getConfigGrid();
+
+    public static void mostraConfigGrid()
+    {
+        janela.remove(confConex);
+        confGrid = new ConfigGrid();
         confGrid.setOpaque(true);
         janela.add(confGrid);
-        confGrid.revalidate();
+        
+        confGrid.revalidate();        
     }
+    
+
     
     private static void mostrar() {
         // frame
-        janela = getJFrame();
+        janela = new JFrame("Batalha Naval");
         janela.setPreferredSize(new Dimension(MAX_LARGURA, MAX_ALTURA));
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janela.setResizable(false);
         
         // instancia um painel ConfigConexao
-        confConexao = getConfigConexao();
-        confConexao.setOpaque(true);
-        
-        // adiciona o painel à janela
-        janela.add(confConexao);
+        mostraConfigConexao();
         
         // mostrar frame
         janela.pack();

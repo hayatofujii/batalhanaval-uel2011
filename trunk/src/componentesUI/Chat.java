@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import nucleo.Conexao;
+import nucleo.ConexaoCliente;
 
 public class Chat extends JPanel {
     private static Chat chat;
@@ -89,7 +89,7 @@ public class Chat extends JPanel {
     // * Bug: enviando mensagem vazia
     private void enviarMensagem(String _msg) {
         colocaMensagemAreaChat(_msg);
-        Conexao.getConexao().enviarMensagem(_msg);
+        ConexaoCliente.getConexao().enviarMensagem(_msg);
         
         areaEntrada.setText("");
         areaEntrada.requestFocus();
