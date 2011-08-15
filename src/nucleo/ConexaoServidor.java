@@ -31,7 +31,7 @@ public class ConexaoServidor extends ConexaoCliente {
             inicializarFluxos();
             
             // precisamos notificar a interface gráfica que a conexão foi aberta
-            Main.mostraConfigConexao();
+            Main.mostraConfigGrid();
         }
     }
 }
