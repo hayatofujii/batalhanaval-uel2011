@@ -1,23 +1,21 @@
 package componentesUI;
 
-import janelas.Main;
-import nucleo.ConexaoCliente;
-import nucleo.Jogador;
-
-import java.awt.BorderLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import janelas.Main;
+import nucleo.ConexaoCliente;
 import nucleo.ConexaoServidor;
+import nucleo.Jogador;
 
 public class PainelConexao extends JPanel {
-
     private JTabbedPane abas;
     private JPanel formServidor;
     private JPanel formCliente;
@@ -201,34 +199,30 @@ public class PainelConexao extends JPanel {
         labelStatusSv.setText(_msg);
     }
 
-    private class EventoBotConectar implements ActionListener
-    {
+    private class EventoBotConectar implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ev) {
             ConexaoCliente.getConexao().conectarCliente(campoIP.getText(), Integer.parseInt(campoPorta.getText()));
             Jogador.getJogador().setNome(campoNome.getText());
             Main.mostraConfigGrid();
-
         }
     }
 
     private class EventoBotConectarSv implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent ev) {
-                Jogador.getJogador().setNome(campoNomeSv.getText());
-                atualizaStatusSv("Aguardando cliente...");
+            Jogador.getJogador().setNome(campoNomeSv.getText());
+            atualizaStatusSv("Aguardando cliente...");
 
-                // abre a thread do servidor
-                ConexaoServidor server = new ConexaoServidor();
-                server.inicializarServidor(Integer.parseInt(campoPortaSv.getText()));
-                
-                // "desativa" interface de conexao
-                botConectarSv.setEnabled(false);
-                abas.setEnabledAt(0, false);
-                campoPortaSv.setEnabled(false);
-                campoNomeSv.setEnabled(false);
+            // abre a thread do servidor
+            ConexaoServidor server = new ConexaoServidor();
+            server.inicializarServidor(Integer.parseInt(campoPortaSv.getText()));
 
-            }
+            // "desativa" a interface de conexão
+            botConectarSv.setEnabled(false);
+            abas.setEnabledAt(0, false);
+            campoPortaSv.setEnabled(false);
+            campoNomeSv.setEnabled(false);
         }
+    }
 }

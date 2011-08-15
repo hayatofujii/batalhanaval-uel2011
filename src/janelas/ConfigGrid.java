@@ -1,12 +1,12 @@
 package janelas;
 
-import componentesUI.Grid;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import componentesUI.Grid;
 
 public class ConfigGrid extends JPanel {
     private Grid grid;

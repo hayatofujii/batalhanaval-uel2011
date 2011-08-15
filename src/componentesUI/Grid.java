@@ -1,63 +1,63 @@
 package componentesUI;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import java.awt.GridLayout;
-import javax.swing.ImageIcon;
-import java.awt.Insets;
 import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.BorderFactory;
 
 public class Grid extends JPanel {
     // ícones
     private ImageIcon sea_tile = new ImageIcon(getClass().getResource("../imagensGrid/sea-tile.jpg"));
     private ImageIcon sea_tile_temp = new ImageIcon(getClass().getResource("../imagensGrid/sea-tile-temp.jpg"));
     
-    //barco 1 - vertical
+    // barco 1 - vertical
     private ImageIcon b11_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b11-c-b-v.jpg"));
     private ImageIcon b12_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b12-c-b-v.jpg"));
     private ImageIcon b13_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b13-c-b-v.jpg"));
     private ImageIcon b14_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b14-c-b-v.jpg"));
     private ImageIcon b15_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b15-c-b-v.jpg"));
     
-    //barco 1 - horizontal
+    // barco 1 - horizontal
     private ImageIcon b11_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b11-c-b-h.jpg"));
     private ImageIcon b12_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b12-c-b-h.jpg"));
     private ImageIcon b13_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b13-c-b-h.jpg"));
     private ImageIcon b14_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b14-c-b-h.jpg"));
     private ImageIcon b15_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b15-c-b-h.jpg"));
     
-    //barco 2 - vertical
+    // barco 2 - vertical
     private ImageIcon b21_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b21-c-b-v.jpg"));
     private ImageIcon b22_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b22-c-b-v.jpg"));
     private ImageIcon b23_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b23-c-b-v.jpg"));
     private ImageIcon b24_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b24-c-b-v.jpg"));
     
-    //barco 2 - horizontal
+    // barco 2 - horizontal
     private ImageIcon b21_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b21-c-b-h.jpg"));
     private ImageIcon b22_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b22-c-b-h.jpg"));
     private ImageIcon b23_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b23-c-b-h.jpg"));
     private ImageIcon b24_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b24-c-b-h.jpg"));
     
-    //barco 3 - vertical
+    // barco 3 - vertical
     private ImageIcon b31_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b31-c-b-v.jpg"));
     private ImageIcon b32_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b32-c-b-v.jpg"));
     private ImageIcon b33_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b33-c-b-v.jpg"));
     
-    //barco 3 - horizontal
+    // barco 3 - horizontal
     private ImageIcon b31_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b31-c-b-h.jpg"));
     private ImageIcon b32_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b32-c-b-h.jpg"));
     private ImageIcon b33_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b33-c-b-h.jpg"));
     
-    //barco 4 - vertical
+    // barco 4 - vertical
     private ImageIcon b41_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b41-c-b-v.jpg"));
     private ImageIcon b42_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b42-c-b-v.jpg"));
     private ImageIcon b43_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b43-c-b-v.jpg"));
     
-    //barco 4 - horizontal
+    // barco 4 - horizontal
     private ImageIcon b41_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b41-c-b-h.jpg"));
     private ImageIcon b42_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b42-c-b-h.jpg"));
     private ImageIcon b43_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b43-c-b-h.jpg"));
@@ -66,14 +66,14 @@ public class Grid extends JPanel {
     private ImageIcon b51_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b51-c-b-v.jpg"));
     private ImageIcon b52_c_b_v = new ImageIcon(getClass().getResource("../imagensGrid/b52-c-b-v.jpg"));
     
-    //barco 5 - horizontal
+    // barco 5 - horizontal
     private ImageIcon b51_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b51-c-b-h.jpg"));
     private ImageIcon b52_c_b_h = new ImageIcon(getClass().getResource("../imagensGrid/b52-c-b-h.jpg"));
     
     // botões
     private JButton[][] botoes;
     
-    // ouvintes dos eventos de mouse
+    // ouvinte dos eventos de mouse
     private MouseListener mouseListener;
     
     // sentido do barco a ser inserido
@@ -609,7 +609,6 @@ public class Grid extends JPanel {
                 }
             }
         }
-        
     }    
  
     private class EventoBotaoGrid_Barco5 extends MouseAdapter {
@@ -702,7 +701,7 @@ public class Grid extends JPanel {
                                 botoes[i][j].repaint();
                                 botoes[i + 1][j].setIcon(b52_c_b_v);
                                 botoes[i + 1][j].repaint();
-                                // fim da configuracao be barcos
+                                // fim da configuração be barcos
                             }
                         } else {
                             if(j <= 8) {
@@ -715,8 +714,7 @@ public class Grid extends JPanel {
                                 botoes[i][j].repaint();
                                 botoes[i][j + 1].setIcon(b52_c_b_h);
                                 botoes[i][j + 1].repaint();
-                                // fim da configuracao de barcos
-
+                                // fim da configuração de barcos
                             }
                         }
                         return;
@@ -724,7 +722,5 @@ public class Grid extends JPanel {
                 }
             }
         }
-        
     }
-
 }

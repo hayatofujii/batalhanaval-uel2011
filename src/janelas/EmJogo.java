@@ -1,9 +1,9 @@
 package janelas;
 
+import javax.swing.JPanel;
+import java.awt.Dimension;
 import componentesUI.Chat;
 import componentesUI.Grid;
-import java.awt.Dimension;
-import javax.swing.JPanel;
 
 public class EmJogo extends JPanel {
     Chat chat;

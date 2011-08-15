@@ -1,8 +1,8 @@
 package janelas;
 
-import componentesUI.PainelConexao;
-import java.awt.Dimension;
 import javax.swing.JPanel;
+import java.awt.Dimension;
+import componentesUI.PainelConexao;
 
 public class ConfigConexao extends JPanel {
     PainelConexao form;

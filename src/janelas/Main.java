@@ -1,10 +1,8 @@
 package janelas;
-import nucleo.Jogador;
 
-import javax.swing.SwingUtilities;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import java.awt.Dimension;
-
 
 public class Main {
     private static JFrame janela;
@@ -38,14 +36,13 @@ public class Main {
     public static void mostraConfigGrid()
     {
         janela.remove(confConex);
+        
         confGrid = new ConfigGrid();
         confGrid.setOpaque(true);
         janela.add(confGrid);
         
         confGrid.revalidate();        
     }
-    
-
     
     private static void mostrar() {
         // frame
