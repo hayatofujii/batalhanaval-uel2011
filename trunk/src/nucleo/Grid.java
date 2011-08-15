@@ -1,10 +1,3 @@
-/* Tipos de Barcos
- * tipo 0: 1x2
- * tipo 1: 1x3
- * tipo 2: 1x3
- * tipo 3: 1x4
- * tipo 4: 1x5
- */
 package nucleo;
 
 public class Grid {
@@ -12,9 +5,6 @@ public class Grid {
     private boolean aberto[][];
     private boolean qtdeBarcos[];
 
-    // coloca um barco no grid
-    // basicamente coloca valores na matriz
-    // ATENÇÃO: Só execute essa rotina caso os dados já tenham passado da validação
     private void colocaBarco(int x, int y, int tipo, boolean vert) {
         int tam;
         
@@ -30,8 +20,6 @@ public class Grid {
                 grid[x + i][y] = 10 * tipo + i;
     }
 
-    // essa função verifica se cada célula do barco está em uma posição legal
-    // e se não existe nada nesses lugares
     private boolean verificaEspaco(int x, int y, int tipo, boolean vert) {
         int tam;
         
@@ -50,7 +38,6 @@ public class Grid {
         return true;
     }
 
-    // retorna o valor no grid em um ponto
     public int abreCampo(int x, int y) {
         if(!aberto[x][y])
             return grid[x][y];
@@ -58,7 +45,6 @@ public class Grid {
             return -1;
     }
 
-    // limpa grid
     public void limpa() {
         byte i, j;
 
