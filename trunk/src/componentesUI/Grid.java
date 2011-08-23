@@ -11,7 +11,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import nucleo.GridLogico;
+
 public class Grid extends JPanel {
+    
     // ícones
     private ImageIcon sea_tile = new ImageIcon(getClass().getResource("../imagensGrid/sea-tile.jpg"));
     private ImageIcon sea_tile_temp = new ImageIcon(getClass().getResource("../imagensGrid/sea-tile-temp.jpg"));
@@ -73,6 +76,14 @@ public class Grid extends JPanel {
     // botões
     private JButton[][] botoes;
     
+    // grid lógica
+    private GridLogico pontos;
+            
+    public int getPontosLogico(int x, int y)
+    {
+        return pontos.abreCampo(x, y);
+    }
+    
     // ouvinte dos eventos de mouse
     private MouseListener mouseListener;
     
@@ -88,6 +99,9 @@ public class Grid extends JPanel {
         // grid
         super(new GridLayout(10, 10));
 
+        // grid lógico
+        pontos = new GridLogico();
+        
         // botões
         botoes = new JButton[10][10];
         
@@ -134,8 +148,8 @@ public class Grid extends JPanel {
     private class EventoBotaoGrid_Barco1 extends MouseAdapter {
         @Override
         public void mouseEntered(MouseEvent e) {
-            for(int i = 0; i < 10; i++) {
-                for(int j = 0; j < 10; j++) {
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 10; j++) {
                     if(e.getSource() == botoes[i][j]) {
                         if(vertical == true) {
                             if(i <= 5) {
@@ -217,6 +231,9 @@ public class Grid extends JPanel {
                                         return;
                                     }
                                 }
+                                
+                                pontos.colocaBarco(i, j, 5, vertical);
+                                
                                 botoes[i][j].setIcon(b11_c_b_v);
                                 botoes[i][j].repaint();
                                 botoes[i + 1][j].setIcon(b12_c_b_v);
@@ -236,6 +253,9 @@ public class Grid extends JPanel {
                                         return;
                                     }
                                 }
+                                
+                                pontos.colocaBarco(i, j, 5, vertical);
+                                                                
                                 botoes[i][j].setIcon(b11_c_b_h);
                                 botoes[i][j].repaint();
                                 botoes[i][j + 1].setIcon(b12_c_b_h);
@@ -342,6 +362,9 @@ public class Grid extends JPanel {
                                         return;
                                     }
                                 }
+                                
+                                pontos.colocaBarco(i, j, 4, vertical);
+                                
                                 botoes[i][j].setIcon(b21_c_b_v);
                                 botoes[i][j].repaint();
                                 botoes[i + 1][j].setIcon(b22_c_b_v);
@@ -359,6 +382,9 @@ public class Grid extends JPanel {
                                         return;
                                     }
                                 }
+                                
+                                pontos.colocaBarco(i, j, 3, vertical);
+                                
                                 botoes[i][j].setIcon(b21_c_b_h);
                                 botoes[i][j].repaint();
                                 botoes[i][j + 1].setIcon(b22_c_b_h);
@@ -463,6 +489,9 @@ public class Grid extends JPanel {
                                         return;
                                     }
                                 }
+                                
+                                pontos.colocaBarco(i, j, 3, vertical);
+                                
                                 botoes[i][j].setIcon(b31_c_b_v);
                                 botoes[i][j].repaint();
                                 botoes[i + 1][j].setIcon(b32_c_b_v);
@@ -478,6 +507,9 @@ public class Grid extends JPanel {
                                         return;
                                     }
                                 }
+                                
+                                pontos.colocaBarco(i, j, 3, vertical);
+                                                                
                                 botoes[i][j].setIcon(b31_c_b_h);
                                 botoes[i][j].repaint();
                                 botoes[i][j + 1].setIcon(b32_c_b_h);
@@ -580,6 +612,9 @@ public class Grid extends JPanel {
                                         return;
                                     }
                                 }
+                                
+                                pontos.colocaBarco(i, j, 3, vertical);
+                                
                                 botoes[i][j].setIcon(b41_c_b_v);
                                 botoes[i][j].repaint();
                                 botoes[i + 1][j].setIcon(b42_c_b_v);
@@ -595,6 +630,9 @@ public class Grid extends JPanel {
                                         return;
                                     }
                                 }
+                                
+                                pontos.colocaBarco(i, j, 3, vertical);
+                                
                                 botoes[i][j].setIcon(b41_c_b_h);
                                 botoes[i][j].repaint();
                                 botoes[i][j + 1].setIcon(b42_c_b_h);
@@ -624,6 +662,9 @@ public class Grid extends JPanel {
                                         return;
                                     }
                                 }
+                                
+                                pontos.colocaBarco(i, j, 2, vertical);
+                                
                                 for(int k = 0; k < 2; k++) {
                                     botoes[i + k][j].setIcon(sea_tile_temp);
                                     botoes[i + k][j].repaint();
@@ -637,6 +678,9 @@ public class Grid extends JPanel {
                                         return;
                                     }
                                 }
+                                
+                                pontos.colocaBarco(i, j, 2, vertical);
+                                
                                 for(int k = 0; k < 2; k++) {
                                     botoes[i][j + k].setIcon(sea_tile_temp);
                                     botoes[i][j + k].repaint();
@@ -717,6 +761,7 @@ public class Grid extends JPanel {
                                 // fim da configuração de barcos
                             }
                         }
+                        pontos.imprimeGridLogico();
                         return;
                     }
                 }
