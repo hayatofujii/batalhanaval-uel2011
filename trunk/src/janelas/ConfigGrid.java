@@ -37,6 +37,8 @@ public class ConfigGrid extends JPanel {
         grid.setBounds(50, 50, tamGrid.width, tamGrid.height);
         add(grid);
         
+        grid.ativaConfiguracao();
+        
         vertical = getVertical();
         horizontal = getHorizontal();
         grupoBotoes = new ButtonGroup();

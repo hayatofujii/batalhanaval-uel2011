@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import nucleo.ConexaoCliente;
 import nucleo.GridLogico;
 
 public class Grid extends JPanel {
@@ -104,12 +105,23 @@ public class Grid extends JPanel {
         
         // botões
         botoes = new JButton[10][10];
-        
-        // por padrão, o sentido dos barcos é true
+    }
+    
+    public void ativaConfiguracao() {
+        // por padrão, o sentido dos barcos é vertical
         vertical = true;
         
-        mouseListener = new EventoBotaoGrid_Barco1();
-        
+        mouseListener = new EventoBotaoGrid_AdicionaBarco1();
+        insereBotoes();
+    }
+    
+    public void ativaPartida() {
+        mouseListener = null;
+        insereBotoes();
+    }
+    
+    public void ativaMini() {
+        mouseListener = null;
         insereBotoes();
     }
     
@@ -145,7 +157,22 @@ public class Grid extends JPanel {
         }
     }
     
-    private class EventoBotaoGrid_Barco1 extends MouseAdapter {
+    private class EventoBotaoGrid_EmJogo extends MouseAdapter
+    {
+        @Override
+        public void mouseClicked(MouseEvent e)
+        {
+            for (int i = 0; i < 10; i++)
+                for (int j = 0; j < 10; j++)
+                    if (e.getSource() == botoes[i][j])
+                    {
+                        // passar i, j por string;
+                        //ConexaoCliente.getConexao().enviar("");
+                    }
+        }
+    }
+    
+    private class EventoBotaoGrid_AdicionaBarco1 extends MouseAdapter {
         @Override
         public void mouseEntered(MouseEvent e) {
             for (int i = 0; i < 10; i++) {
@@ -244,7 +271,7 @@ public class Grid extends JPanel {
                                 botoes[i + 3][j].repaint();
                                 botoes[i + 4][j].setIcon(b15_c_b_v);
                                 botoes[i + 4][j].repaint();
-                                atualizaMouseListener(new EventoBotaoGrid_Barco2());
+                                atualizaMouseListener(new EventoBotaoGrid_AdicionaBarco2());
                             }
                         } else {
                             if(j <= 5) {
@@ -266,7 +293,7 @@ public class Grid extends JPanel {
                                 botoes[i][j + 3].repaint();
                                 botoes[i][j + 4].setIcon(b15_c_b_h);
                                 botoes[i][j + 4].repaint();
-                                atualizaMouseListener(new EventoBotaoGrid_Barco2());
+                                atualizaMouseListener(new EventoBotaoGrid_AdicionaBarco2());
                             }
                         }
                         return;
@@ -276,7 +303,7 @@ public class Grid extends JPanel {
         }
     }
     
-    private class EventoBotaoGrid_Barco2 extends MouseAdapter {
+    private class EventoBotaoGrid_AdicionaBarco2 extends MouseAdapter {
         @Override
         public void mouseEntered(MouseEvent e) {
             for(int i = 0; i < 10; i++) {
@@ -373,7 +400,7 @@ public class Grid extends JPanel {
                                 botoes[i + 2][j].repaint();
                                 botoes[i + 3][j].setIcon(b24_c_b_v);
                                 botoes[i + 3][j].repaint();
-                                atualizaMouseListener(new EventoBotaoGrid_Barco3());
+                                atualizaMouseListener(new EventoBotaoGrid_AdicionaBarco3());
                             }
                         } else {
                             if(j <= 6) {
@@ -393,7 +420,7 @@ public class Grid extends JPanel {
                                 botoes[i][j + 2].repaint();
                                 botoes[i][j + 3].setIcon(b24_c_b_h);
                                 botoes[i][j + 3].repaint();
-                                atualizaMouseListener(new EventoBotaoGrid_Barco3());
+                                atualizaMouseListener(new EventoBotaoGrid_AdicionaBarco3());
                             }
                         }
                         return;
@@ -403,7 +430,7 @@ public class Grid extends JPanel {
         }
     }
 
-    private class EventoBotaoGrid_Barco3 extends MouseAdapter {
+    private class EventoBotaoGrid_AdicionaBarco3 extends MouseAdapter {
         @Override
         public void mouseEntered(MouseEvent e) {
             for(int i = 0; i < 10; i++) {
@@ -498,7 +525,7 @@ public class Grid extends JPanel {
                                 botoes[i + 1][j].repaint();
                                 botoes[i + 2][j].setIcon(b33_c_b_v);
                                 botoes[i + 2][j].repaint();
-                                atualizaMouseListener(new EventoBotaoGrid_Barco4());
+                                atualizaMouseListener(new EventoBotaoGrid_AdicionaBarco4());
                             }
                         } else {
                             if(j <= 7) {
@@ -516,7 +543,7 @@ public class Grid extends JPanel {
                                 botoes[i][j + 1].repaint();
                                 botoes[i][j + 2].setIcon(b33_c_b_h);
                                 botoes[i][j + 2].repaint();
-                                atualizaMouseListener(new EventoBotaoGrid_Barco4());
+                                atualizaMouseListener(new EventoBotaoGrid_AdicionaBarco4());
                             }
                         }
                         return;
@@ -526,7 +553,7 @@ public class Grid extends JPanel {
         }
     }
         
-    private class EventoBotaoGrid_Barco4 extends MouseAdapter {
+    private class EventoBotaoGrid_AdicionaBarco4 extends MouseAdapter {
         @Override
         public void mouseEntered(MouseEvent e) {
             for(int i = 0; i < 10; i++) {
@@ -621,7 +648,7 @@ public class Grid extends JPanel {
                                 botoes[i + 1][j].repaint();
                                 botoes[i + 2][j].setIcon(b43_c_b_v);
                                 botoes[i + 2][j].repaint();
-                                atualizaMouseListener(new EventoBotaoGrid_Barco5());
+                                atualizaMouseListener(new EventoBotaoGrid_AdicionaBarco5());
                             }
                         } else {
                             if(j <= 7) {
@@ -639,7 +666,7 @@ public class Grid extends JPanel {
                                 botoes[i][j + 1].repaint();
                                 botoes[i][j + 2].setIcon(b43_c_b_h);
                                 botoes[i][j + 2].repaint();
-                                atualizaMouseListener(new EventoBotaoGrid_Barco5());
+                                atualizaMouseListener(new EventoBotaoGrid_AdicionaBarco5());
                             }
                         }
                         return;
@@ -649,7 +676,7 @@ public class Grid extends JPanel {
         }
     }    
  
-    private class EventoBotaoGrid_Barco5 extends MouseAdapter {
+    private class EventoBotaoGrid_AdicionaBarco5 extends MouseAdapter {
         @Override
         public void mouseEntered(MouseEvent e) {
             for(int i = 0; i < 10; i++) {

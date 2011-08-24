@@ -87,7 +87,7 @@ public class Chat extends JPanel {
     // adiciona a frase à janela de chat
     private void enviarMensagem(String _msg) {
         colocaMensagemAreaChat(_msg);
-        ConexaoCliente.getConexao().enviarMensagem(_msg);
+        ConexaoCliente.getConexao().enviarMensagemChat(_msg);
         
         areaEntrada.setText("");
         areaEntrada.requestFocus();

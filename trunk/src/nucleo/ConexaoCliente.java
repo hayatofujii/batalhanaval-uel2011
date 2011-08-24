@@ -16,10 +16,7 @@ public class ConexaoCliente {
     protected InputStreamReader streamReader;
     protected BufferedReader reader;
     protected PrintWriter writer;
-    
-    protected String entrada;
-    protected String saida;
-    
+        
     public static ConexaoCliente getConexao() {
         if(conexao == null)
             conexao = new ConexaoCliente();
@@ -56,8 +53,24 @@ public class ConexaoCliente {
         }
     }
     
-    public void enviarMensagem(String _msg) {
-        System.out.println(_msg);
+    public void enviarMensagemChat(String _msg) {
+        System.out.println("0:" + _msg);
+        writer.print("0:" + _msg);
+        writer.flush();
+    }
+    
+    public void enviarCoordenadas(int x, int y)
+    {
+        System.out.println("1:" + x + ":" + y);
+        writer.print("1:" + x + ":" + y);
+        writer.flush();
+    }
+    
+    public void enviarPontuacao (int pontos, int tipoBarco, int secao, boolean vert)
+    {
+        System.out.println("2:" + pontos + ":" + tipoBarco + ":" + secao + ":" + vert);
+        writer.print("2:" + pontos + ":" + tipoBarco + ":" + secao + ":" + vert);
+        writer.flush();
     }
 
     public String detectarIP() {
@@ -73,5 +86,13 @@ public class ConexaoCliente {
         }
         
         return enderecoIP;
+    }
+    
+    public class Ouvinte implements Runnable {
+        @Override
+        public void run()
+        {
+            //FAZERZ
+        }
     }
 }

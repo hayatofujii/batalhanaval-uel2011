@@ -16,6 +16,7 @@ public class ConexaoServidor extends ConexaoCliente {
 
         Thread aceita = new Thread(new EventoAceitaConexao());
         aceita.start();
+        
     }
  
     public class EventoAceitaConexao implements Runnable {
@@ -30,6 +31,8 @@ public class ConexaoServidor extends ConexaoCliente {
             inicializarFluxos();
 
             Main.mostraConfigGrid();
+            
+            Thread ouvinte = new Thread(new Ouvinte());
         }
     }
 }
