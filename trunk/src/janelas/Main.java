@@ -7,8 +7,9 @@ import java.awt.Dimension;
 public class Main {
     private static JFrame janela;
     
-    private static ConfigGrid confGrid;
     private static ConfigConexao confConex;
+    private static ConfigGrid confGrid;
+    private static EmJogo emJogo;
     
     private static final int MAX_LARGURA = 800;
     private static final int MAX_ALTURA = 600;
@@ -33,8 +34,7 @@ public class Main {
         confConex.revalidate();
     }
 
-    public static void mostraConfigGrid()
-    {
+    public static void mostraConfigGrid() {
         //janela.remove(confConex);
         
         confGrid = new ConfigGrid();
@@ -42,6 +42,16 @@ public class Main {
         janela.add(confGrid);
         
         confGrid.revalidate();        
+    }
+    
+    public static void mostraEmJogo() {
+        janela.remove(confGrid);
+        
+        emJogo = new EmJogo();
+        emJogo.setOpaque(true);
+        janela.add(emJogo);
+        
+        emJogo.revalidate();
     }
     
     private static void mostrar() {

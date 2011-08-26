@@ -31,7 +31,7 @@ public class ConexaoServidor extends ConexaoCliente {
             inicializarFluxos();
 
             Main.mostraConfigGrid();
-            
+
             Thread ouvinte = new Thread(new Ouvinte());
             ouvinte.start();
         }
