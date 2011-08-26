@@ -16,6 +16,8 @@ public class ConexaoCliente {
     protected InputStreamReader streamReader;
     protected BufferedReader reader;
     protected PrintWriter writer;
+    
+    private String mensagem;
         
     public static ConexaoCliente getConexao() {
         if(conexao == null)
@@ -26,13 +28,16 @@ public class ConexaoCliente {
     protected ConexaoCliente() {}
     
     public class Ouvinte implements Runnable {
-        public Ouvinte() {
-            // fazer
-        }
         
         @Override
         public void run() {
-            // fazer
+            try {
+                while ((mensagem = reader.readLine()) != null) {
+                    // fazer split
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
     
