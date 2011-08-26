@@ -33,6 +33,7 @@ public class ConexaoServidor extends ConexaoCliente {
             Main.mostraConfigGrid();
             
             Thread ouvinte = new Thread(new Ouvinte());
+            ouvinte.start();
         }
     }
 }

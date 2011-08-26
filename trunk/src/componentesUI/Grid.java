@@ -166,8 +166,7 @@ public class Grid extends JPanel {
                 for (int j = 0; j < 10; j++)
                     if (e.getSource() == botoes[i][j])
                     {
-                        // passar i, j por string;
-                        //ConexaoCliente.getConexao().enviar("");
+                        ConexaoCliente.getConexao().enviarCoordenadas(i, j);
                     }
         }
     }
