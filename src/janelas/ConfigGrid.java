@@ -27,7 +27,7 @@ public class ConfigGrid extends JPanel {
     }
     
     public ConfigGrid() {
-        grid = new Grid();
+        grid = new Grid(1);
         
         setLayout(null);
         setPreferredSize(new Dimension(800, 600));
@@ -36,8 +36,6 @@ public class ConfigGrid extends JPanel {
         Dimension tamGrid = grid.getPreferredSize();
         grid.setBounds(50, 50, tamGrid.width, tamGrid.height);
         add(grid);
-        
-        grid.ativaConfiguracao();
         
         vertical = getVertical();
         horizontal = getHorizontal();

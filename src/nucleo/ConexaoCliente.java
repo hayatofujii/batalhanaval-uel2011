@@ -26,14 +26,12 @@ public class ConexaoCliente {
     protected ConexaoCliente() {}
     
     public class Ouvinte implements Runnable {
-        public Ouvinte()
-        {
+        public Ouvinte() {
             // fazer
         }
         
         @Override
-        public void run()
-        {
+        public void run() {
             // fazer
         }
     }
@@ -75,15 +73,13 @@ public class ConexaoCliente {
         writer.flush();
     }
     
-    public void enviarCoordenadas(int x, int y)
-    {
+    public void enviarCoordenadas(int x, int y) {
         System.out.println("1:" + x + ":" + y);
         writer.print("1:" + x + ":" + y);
         writer.flush();
     }
     
-    public void enviarPontuacao (int pontos, int tipoBarco, int secao, boolean vert)
-    {
+    public void enviarPontuacao(int pontos, int tipoBarco, int secao, boolean vert) {
         System.out.println("2:" + pontos + ":" + tipoBarco + ":" + secao + ":" + vert);
         writer.print("2:" + pontos + ":" + tipoBarco + ":" + secao + ":" + vert);
         writer.flush();
