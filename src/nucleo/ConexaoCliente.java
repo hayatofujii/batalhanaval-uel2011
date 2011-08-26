@@ -25,6 +25,19 @@ public class ConexaoCliente {
     
     protected ConexaoCliente() {}
     
+    public class Ouvinte implements Runnable {
+        public Ouvinte()
+        {
+            // fazer
+        }
+        
+        @Override
+        public void run()
+        {
+            // fazer
+        }
+    }
+    
     public void conectarCliente(String _endereco, int _porta) {
         try {
             soqueteCliente = new Socket(_endereco, _porta);
@@ -35,6 +48,9 @@ public class ConexaoCliente {
         }
         
         inicializarFluxos();
+        
+        Thread ouvinte =  new Thread(new Ouvinte());
+        ouvinte.start();
     }
 
     public void inicializarFluxos() {
@@ -86,13 +102,5 @@ public class ConexaoCliente {
         }
         
         return enderecoIP;
-    }
-    
-    public class Ouvinte implements Runnable {
-        @Override
-        public void run()
-        {
-            //FAZERZ
-        }
     }
 }
