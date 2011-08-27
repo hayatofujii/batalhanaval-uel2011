@@ -18,18 +18,19 @@ public class ConexaoServidor extends ConexaoCliente {
         aceita.start();
         
     }
- 
+
     public class EventoAceitaConexao implements Runnable {
         @Override
         public void run() {
+            System.out.println("Entrou no susbsistema de aceitarConexao.");
             try {
-                soqueteCliente = soqueteServidor.accept();
+               ConexaoCliente.getConexao().soqueteCliente = soqueteServidor.accept();
             } catch(IOException ex) {
                 ex.printStackTrace();
             }
-
-            inicializarFluxos();
-
+            
+            ConexaoCliente.getConexao().inicializarFluxos();
+            
             Main.mostraConfigGrid();
 
             Thread ouvinte = new Thread(new Ouvinte());
