@@ -35,7 +35,7 @@ public class Main {
     }
 
     public static void mostraConfigGrid() {
-        //janela.remove(confConex);
+        janela.remove(confConex);
         
         confGrid = new ConfigGrid();
         confGrid.setOpaque(true);
@@ -62,9 +62,9 @@ public class Main {
         janela.setResizable(false);
         
         // instancia um painel ConfigConexao
-        //mostraConfigConexao();
+        mostraConfigConexao();
         
-        mostraConfigGrid();
+        //mostraConfigGrid();
         
         // mostrar frame
         janela.pack();
