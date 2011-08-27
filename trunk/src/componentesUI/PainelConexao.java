@@ -11,8 +11,8 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import janelas.Main;
-import nucleo.ConexaoCliente;
-import nucleo.ConexaoServidor;
+
+import nucleo.Conexao;
 import nucleo.Jogador;
 
 public class PainelConexao extends JPanel {
@@ -191,7 +191,7 @@ public class PainelConexao extends JPanel {
 
     private void atualizaIP() {
         atualizaStatusSv("Detectando IP da máquina...");
-        campoIPSv.setText(ConexaoCliente.getConexao().detectarIP());
+        campoIPSv.setText(Conexao.getConexao().detectarIP());
         atualizaStatusSv("");
     }
 
@@ -202,7 +202,7 @@ public class PainelConexao extends JPanel {
     private class EventoBotConectar implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent ev) {
-            ConexaoCliente.getConexao().conectarCliente(campoIP.getText(), Integer.parseInt(campoPorta.getText()));
+            Conexao.getConexao().conectarCliente(campoIP.getText(), Integer.parseInt(campoPorta.getText()));
             Jogador.getJogador().setNome(campoNome.getText());
             Main.mostraConfigGrid();
         }
@@ -215,7 +215,7 @@ public class PainelConexao extends JPanel {
             atualizaStatusSv("Aguardando cliente...");
 
             // abre a thread do servidor
-            ConexaoServidor server = new ConexaoServidor();
+            Conexao server = new Conexao();
             server.inicializarServidor(Integer.parseInt(campoPortaSv.getText()));
 
             // "desativa" a interface de conexão
