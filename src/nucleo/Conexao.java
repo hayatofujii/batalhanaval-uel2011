@@ -15,11 +15,10 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class Conexao {
+
     private static Conexao conexao;
-    
     private Socket soqueteCliente;
     private ServerSocket soqueteServidor;
-    
     private InputStreamReader streamReader;
     private BufferedReader reader;
     private PrintWriter writer;
@@ -28,7 +27,7 @@ public class Conexao {
         if (conexao == null) {
             conexao = new Conexao();
         }
-        
+
         return conexao;
     }
 
@@ -61,46 +60,50 @@ public class Conexao {
     }
 
     public class Ouvinte implements Runnable {
+
         private String mensagem;
 
         @Override
         public void run() {
-            try {
-                while ((mensagem = Conexao.getConexao().reader.readLine()) != null) {
-                    if (mensagem.charAt(0) == 'c') {
-                        String temp = mensagem.substring(2);
-                        Chat.getChat().colocaMensagemAreaChat(temp);
-                    }
-                    if (mensagem.charAt(0) == 'j') {
-                        int x = Integer.parseInt(Character.toString(mensagem.charAt(2)));
-                        int y = Integer.parseInt(Character.toString(mensagem.charAt(4)));
-                        String resultado = Jogador.getJogador().getPontosLogico(x, y);
-
-                        int pontos = 0;
-                        if (!resultado.equals("sea_tile")) {
-                            pontos = 10;
+            while (true) {
+                try {
+                    while ((mensagem = Conexao.getConexao().reader.readLine()) != null) {
+                        if (mensagem.charAt(0) == 'c') {
+                            String temp = mensagem.substring(2);
+                            Chat.getChat().colocaMensagemAreaChat(temp);
                         }
-                        EmJogo.getMini().setBotao(x, y, resultado);
-                        enviarPontuacao(pontos, resultado, x, y);
-                    }
-                    if (mensagem.charAt(0) == 'p') {
-                        String vetor[] = mensagem.split(":");
-                        int pontos = Integer.parseInt(vetor[1]);
-                        String icone = vetor[2];
-                        int x = Integer.parseInt(vetor[3]);
-                        int y = Integer.parseInt(vetor[4]);
+                        if (mensagem.charAt(0) == 'j') {
+                            int x = Integer.parseInt(Character.toString(mensagem.charAt(2)));
+                            int y = Integer.parseInt(Character.toString(mensagem.charAt(4)));
+                            String resultado = Jogador.getJogador().getPontosLogico(x, y);
 
-                        Jogador.getJogador().setPontos(Jogador.getJogador().getPontos() + pontos);
-                        EmJogo.getGrid().setBotao(x, y, icone);
+                            int pontos = 0;
+                            if (!resultado.equals("sea_tile")) {
+                                pontos = 10;
+                            }
+                            EmJogo.getMini().setBotao(x, y, resultado);
+                            enviarPontuacao(pontos, resultado, x, y);
+                        }
+                        if (mensagem.charAt(0) == 'p') {
+                            String vetor[] = mensagem.split(":");
+                            int pontos = Integer.parseInt(vetor[1]);
+                            String icone = vetor[2];
+                            int x = Integer.parseInt(vetor[3]);
+                            int y = Integer.parseInt(vetor[4]);
+
+                            Jogador.getJogador().setPontos(Jogador.getJogador().getPontos() + pontos);
+                            EmJogo.getGrid().setBotao(x, y, icone);
+                        }
                     }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
-            } catch (IOException ex) {
-                ex.printStackTrace();
             }
         }
     }
 
     public class EventoAceitaConexao implements Runnable {
+
         @Override
         public void run() {
             try {
@@ -128,12 +131,13 @@ public class Conexao {
         Thread aceita = new Thread(new EventoAceitaConexao());
         aceita.start();
     }
-    
+
     public void enviarMensagemChat(String _msg) {
 
-        if (soqueteCliente == null)
+        if (soqueteCliente == null) {
             System.out.println("soquetecliente null");
-        
+        }
+
         System.out.println("c:" + _msg);
 
         writer.print("c:" + _msg);
