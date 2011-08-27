@@ -12,7 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import nucleo.ConexaoCliente;
+import nucleo.Conexao;
 import nucleo.Jogador;
 
 public class Grid extends JPanel {
@@ -141,7 +141,7 @@ public class Grid extends JPanel {
             for (int i = 0; i < 10; i++) {
                 for (int j = 0; j < 10; j++) {
                     if (e.getSource() == botoes[i][j]) {
-                        ConexaoCliente.getConexao().enviarCoordenadas(i, j);
+                        Conexao.getConexao().enviarCoordenadas(i, j);
                     }
                 }
             }
@@ -725,8 +725,9 @@ public class Grid extends JPanel {
                                 botoes[i][j + 1].setIcon(b52_c_b_h);
                                 Jogador.getJogador().atualizaGridLogico(i, j + 1, "b52_c_b_h");
                                 
-                                Thread ouvinte = new Thread(ConexaoCliente.getConexao().new Ouvinte());
+                                Thread ouvinte = new Thread(Conexao.getConexao().new Ouvinte());
                                 ouvinte.start();
+                                
                                 Main.mostraEmJogo();
                             }
                         }

@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import nucleo.ConexaoCliente;
+import nucleo.Conexao;
 
 public class Chat extends JPanel {
     private static Chat chat;
@@ -87,7 +87,7 @@ public class Chat extends JPanel {
     // adiciona a frase à janela de chat
     private void enviarMensagem(String _msg) {
         colocaMensagemAreaChat(_msg);
-        ConexaoCliente.getConexao().enviarMensagemChat(_msg);
+        Conexao.getConexao().enviarMensagemChat(_msg);
         
         areaEntrada.setText("");
         areaEntrada.requestFocus();
