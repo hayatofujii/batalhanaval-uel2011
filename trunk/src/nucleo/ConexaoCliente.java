@@ -1,5 +1,7 @@
 package nucleo;
 
+import componentesUI.Chat;
+import janelas.EmJogo;
 import javax.swing.JOptionPane;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -20,7 +22,7 @@ public class ConexaoCliente {
     private String mensagem;
         
     public static ConexaoCliente getConexao() {
-        if(conexao == null)
+        if (conexao == null)
             conexao = new ConexaoCliente();
         return conexao;
     }
@@ -33,7 +35,32 @@ public class ConexaoCliente {
         public void run() {
             try {
                 while ((mensagem = reader.readLine()) != null) {
-                    // fazer split
+                    if (mensagem.charAt(0) == 'c') {
+                        String temp = mensagem.substring(2);
+                        Chat.getChat().colocaMensagemAreaChat(temp);
+                    }
+                    if (mensagem.charAt(0) == 'j') {
+                        int x = Integer.parseInt(Character.toString(mensagem.charAt(2)));
+                        int y = Integer.parseInt(Character.toString(mensagem.charAt(4)));
+                        String resultado = Jogador.getJogador().getPontosLogico(x, y);
+                        
+                        int pontos = 0;
+                        if (!resultado.equals("sea_tile")) {
+                            pontos = 10;
+                        }
+                        EmJogo.getMini().setBotao(x, y, resultado);
+                        ConexaoCliente.getConexao().enviarPontuacao(pontos, resultado, x, y);
+                    }
+                    if (mensagem.charAt(0) == 'p') {
+                        String vetor[] = mensagem.split(":");
+                        int pontos = Integer.parseInt(vetor[1]);
+                        String icone = vetor[2];
+                        int x = Integer.parseInt(vetor[3]);
+                        int y = Integer.parseInt(vetor[4]);
+                        
+                        Jogador.getJogador().setPontos(Jogador.getJogador().getPontos() + pontos);
+                        EmJogo.getGrid().setBotao(x, y, icone);
+                    }
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -51,9 +78,6 @@ public class ConexaoCliente {
         }
         
         inicializarFluxos();
-        
-        Thread ouvinte =  new Thread(new Ouvinte());
-        ouvinte.start();
     }
 
     public void inicializarFluxos() {
@@ -73,20 +97,20 @@ public class ConexaoCliente {
     }
     
     public void enviarMensagemChat(String _msg) {
-        System.out.println("0:" + _msg);
-        writer.print("0:" + _msg);
+        System.out.println("c:" + _msg);
+        writer.print("c:" + _msg);
         writer.flush();
     }
     
     public void enviarCoordenadas(int x, int y) {
-        System.out.println("1:" + x + ":" + y);
-        writer.print("1:" + x + ":" + y);
+        System.out.println("j:" + x + ":" + y);
+        writer.print("j:" + x + ":" + y);
         writer.flush();
     }
     
-    public void enviarPontuacao(int pontos, int tipoBarco, int secao, boolean vert) {
-        System.out.println("2:" + pontos + ":" + tipoBarco + ":" + secao + ":" + vert);
-        writer.print("2:" + pontos + ":" + tipoBarco + ":" + secao + ":" + vert);
+    public void enviarPontuacao(int pontos, String icone, int x, int y) {
+        System.out.println("p:" + pontos + ":" + icone + ":" + x + ":" + y);
+        writer.print("p:" + pontos + ":" + icone + ":" + x + ":" + y);
         writer.flush();
     }
 

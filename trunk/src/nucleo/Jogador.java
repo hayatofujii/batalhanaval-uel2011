@@ -4,6 +4,15 @@ public class Jogador {
     private static Jogador jogador;
     private String nome;
     private int pontos;
+    private GridLogico gridLogico;
+    
+    public void atualizaGridLogico(int x, int y, String icone) {
+        gridLogico.colocaBarco(x, y, icone);
+    }
+    
+    public String getPontosLogico(int x, int y) {
+        return gridLogico.abreCampo(x, y);
+    }
     
     public static Jogador getJogador() {
         if(jogador == null)
@@ -13,6 +22,7 @@ public class Jogador {
 
     private Jogador() {
         pontos = 0;
+        gridLogico = new GridLogico();
     }
     
     public void setNome(String nome) {
@@ -25,6 +35,10 @@ public class Jogador {
     
     public int getPontos() {
         return pontos;
+    }
+    
+    public void setPontos(int pontos) {
+        this.pontos = pontos;
     }
     
     /*

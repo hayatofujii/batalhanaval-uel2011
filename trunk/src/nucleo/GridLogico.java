@@ -1,7 +1,7 @@
 package nucleo;
 
 public class GridLogico {
-    private int grid[][];
+    private String grid[][];
     private boolean aberto[][];
     
     public void imprimeGridLogico() {
@@ -12,31 +12,31 @@ public class GridLogico {
         }
     }
 
-    public void colocaBarco(int x, int y, int tam, boolean vert) {
-        for(int i = 0; i < tam; i++)
-            if(vert)
-                grid[x + i][y] = 10;
-            else
-                grid[x][y + i] = 10;
+    public void colocaBarco(int x, int y, String icone) {
+        grid[x][y] = icone;
     }
 
-    public int abreCampo(int x, int y) {
-        if(!aberto[x][y])
-            return grid[x][y];
-        else
-            return -1;
+    public String abreCampo(int x, int y) {
+        String resultado = null;
+        
+        if(!aberto[x][y]) {
+            aberto[x][y] = true;
+            resultado = grid[x][y];
+        }
+        
+        return resultado;
     }
 
     public void limpa() {
         for(int i = 0; i < 10; i++)
             for (int j = 0; j < 10; j++) {
-                this.grid[i][j] = 0;
+                this.grid[i][j] = "sea_tile";
                 this.aberto[i][j] = false;
             }
     }
 
     public GridLogico() {
-        this.grid = new int[10][10];
+        this.grid = new String[10][10];
         this.aberto = new boolean[10][10];
         this.limpa();
     }

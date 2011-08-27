@@ -6,8 +6,16 @@ import componentesUI.Chat;
 import componentesUI.Grid;
 
 public class EmJogo extends JPanel {
-    Chat chat;
-    Grid grid, mini;
+    private Chat chat;
+    private static Grid grid, mini;
+    
+    public static Grid getGrid() {
+        return grid;
+    }
+    
+    public static Grid getMini() {
+        return mini;
+    }
     
     public EmJogo() {
         grid = new Grid(2);
