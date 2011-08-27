@@ -20,6 +20,8 @@ public class ConexaoCliente {
     protected PrintWriter writer;
     
     private String mensagem;
+    
+    protected int testeInt = 0;
         
     public static ConexaoCliente getConexao() {
         if (conexao == null)
@@ -27,21 +29,19 @@ public class ConexaoCliente {
         return conexao;
     }
     
-    protected ConexaoCliente() {}
-    
     public class Ouvinte implements Runnable {
         
         @Override
         public void run() {
             try {
-                while ((mensagem = reader.readLine()) != null) {
-                    if (mensagem.charAt(0) == 'c') {
-                        String temp = mensagem.substring(2);
+                while ((ConexaoCliente.getConexao().mensagem = ConexaoCliente.getConexao().reader.readLine()) != null) {
+                    if (ConexaoCliente.getConexao().mensagem.charAt(0) == 'c') {
+                        String temp = ConexaoCliente.getConexao().mensagem.substring(2);
                         Chat.getChat().colocaMensagemAreaChat(temp);
                     }
-                    if (mensagem.charAt(0) == 'j') {
-                        int x = Integer.parseInt(Character.toString(mensagem.charAt(2)));
-                        int y = Integer.parseInt(Character.toString(mensagem.charAt(4)));
+                    if (ConexaoCliente.getConexao().mensagem.charAt(0) == 'j') {
+                        int x = Integer.parseInt(Character.toString(ConexaoCliente.getConexao().mensagem.charAt(2)));
+                        int y = Integer.parseInt(Character.toString(ConexaoCliente.getConexao().mensagem.charAt(4)));
                         String resultado = Jogador.getJogador().getPontosLogico(x, y);
                         
                         int pontos = 0;
@@ -51,8 +51,8 @@ public class ConexaoCliente {
                         EmJogo.getMini().setBotao(x, y, resultado);
                         ConexaoCliente.getConexao().enviarPontuacao(pontos, resultado, x, y);
                     }
-                    if (mensagem.charAt(0) == 'p') {
-                        String vetor[] = mensagem.split(":");
+                    if (ConexaoCliente.getConexao().mensagem.charAt(0) == 'p') {
+                        String vetor[] = ConexaoCliente.getConexao().mensagem.split(":");
                         int pontos = Integer.parseInt(vetor[1]);
                         String icone = vetor[2];
                         int x = Integer.parseInt(vetor[3]);
@@ -82,7 +82,7 @@ public class ConexaoCliente {
 
     public void inicializarFluxos() {
         try {
-            streamReader = new InputStreamReader(soqueteCliente.getInputStream());
+            streamReader = new InputStreamReader(ConexaoCliente.getConexao().soqueteCliente.getInputStream());
         } catch(IOException ex) {
             ex.printStackTrace();
         }
@@ -90,20 +90,42 @@ public class ConexaoCliente {
         reader = new BufferedReader(streamReader);
         
         try {
-            writer = new PrintWriter(soqueteCliente.getOutputStream());
+            writer = new PrintWriter(ConexaoCliente.getConexao().soqueteCliente.getOutputStream());
         } catch(IOException ex) {
             ex.printStackTrace();
         }
     }
     
     public void enviarMensagemChat(String _msg) {
-        System.out.println("c:" + _msg);
+        System.out.println("c:" + _msg + " aaa:" + testeInt);
+        
+        if (soqueteCliente == null)
+            System.out.println("soqueteCliente nulo!");
+        
+        if (writer == null || reader == null) 
+        {
+             System.out.println("Writer nulo, reinicializando.");
+             inicializarFluxos();
+        }
         writer.print("c:" + _msg);
         writer.flush();
     }
     
     public void enviarCoordenadas(int x, int y) {
-        System.out.println("j:" + x + ":" + y);
+        
+        System.out.println("j:" + x + ":" + y + " aaa:" + testeInt);
+        
+        if (soqueteCliente == null)
+            System.out.println("ALERTA SOQUETECLIENTE NULO");
+        
+        while (writer == null || reader == null) 
+        {
+             System.out.println("Writer nulo, reinicializando.");
+             inicializarFluxos();
+        }
+        
+        
+        
         writer.print("j:" + x + ":" + y);
         writer.flush();
     }
