@@ -19,7 +19,7 @@ public class EmJogo extends JPanel {
     
     public EmJogo() {
         grid = new Grid(2);
-        mini = new Grid(2);
+        mini = new Grid(0);
         chat = Chat.getChat();
         
         setLayout(null);
