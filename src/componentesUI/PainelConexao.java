@@ -17,6 +17,7 @@ import nucleo.Jogador;
 
 public class PainelConexao extends JPanel {
     private JTabbedPane abas;
+    
     private JPanel formServidor;
     private JPanel formCliente;
     private JLabel labelNome;
@@ -214,9 +215,7 @@ public class PainelConexao extends JPanel {
             Jogador.getJogador().setNome(campoNomeSv.getText());
             atualizaStatusSv("Aguardando cliente...");
 
-            // abre a thread do servidor
-            Conexao server = new Conexao();
-            server.inicializarServidor(Integer.parseInt(campoPortaSv.getText()));
+            Conexao.getConexao().inicializarServidor(Integer.parseInt(campoPortaSv.getText()));
 
             // "desativa" a interface de conexão
             botConectarSv.setEnabled(false);

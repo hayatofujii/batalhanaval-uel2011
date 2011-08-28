@@ -3,6 +3,7 @@ package janelas;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import java.awt.Dimension;
+import nucleo.Conexao;
 
 public class Main {
     private static JFrame janela;
@@ -52,6 +53,9 @@ public class Main {
         janela.add(emJogo);
         
         emJogo.revalidate();
+        
+        Thread ouvinte = new Thread(Conexao.getConexao().new Ouvinte());
+        ouvinte.start();
     }
     
     private static void mostrar() {

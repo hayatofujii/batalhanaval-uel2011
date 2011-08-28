@@ -82,6 +82,10 @@ public class Grid extends JPanel {
         // botões
         botoes = new JButton[10][10];
         
+        if (tipoListener == 0) {
+            mouseListener = null;
+        }
+        
         if (tipoListener == 1) {
             // por padrão, o sentido dos barcos é vertical
             vertical = true;
@@ -709,7 +713,7 @@ public class Grid extends JPanel {
                                 Jogador.getJogador().atualizaGridLogico(i, j, "b51_c_b_v");
                                 botoes[i + 1][j].setIcon(b52_c_b_v);
                                 Jogador.getJogador().atualizaGridLogico(i + 1, j, "b52_c_b_v");
-
+                                
                                 Main.mostraEmJogo();
                             }
                         } else {
@@ -724,9 +728,6 @@ public class Grid extends JPanel {
                                 Jogador.getJogador().atualizaGridLogico(i, j, "b51_c_b_h");
                                 botoes[i][j + 1].setIcon(b52_c_b_h);
                                 Jogador.getJogador().atualizaGridLogico(i, j + 1, "b52_c_b_h");
-                                
-                                Thread ouvinte = new Thread(Conexao.getConexao().new Ouvinte());
-                                ouvinte.start();
                                 
                                 Main.mostraEmJogo();
                             }
