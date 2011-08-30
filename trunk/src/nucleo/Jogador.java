@@ -10,6 +10,10 @@ public class Jogador {
         gridLogico.colocaBarco(x, y, icone);
     }
     
+    public String getPosicaoLogico(int x, int y) {
+        return gridLogico.getPosicao(x, y);
+    }
+    
     public String getPontosLogico(int x, int y) {
         return gridLogico.abreCampo(x, y);
     }

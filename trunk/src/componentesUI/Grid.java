@@ -101,6 +101,24 @@ public class Grid extends JPanel {
         insereBotoes();
     }
 
+    public void montaMini() {
+        String nomeIcone;
+        ImageIcon icone;
+        String aux;
+        for(int i = 0; i < 10; i++) {
+            for(int j = 0; j < 10; j++) {
+                nomeIcone = Jogador.getJogador().getPosicaoLogico(i, j);
+                if (nomeIcone.charAt(0) != 's') {
+                    aux = nomeIcone.substring(1);
+                    aux.replace('b', 's');
+                    nomeIcone = "b" + aux;
+                }
+                icone = new ImageIcon(getClass().getResource("../imagensGrid/" + nomeIcone + ".jpg"));
+                botoes[i][j].setIcon(icone);
+            }
+        }
+    }
+    
     public void setBotao(int x, int y, String nomeIcone) {
         ImageIcon icone = new ImageIcon(getClass().getResource("../imagensGrid/" + nomeIcone + ".jpg"));
         botoes[x][y].setIcon(icone);
@@ -236,15 +254,15 @@ public class Grid extends JPanel {
                                 }
 
                                 botoes[i][j].setIcon(b11_c_b_v);
-                                Jogador.getJogador().atualizaGridLogico(i, j, "b11_c_b_v");
+                                Jogador.getJogador().atualizaGridLogico(i, j, "b11-c-b-v");
                                 botoes[i + 1][j].setIcon(b12_c_b_v);
-                                Jogador.getJogador().atualizaGridLogico(i + 1, j, "b12_c_b_v");
+                                Jogador.getJogador().atualizaGridLogico(i + 1, j, "b12-c-b-v");
                                 botoes[i + 2][j].setIcon(b13_c_b_v);
-                                Jogador.getJogador().atualizaGridLogico(i + 2, j, "b13_c_b_v");
+                                Jogador.getJogador().atualizaGridLogico(i + 2, j, "b13-c-b-v");
                                 botoes[i + 3][j].setIcon(b14_c_b_v);
-                                Jogador.getJogador().atualizaGridLogico(i + 3, j, "b14_c_b_v");
+                                Jogador.getJogador().atualizaGridLogico(i + 3, j, "b14-c-b-v");
                                 botoes[i + 4][j].setIcon(b15_c_b_v);
-                                Jogador.getJogador().atualizaGridLogico(i + 4, j, "b15_c_b_v");
+                                Jogador.getJogador().atualizaGridLogico(i + 4, j, "b15-c-b-v");
                                 atualizaMouseListener(new EventoBotaoGrid_AdicionaBarco2());
                             }
                         } else {
@@ -256,15 +274,15 @@ public class Grid extends JPanel {
                                 }
 
                                 botoes[i][j].setIcon(b11_c_b_h);
-                                Jogador.getJogador().atualizaGridLogico(i, j, "b11_c_b_h");
+                                Jogador.getJogador().atualizaGridLogico(i, j, "b11-c-b-h");
                                 botoes[i][j + 1].setIcon(b12_c_b_h);
-                                Jogador.getJogador().atualizaGridLogico(i, j + 1, "b12_c_b_h");
+                                Jogador.getJogador().atualizaGridLogico(i, j + 1, "b12-c-b-h");
                                 botoes[i][j + 2].setIcon(b13_c_b_h);
-                                Jogador.getJogador().atualizaGridLogico(i, j + 2, "b13_c_b_h");
+                                Jogador.getJogador().atualizaGridLogico(i, j + 2, "b13-c-b-h");
                                 botoes[i][j + 3].setIcon(b14_c_b_h);
-                                Jogador.getJogador().atualizaGridLogico(i, j + 3, "b14_c_b_h");
+                                Jogador.getJogador().atualizaGridLogico(i, j + 3, "b14-c-b-h");
                                 botoes[i][j + 4].setIcon(b15_c_b_h);
-                                Jogador.getJogador().atualizaGridLogico(i, j + 4, "b15_c_b_h");
+                                Jogador.getJogador().atualizaGridLogico(i, j + 4, "b15-c-b-h");
                                 atualizaMouseListener(new EventoBotaoGrid_AdicionaBarco2());
                             }
                         }
@@ -359,13 +377,13 @@ public class Grid extends JPanel {
                                 }
 
                                 botoes[i][j].setIcon(b21_c_b_v);
-                                Jogador.getJogador().atualizaGridLogico(i, j, "b21_c_b_v");
+                                Jogador.getJogador().atualizaGridLogico(i, j, "b21-c-b-v");
                                 botoes[i + 1][j].setIcon(b22_c_b_v);
-                                Jogador.getJogador().atualizaGridLogico(i + 1, j, "b22_c_b_v");
+                                Jogador.getJogador().atualizaGridLogico(i + 1, j, "b22-c-b-v");
                                 botoes[i + 2][j].setIcon(b23_c_b_v);
-                                Jogador.getJogador().atualizaGridLogico(i + 2, j, "b23_c_b_v");
+                                Jogador.getJogador().atualizaGridLogico(i + 2, j, "b23-c-b-v");
                                 botoes[i + 3][j].setIcon(b24_c_b_v);
-                                Jogador.getJogador().atualizaGridLogico(i + 3, j, "b24_c_b_v");
+                                Jogador.getJogador().atualizaGridLogico(i + 3, j, "b24-c-b-v");
                                 atualizaMouseListener(new EventoBotaoGrid_AdicionaBarco3());
                             }
                         } else {
@@ -377,13 +395,13 @@ public class Grid extends JPanel {
                                 }
 
                                 botoes[i][j].setIcon(b21_c_b_h);
-                                Jogador.getJogador().atualizaGridLogico(i, j, "b21_c_b_h");
+                                Jogador.getJogador().atualizaGridLogico(i, j, "b21-c-b-h");
                                 botoes[i][j + 1].setIcon(b22_c_b_h);
-                                Jogador.getJogador().atualizaGridLogico(i, j + 1, "b22_c_b_h");
+                                Jogador.getJogador().atualizaGridLogico(i, j + 1, "b22-c-b-h");
                                 botoes[i][j + 2].setIcon(b23_c_b_h);
-                                Jogador.getJogador().atualizaGridLogico(i, j + 2, "b23_c_b_h");
+                                Jogador.getJogador().atualizaGridLogico(i, j + 2, "b23-c-b-h");
                                 botoes[i][j + 3].setIcon(b24_c_b_h);
-                                Jogador.getJogador().atualizaGridLogico(i, j + 3, "b24_c_b_h");
+                                Jogador.getJogador().atualizaGridLogico(i, j + 3, "b24-c-b-h");
                                 atualizaMouseListener(new EventoBotaoGrid_AdicionaBarco3());
                             }
                         }
@@ -478,11 +496,11 @@ public class Grid extends JPanel {
                                 }
 
                                 botoes[i][j].setIcon(b31_c_b_v);
-                                Jogador.getJogador().atualizaGridLogico(i, j, "b31_c_b_v");
+                                Jogador.getJogador().atualizaGridLogico(i, j, "b31-c-b-v");
                                 botoes[i + 1][j].setIcon(b32_c_b_v);
-                                Jogador.getJogador().atualizaGridLogico(i + 1, j, "b32_c_b_v");
+                                Jogador.getJogador().atualizaGridLogico(i + 1, j, "b32-c-b-v");
                                 botoes[i + 2][j].setIcon(b33_c_b_v);
-                                Jogador.getJogador().atualizaGridLogico(i + 2, j, "b33_c_b_v");
+                                Jogador.getJogador().atualizaGridLogico(i + 2, j, "b33-c-b-v");
                                 atualizaMouseListener(new EventoBotaoGrid_AdicionaBarco4());
                             }
                         } else {
@@ -494,11 +512,11 @@ public class Grid extends JPanel {
                                 }
 
                                 botoes[i][j].setIcon(b31_c_b_h);
-                                Jogador.getJogador().atualizaGridLogico(i, j, "b31_c_b_h");
+                                Jogador.getJogador().atualizaGridLogico(i, j, "b31-c-b-h");
                                 botoes[i][j + 1].setIcon(b32_c_b_h);
-                                Jogador.getJogador().atualizaGridLogico(i, j + 1, "b32_c_b_h");
+                                Jogador.getJogador().atualizaGridLogico(i, j + 1, "b32-c-b-h");
                                 botoes[i][j + 2].setIcon(b33_c_b_h);
-                                Jogador.getJogador().atualizaGridLogico(i, j + 2, "b33_c_b_h");
+                                Jogador.getJogador().atualizaGridLogico(i, j + 2, "b33-c-b-h");
                                 atualizaMouseListener(new EventoBotaoGrid_AdicionaBarco4());
                             }
                         }
@@ -593,11 +611,11 @@ public class Grid extends JPanel {
                                 }
 
                                 botoes[i][j].setIcon(b41_c_b_v);
-                                Jogador.getJogador().atualizaGridLogico(i, j, "b41_c_b_v");
+                                Jogador.getJogador().atualizaGridLogico(i, j, "b41-c-b-v");
                                 botoes[i + 1][j].setIcon(b42_c_b_v);
-                                Jogador.getJogador().atualizaGridLogico(i + 1, j, "b42_c_b_v");
+                                Jogador.getJogador().atualizaGridLogico(i + 1, j, "b42-c-b-v");
                                 botoes[i + 2][j].setIcon(b43_c_b_v);
-                                Jogador.getJogador().atualizaGridLogico(i + 2, j, "b43_c_b_v");
+                                Jogador.getJogador().atualizaGridLogico(i + 2, j, "b43-c-b-v");
                                 atualizaMouseListener(new EventoBotaoGrid_AdicionaBarco5());
                             }
                         } else {
@@ -609,11 +627,11 @@ public class Grid extends JPanel {
                                 }
 
                                 botoes[i][j].setIcon(b41_c_b_h);
-                                Jogador.getJogador().atualizaGridLogico(i, j, "b41_c_b_h");
+                                Jogador.getJogador().atualizaGridLogico(i, j, "b41-c-b-h");
                                 botoes[i][j + 1].setIcon(b42_c_b_h);
-                                Jogador.getJogador().atualizaGridLogico(i, j + 1, "b42_c_b_h");
+                                Jogador.getJogador().atualizaGridLogico(i, j + 1, "b42-c-b-h");
                                 botoes[i][j + 2].setIcon(b43_c_b_h);
-                                Jogador.getJogador().atualizaGridLogico(i, j + 2, "b43_c_b_h");
+                                Jogador.getJogador().atualizaGridLogico(i, j + 2, "b43-c-b-h");
                                 atualizaMouseListener(new EventoBotaoGrid_AdicionaBarco5());
                             }
                         }
@@ -710,9 +728,9 @@ public class Grid extends JPanel {
                                 }
                                 
                                 botoes[i][j].setIcon(b51_c_b_v);
-                                Jogador.getJogador().atualizaGridLogico(i, j, "b51_c_b_v");
+                                Jogador.getJogador().atualizaGridLogico(i, j, "b51-c-b-v");
                                 botoes[i + 1][j].setIcon(b52_c_b_v);
-                                Jogador.getJogador().atualizaGridLogico(i + 1, j, "b52_c_b_v");
+                                Jogador.getJogador().atualizaGridLogico(i + 1, j, "b52-c-b-v");
                                 
                                 Main.mostraEmJogo();
                             }
@@ -725,9 +743,9 @@ public class Grid extends JPanel {
                                 }
                                 
                                 botoes[i][j].setIcon(b51_c_b_h);
-                                Jogador.getJogador().atualizaGridLogico(i, j, "b51_c_b_h");
+                                Jogador.getJogador().atualizaGridLogico(i, j, "b51-c-b-h");
                                 botoes[i][j + 1].setIcon(b52_c_b_h);
-                                Jogador.getJogador().atualizaGridLogico(i, j + 1, "b52_c_b_h");
+                                Jogador.getJogador().atualizaGridLogico(i, j + 1, "b52-c-b-h");
                                 
                                 Main.mostraEmJogo();
                             }
