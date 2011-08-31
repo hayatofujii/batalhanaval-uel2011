@@ -110,8 +110,8 @@ public class Grid extends JPanel {
                 nomeIcone = Jogador.getJogador().getPosicaoLogico(i, j);
                 if (nomeIcone.charAt(0) != 's') {
                     aux = nomeIcone.substring(1);
-                    aux.replace('b', 's');
-                    nomeIcone = "b" + aux;
+                    nomeIcone = "b" + aux.replace('b', 's');;
+                    System.out.println("nomeIcone: " + aux);
                 }
                 icone = new ImageIcon(getClass().getResource("../imagensGrid/" + nomeIcone + ".jpg"));
                 botoes[i][j].setIcon(icone);
@@ -163,8 +163,11 @@ public class Grid extends JPanel {
             for (int i = 0; i < 10; i++) {
                 for (int j = 0; j < 10; j++) {
                     if (e.getSource() == botoes[i][j]) {
-                        Conexao.getConexao().enviarCoordenadas(i, j);
-                        botoes[i][j].removeMouseListener(mouseListener);
+                        if(Jogador.getJogador().getTurno()) {
+                            Conexao.getConexao().enviarCoordenadas(i, j);
+                            botoes[i][j].removeMouseListener(mouseListener);
+                            Jogador.getJogador().setTurno(false);
+                        }
                     }
                 }
             }
@@ -734,6 +737,9 @@ public class Grid extends JPanel {
                                 Jogador.getJogador().atualizaGridLogico(i + 1, j, "b52-c-b-v");
                                 
                                 Main.mostraEmJogo();
+                                if (Jogador.getJogador().getTurno()) {
+                                    Chat.getChat().colocaMensagemAreaChat("Sistema: É sua vez!");
+                                }
                             }
                         } else {
                             if (j <= 8) {

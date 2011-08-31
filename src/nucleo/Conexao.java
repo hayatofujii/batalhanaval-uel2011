@@ -56,17 +56,26 @@ public class Conexao {
                         Chat.getChat().colocaMensagemAreaChat(temp);
                     }
                     if (mensagem.charAt(0) == 'j') {
-                        
                         int x = Integer.parseInt(Character.toString(mensagem.charAt(2)));
                         int y = Integer.parseInt(Character.toString(mensagem.charAt(4)));
                         String resultado = Jogador.getJogador().getPontosLogico(x, y);
+                        String aux;
 
                         int pontos = 0;
                         if (!resultado.equals("sea-tile")) {
                             pontos = 10;
                         }
-                        EmJogo.getMini().setBotao(x, y, resultado);
+                        
                         enviarPontuacao(pontos, resultado, x, y);
+                        
+                        if (resultado.charAt(0) != 's') {
+                            aux = resultado.substring(1);
+                            resultado = "b" + aux.replace('b', 's');
+                        }
+                        
+                        EmJogo.getMini().setBotao(x, y, resultado);
+                        Jogador.getJogador().setTurno(true);
+                        Chat.getChat().colocaMensagemAreaChat("Sistema: É sua vez!");
                     }
                     if (mensagem.charAt(0) == 'p') {
                         
