@@ -21,9 +21,9 @@ public class GridLogico {
     }
 
     public String abreCampo(int x, int y) {
-        String resultado = null;
+        String resultado = "aberto";
         
-        if(!aberto[x][y]) {
+        if (!aberto[x][y]) {
             aberto[x][y] = true;
             resultado = grid[x][y];
         }
