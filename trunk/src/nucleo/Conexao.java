@@ -47,13 +47,16 @@ public class Conexao {
 
         @Override
         public void run() {
+            System.out.println("running");
             try {
                 while ((mensagem = reader.readLine()) != null) {
+                    System.out.println("Recebi: " + mensagem);
                     if (mensagem.charAt(0) == 'c') {
                         String temp = mensagem.substring(2);
                         Chat.getChat().colocaMensagemAreaChat(temp);
                     }
                     if (mensagem.charAt(0) == 'j') {
+                        
                         int x = Integer.parseInt(Character.toString(mensagem.charAt(2)));
                         int y = Integer.parseInt(Character.toString(mensagem.charAt(4)));
                         String resultado = Jogador.getJogador().getPontosLogico(x, y);
@@ -66,6 +69,7 @@ public class Conexao {
                         enviarPontuacao(pontos, resultado, x, y);
                     }
                     if (mensagem.charAt(0) == 'p') {
+                        
                         String vetor[] = mensagem.split(":");
                         int pontos = Integer.parseInt(vetor[1]);
                         String icone = vetor[2];
@@ -127,12 +131,12 @@ public class Conexao {
     }
 
     public void enviarCoordenadas(int x, int y) {
-        writer.print("j:" + x + ":" + y);
+        writer.println("j:" + x + ":" + y);
         writer.flush();
     }
 
     public void enviarPontuacao(int pontos, String icone, int x, int y) {
-        writer.print("p:" + pontos + ":" + icone + ":" + x + ":" + y);
+        writer.println("p:" + pontos + ":" + icone + ":" + x + ":" + y);
         writer.flush();
     }
 

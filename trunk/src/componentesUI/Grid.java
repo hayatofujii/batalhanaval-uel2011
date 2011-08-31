@@ -164,6 +164,7 @@ public class Grid extends JPanel {
                 for (int j = 0; j < 10; j++) {
                     if (e.getSource() == botoes[i][j]) {
                         Conexao.getConexao().enviarCoordenadas(i, j);
+                        botoes[i][j].removeMouseListener(mouseListener);
                     }
                 }
             }
