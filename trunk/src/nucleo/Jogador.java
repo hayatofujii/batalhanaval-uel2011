@@ -5,6 +5,7 @@ public class Jogador {
     private String nome;
     private int pontos;
     private GridLogico gridLogico;
+    private boolean turno;
     
     public void atualizaGridLogico(int x, int y, String icone) {
         gridLogico.colocaBarco(x, y, icone);
@@ -37,27 +38,19 @@ public class Jogador {
         return nome;
     }
     
-    public int getPontos() {
-        return pontos;
-    }
-    
     public void setPontos(int pontos) {
         this.pontos = pontos;
     }
     
-    /*
-    public void fazJogada(Jogador oponente, int posX, int posY) {
-        int rodadaSeguida = 0;
-        boolean sair = false;
-        
-        do {
-            if(oponente.pegaCampo(posX, posY) > 0) {
-                rodadaSeguida++;
-                pontos += rodadaSeguida * 10;
-            }
-            else
-                sair = true;
-        } while(!sair);
+    public int getPontos() {
+        return pontos;
     }
-    */
+    
+    public void setTurno(boolean turno) {
+        this.turno = turno;
+    }
+    
+    public boolean getTurno() {
+        return turno;
+    }
 }
