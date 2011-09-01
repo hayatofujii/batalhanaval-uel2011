@@ -77,8 +77,10 @@ public class Conexao {
                         }
                         
                         EmJogo.getMini().setBotao(x, y, resultado);
-                        Jogador.getJogador().setTurno(true);
-                        Chat.getChat().colocaMensagemAreaChat("Sistema: É sua vez!");
+                        if (pontos == 0) {
+                            Jogador.getJogador().setTurno(true);
+                            Chat.getChat().colocaMensagemAreaChat("Sistema: É sua vez!");
+                        }
                     }
                     if (mensagem.charAt(0) == 'p') {
                         String vetor[] = mensagem.split(":");
@@ -86,8 +88,11 @@ public class Conexao {
                         String icone = vetor[2];
                         int x = Integer.parseInt(vetor[3]);
                         int y = Integer.parseInt(vetor[4]);
-
+                        
                         Jogador.getJogador().setPontos(Jogador.getJogador().getPontos() + pontos);
+                        if (pontos == 0) {
+                            Jogador.getJogador().setTurno(false);
+                        }
                         EmJogo.getGrid().setBotao(x, y, icone);
                     }
                 }

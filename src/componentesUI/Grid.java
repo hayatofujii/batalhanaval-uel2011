@@ -163,9 +163,9 @@ public class Grid extends JPanel {
                 for (int j = 0; j < 10; j++) {
                     if (e.getSource() == botoes[i][j]) {
                         if(Jogador.getJogador().getTurno()) {
+                            int pontosAntes = Jogador.getJogador().getPontos();
                             Conexao.getConexao().enviarCoordenadas(i, j);
                             botoes[i][j].removeMouseListener(mouseListener);
-                            Jogador.getJogador().setTurno(false);
                         }
                     }
                 }
