@@ -111,7 +111,6 @@ public class Grid extends JPanel {
                 if (nomeIcone.charAt(0) != 's') {
                     aux = nomeIcone.substring(1);
                     nomeIcone = "b" + aux.replace('b', 's');;
-                    System.out.println("nomeIcone: " + aux);
                 }
                 icone = new ImageIcon(getClass().getResource("../imagensGrid/" + nomeIcone + ".jpg"));
                 botoes[i][j].setIcon(icone);
