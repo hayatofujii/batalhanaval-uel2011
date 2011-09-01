@@ -63,6 +63,10 @@ public class Conexao {
                         int pontos = 0;
                         if (!resultado.equals("sea-tile")) {
                             pontos = 10;
+                            resultado = resultado.replace('c', 'h');
+                        }
+                        else {
+                            resultado = "sea-tile-hit";
                         }
                         
                         enviarPontuacao(pontos, resultado, x, y);
