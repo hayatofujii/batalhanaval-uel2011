@@ -57,7 +57,7 @@ public class PainelConexao extends JPanel {
 
         add(abas);
 
-        configTesteCliente();
+        // configTesteCliente();
     }
 
     private void montarFormCliente() {

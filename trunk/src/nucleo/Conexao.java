@@ -79,7 +79,7 @@ public class Conexao {
                         EmJogo.getMini().setBotao(x, y, resultado);
                         if (pontos == 0) {
                             Jogador.getJogador().setTurno(true);
-                            Chat.getChat().colocaMensagemAreaChat("Sistema: É sua vez!");
+                            Chat.getChat().colocaMensagemAreaChat("Sistema: Seu turno!");
                         }
                     }
                     if (mensagem.charAt(0) == 'p') {
@@ -92,6 +92,7 @@ public class Conexao {
                         Jogador.getJogador().setPontos(Jogador.getJogador().getPontos() + pontos);
                         if (pontos == 0) {
                             Jogador.getJogador().setTurno(false);
+                            Chat.getChat().colocaMensagemAreaChat("Sistema: Turno do oponente!");
                         }
                         EmJogo.getGrid().setBotao(x, y, icone);
                     }
