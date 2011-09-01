@@ -47,7 +47,6 @@ public class Conexao {
 
         @Override
         public void run() {
-            System.out.println("running");
             try {
                 while ((mensagem = reader.readLine()) != null) {
                     System.out.println("Recebi: " + mensagem);
@@ -78,7 +77,6 @@ public class Conexao {
                         Chat.getChat().colocaMensagemAreaChat("Sistema: É sua vez!");
                     }
                     if (mensagem.charAt(0) == 'p') {
-                        
                         String vetor[] = mensagem.split(":");
                         int pontos = Integer.parseInt(vetor[1]);
                         String icone = vetor[2];
