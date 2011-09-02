@@ -96,12 +96,15 @@ public class Conexao {
                         }
                         
                         if (Jogador.getJogador().getContador() == 17) {
-                            int resposta = JOptionPane.showConfirmDialog(Main.getJanela(), "Parabéns! Você é o vencedor!\nDeseja continuar jogando?", "Fim de jogo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                             enviarAvisoReinicioJogo();
+                            int resposta = JOptionPane.showConfirmDialog(Main.getJanela(), "Parabéns! Você é o vencedor!\nDeseja continuar jogando?", "Fim de jogo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                            
                             if (resposta == 0) {
+                                Jogador.getJogador().limpaGridLogico();
                                 Main.reiniciaJogo();
                             }
                             if (resposta == 1) {
+                                enviarAvisoDesistencia();
                                 fechaFluxos();
                                 System.exit(0);
                             }
@@ -111,12 +114,14 @@ public class Conexao {
                     }
                     if (mensagem.charAt(0) == 'r') {
                         int resposta = JOptionPane.showConfirmDialog(Main.getJanela(), "Que pena! Você perdeu!\nDeseja continuar jogando?", "Fim de jogo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                        
                         if (resposta == 0) {
+                            Jogador.getJogador().limpaGridLogico();
                             Main.reiniciaJogo();
                         }
                         if (resposta == 1) {
-                            fechaFluxos();
                             enviarAvisoDesistencia();
+                            fechaFluxos();
                             System.exit(0);
                         }
                     }

@@ -48,7 +48,7 @@ public class Main {
         janela.add(confGrid);
 
         confGrid.revalidate();
-        
+
         Thread ouvinte = new Thread(Conexao.getConexao().new Ouvinte());
         ouvinte.start();
     }
@@ -65,6 +65,7 @@ public class Main {
 
     public static void reiniciaJogo() {
         janela.remove(emJogo);
+        emJogo = null;
         confGrid = new ConfigGrid();
         confGrid.setOpaque(true);
         janela.add(confGrid);
@@ -73,11 +74,14 @@ public class Main {
     }
 
     public static void voltaAoInicio() throws IOException {
-        if (emJogo != null)
+        if (emJogo != null) {
             janela.remove(emJogo);
-        else
+            emJogo = null;
+        } else {
             janela.remove(confGrid);
-        
+            confGrid = null;
+        }
+
         confConex = new ConfigConexao();
         confConex.setOpaque(true);
         janela.add(confConex);
@@ -105,8 +109,9 @@ public class Main {
 
         @Override
         public void windowClosing(WindowEvent e) {
-            if (Conexao.getConexao().writerInstanciado())
+            if (Conexao.getConexao().writerInstanciado()) {
                 Conexao.getConexao().enviarAvisoDesistencia();
+            }
         }
     }
 }
