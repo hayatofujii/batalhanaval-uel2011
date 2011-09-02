@@ -3,7 +3,6 @@ package nucleo;
 import componentesUI.Chat;
 import janelas.EmJogo;
 import janelas.Main;
-
 import javax.swing.JOptionPane;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -64,18 +63,17 @@ public class Conexao {
                         if (!resultado.equals("sea-tile")) {
                             pontos = 10;
                             resultado = resultado.replace('c', 'h');
-                        }
-                        else {
+                        } else {
                             resultado = "sea-tile-hit";
                         }
-                        
+
                         enviarPontuacao(pontos, resultado, x, y);
-                        
+
                         if (resultado.charAt(0) != 's') {
                             aux = resultado.substring(1);
                             resultado = "b" + aux.replace('b', 's');
                         }
-                        
+
                         EmJogo.getMini().setBotao(x, y, resultado);
                         if (pontos == 0) {
                             Jogador.getJogador().setTurno(true);
@@ -88,12 +86,24 @@ public class Conexao {
                         String icone = vetor[2];
                         int x = Integer.parseInt(vetor[3]);
                         int y = Integer.parseInt(vetor[4]);
-                        
+
                         Jogador.getJogador().setPontos(Jogador.getJogador().getPontos() + pontos);
                         if (pontos == 0) {
                             Jogador.getJogador().setTurno(false);
                             Chat.getChat().colocaMensagemAreaChat("Sistema: Turno do oponente!");
                         }
+
+                        if (Jogador.getJogador().getContador() == 17) {
+                            int resposta = JOptionPane.showConfirmDialog(Main.getJanela(), "Parabéns! Você é o vencedor!\nDeseja continuar jogando?", "Fim de jogo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                            if (resposta == 0) {
+                                Main.reiniciaJogo();
+                            }
+                            if (resposta == 1) {
+                                fechaFluxos();
+                                System.exit(0);
+                            }
+                        }
+
                         EmJogo.getGrid().setBotao(x, y, icone);
                     }
                 }
@@ -166,9 +176,19 @@ public class Conexao {
         }
 
         if (enderecoIP.equals("127.0.0.1")) {
-            JOptionPane.showMessageDialog(null, "Não há conexão de rede disponível.", "Alerta", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(Main.getJanela(), "Não há conexão de rede disponível.", "Alerta", JOptionPane.WARNING_MESSAGE);
         }
 
         return enderecoIP;
+    }
+    
+    private void fechaFluxos() throws IOException {
+        writer.close();
+        reader.close();
+        streamReader.close();
+        soqueteCliente.close();
+        if (Jogador.getJogador().getServidor()) {
+            soqueteServidor.close();
+        }
     }
 }

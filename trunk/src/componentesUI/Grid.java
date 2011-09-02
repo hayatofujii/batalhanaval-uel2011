@@ -11,12 +11,12 @@ import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import nucleo.Conexao;
 import nucleo.Jogador;
 
 public class Grid extends JPanel {
     // ícones
+
     private ImageIcon sea_tile = new ImageIcon(getClass().getResource("../imagensGrid/sea-tile.jpg"));
     private ImageIcon sea_tile_temp = new ImageIcon(getClass().getResource("../imagensGrid/sea-tile-temp.jpg"));
     // barco 1 - vertical
@@ -70,7 +70,6 @@ public class Grid extends JPanel {
     // sentido do barco a ser inserido
     private static boolean vertical;
 
-    // setter para a variável booleana vertical
     public static void setBooleanVertical(boolean valor) {
         vertical = valor;
     }
@@ -81,22 +80,22 @@ public class Grid extends JPanel {
 
         // botões
         botoes = new JButton[10][10];
-        
+
         if (tipoListener == 0) {
             mouseListener = null;
         }
-        
+
         if (tipoListener == 1) {
             // por padrão, o sentido dos barcos é vertical
             vertical = true;
 
             mouseListener = new EventoBotaoGrid_AdicionaBarco1();
         }
-        
+
         if (tipoListener == 2) {
             mouseListener = new EventoBotaoGrid_EmJogo();
         }
-        
+
         // insere os botões
         insereBotoes();
     }
@@ -105,8 +104,8 @@ public class Grid extends JPanel {
         String nomeIcone;
         ImageIcon icone;
         String aux;
-        for(int i = 0; i < 10; i++) {
-            for(int j = 0; j < 10; j++) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
                 nomeIcone = Jogador.getJogador().getPosicaoLogico(i, j);
                 if (nomeIcone.charAt(0) != 's') {
                     aux = nomeIcone.substring(1);
@@ -117,12 +116,12 @@ public class Grid extends JPanel {
             }
         }
     }
-    
+
     public void setBotao(int x, int y, String nomeIcone) {
         ImageIcon icone = new ImageIcon(getClass().getResource("../imagensGrid/" + nomeIcone + ".jpg"));
         botoes[x][y].setIcon(icone);
     }
-    
+
     private void insereBotoes() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -162,7 +161,7 @@ public class Grid extends JPanel {
             for (int i = 0; i < 10; i++) {
                 for (int j = 0; j < 10; j++) {
                     if (e.getSource() == botoes[i][j]) {
-                        if(Jogador.getJogador().getTurno()) {
+                        if (Jogador.getJogador().getTurno()) {
                             Conexao.getConexao().enviarCoordenadas(i, j);
                             botoes[i][j].removeMouseListener(mouseListener);
                         }
@@ -728,12 +727,12 @@ public class Grid extends JPanel {
                                         return;
                                     }
                                 }
-                                
+
                                 botoes[i][j].setIcon(b51_c_b_v);
                                 Jogador.getJogador().atualizaGridLogico(i, j, "b51-c-b-v");
                                 botoes[i + 1][j].setIcon(b52_c_b_v);
                                 Jogador.getJogador().atualizaGridLogico(i + 1, j, "b52-c-b-v");
-                                
+
                                 Main.mostraEmJogo();
                                 if (Jogador.getJogador().getTurno()) {
                                     Chat.getChat().colocaMensagemAreaChat("Sistema: Seu turno!");
@@ -746,12 +745,12 @@ public class Grid extends JPanel {
                                         return;
                                     }
                                 }
-                                
+
                                 botoes[i][j].setIcon(b51_c_b_h);
                                 Jogador.getJogador().atualizaGridLogico(i, j, "b51-c-b-h");
                                 botoes[i][j + 1].setIcon(b52_c_b_h);
                                 Jogador.getJogador().atualizaGridLogico(i, j + 1, "b52-c-b-h");
-                                
+
                                 Main.mostraEmJogo();
                             }
                         }
