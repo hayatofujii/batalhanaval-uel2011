@@ -1,8 +1,11 @@
 package janelas;
 
+import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import nucleo.Conexao;
 
 public class Main {
@@ -17,7 +20,7 @@ public class Main {
     public static JFrame getJanela() {
         return janela;
     }
-    
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(
                 new Runnable() {
@@ -45,6 +48,9 @@ public class Main {
         janela.add(confGrid);
 
         confGrid.revalidate();
+        
+        Thread ouvinte = new Thread(Conexao.getConexao().new Ouvinte());
+        ouvinte.start();
     }
 
     public static void mostraEmJogo() {
@@ -55,11 +61,8 @@ public class Main {
         janela.add(emJogo);
 
         emJogo.revalidate();
-
-        Thread ouvinte = new Thread(Conexao.getConexao().new Ouvinte());
-        ouvinte.start();
     }
-    
+
     public static void reiniciaJogo() {
         janela.remove(emJogo);
         confGrid = new ConfigGrid();
@@ -69,9 +72,23 @@ public class Main {
         confGrid.revalidate();
     }
 
+    public static void voltaAoInicio() throws IOException {
+        if (emJogo != null)
+            janela.remove(emJogo);
+        else
+            janela.remove(confGrid);
+        
+        confConex = new ConfigConexao();
+        confConex.setOpaque(true);
+        janela.add(confConex);
+
+        confConex.revalidate();
+    }
+
     private static void mostrar() {
         // frame
         janela = new JFrame("Batalha Naval");
+        janela.addWindowListener(new EventoFechaJanela());
         janela.setPreferredSize(new Dimension(MAX_LARGURA, MAX_ALTURA));
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janela.setResizable(false);
@@ -82,5 +99,14 @@ public class Main {
         // mostra frame
         janela.pack();
         janela.setVisible(true);
+    }
+
+    private static class EventoFechaJanela extends WindowAdapter {
+
+        @Override
+        public void windowClosing(WindowEvent e) {
+            if (Conexao.getConexao().writerInstanciado())
+                Conexao.getConexao().enviarAvisoDesistencia();
+        }
     }
 }

@@ -91,10 +91,13 @@ public class Conexao {
                         if (pontos == 0) {
                             Jogador.getJogador().setTurno(false);
                             Chat.getChat().colocaMensagemAreaChat("Sistema: Turno do oponente!");
+                        } else {
+                            Jogador.getJogador().incrementaContador();
                         }
-
+                        
                         if (Jogador.getJogador().getContador() == 17) {
                             int resposta = JOptionPane.showConfirmDialog(Main.getJanela(), "Parabéns! Você é o vencedor!\nDeseja continuar jogando?", "Fim de jogo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                            enviarAvisoReinicioJogo();
                             if (resposta == 0) {
                                 Main.reiniciaJogo();
                             }
@@ -105,6 +108,24 @@ public class Conexao {
                         }
 
                         EmJogo.getGrid().setBotao(x, y, icone);
+                    }
+                    if (mensagem.charAt(0) == 'r') {
+                        int resposta = JOptionPane.showConfirmDialog(Main.getJanela(), "Que pena! Você perdeu!\nDeseja continuar jogando?", "Fim de jogo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                        if (resposta == 0) {
+                            Main.reiniciaJogo();
+                        }
+                        if (resposta == 1) {
+                            fechaFluxos();
+                            enviarAvisoDesistencia();
+                            System.exit(0);
+                        }
+                    }
+                    if (mensagem.charAt(0) == 'd') {
+                        JOptionPane.showMessageDialog(Main.getJanela(), "O outro jogador desistiu!", "Fim de jogo", JOptionPane.INFORMATION_MESSAGE);
+                        if (Jogador.getJogador().getServidor()) {
+                            soqueteServidor.close();
+                        }
+                        Main.voltaAoInicio();
                     }
                 }
             } catch (Exception ex) {
@@ -166,6 +187,16 @@ public class Conexao {
         writer.println("p:" + pontos + ":" + icone + ":" + x + ":" + y);
         writer.flush();
     }
+    
+    public void enviarAvisoReinicioJogo() {
+        writer.println("r");
+        writer.flush();
+    }
+    
+    public void enviarAvisoDesistencia() {
+        writer.println("d");
+        writer.flush();
+    }
 
     public String detectarIP() {
         String enderecoIP = null;
@@ -182,7 +213,7 @@ public class Conexao {
         return enderecoIP;
     }
     
-    private void fechaFluxos() throws IOException {
+    public void fechaFluxos() throws IOException {
         writer.close();
         reader.close();
         streamReader.close();
@@ -190,5 +221,12 @@ public class Conexao {
         if (Jogador.getJogador().getServidor()) {
             soqueteServidor.close();
         }
+    }
+    
+    public boolean writerInstanciado() {
+        if (writer == null)
+            return false;
+        else
+            return true;
     }
 }

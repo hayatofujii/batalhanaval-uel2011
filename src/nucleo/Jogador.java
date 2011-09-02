@@ -60,8 +60,8 @@ public class Jogador {
         return turno;
     }
 
-    public void setContador(int contador) {
-        this.contador += contador;
+    public void incrementaContador() {
+        contador++;
     }
 
     public int getContador() {
