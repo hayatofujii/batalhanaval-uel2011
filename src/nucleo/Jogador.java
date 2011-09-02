@@ -14,6 +14,10 @@ public class Jogador {
         gridLogico.colocaBarco(x, y, icone);
     }
 
+    public void limpaGridLogico() {
+        gridLogico.limpa();
+    }
+    
     public String getPosicaoLogico(int x, int y) {
         return gridLogico.getPosicao(x, y);
     }
