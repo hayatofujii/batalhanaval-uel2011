@@ -1,5 +1,6 @@
 package componentesUI;
 
+import janelas.Main;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -10,14 +11,12 @@ import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import janelas.Main;
-
 import nucleo.Conexao;
 import nucleo.Jogador;
 
 public class PainelConexao extends JPanel {
+
     private JTabbedPane abas;
-    
     private JPanel formServidor;
     private JPanel formCliente;
     private JLabel labelNome;
@@ -28,7 +27,6 @@ public class PainelConexao extends JPanel {
     private JTextField campoPorta;
     private JLabel labelStatus;
     private JButton botConectar;
-    
     private JLabel labelNomeSv;
     private JTextField campoNomeSv;
     private JLabel labelIPSv;
@@ -44,8 +42,8 @@ public class PainelConexao extends JPanel {
 
         campoIP.setText("localhost");
 
-        campoNome.setText("xptoA");
-        campoNomeSv.setText("xptoB");
+        campoNome.setText("Cliente");
+        campoNomeSv.setText("Servidor");
     }
 
     public PainelConexao() {
@@ -201,6 +199,7 @@ public class PainelConexao extends JPanel {
     }
 
     private class EventoBotConectar implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent ev) {
             Conexao.getConexao().conectarCliente(campoIP.getText(), Integer.parseInt(campoPorta.getText()));
@@ -211,6 +210,7 @@ public class PainelConexao extends JPanel {
     }
 
     private class EventoBotConectarSv implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent ev) {
             Jogador.getJogador().setNome(campoNomeSv.getText());
@@ -218,6 +218,7 @@ public class PainelConexao extends JPanel {
 
             Conexao.getConexao().inicializarServidor(Integer.parseInt(campoPortaSv.getText()));
             Jogador.getJogador().setTurno(true);
+            Jogador.getJogador().setServidor(true);
 
             // "desativa" a interface de conexão
             botConectarSv.setEnabled(false);
