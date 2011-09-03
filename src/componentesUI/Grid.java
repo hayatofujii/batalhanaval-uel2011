@@ -15,8 +15,8 @@ import nucleo.Conexao;
 import nucleo.Jogador;
 
 public class Grid extends JPanel {
+    
     // ícones
-
     private ImageIcon sea_tile = new ImageIcon(getClass().getResource("../imagensGrid/sea-tile.jpg"));
     private ImageIcon sea_tile_temp = new ImageIcon(getClass().getResource("../imagensGrid/sea-tile-temp.jpg"));
     // barco 1 - vertical
@@ -109,7 +109,7 @@ public class Grid extends JPanel {
                 nomeIcone = Jogador.getJogador().getPosicaoLogico(i, j);
                 if (nomeIcone.charAt(0) != 's') {
                     aux = nomeIcone.substring(1);
-                    nomeIcone = "b" + aux.replace('b', 's');;
+                    nomeIcone = "b" + aux.replace('b', 's');
                 }
                 icone = new ImageIcon(getClass().getResource("../imagensGrid/" + nomeIcone + ".jpg"));
                 botoes[i][j].setIcon(icone);

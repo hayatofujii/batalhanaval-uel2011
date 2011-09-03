@@ -1,9 +1,11 @@
 package janelas;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import componentesUI.Grid;
@@ -14,6 +16,7 @@ public class ConfigGrid extends JPanel {
     private static JRadioButton vertical;
     private static JRadioButton horizontal;
     private ButtonGroup grupoBotoes;
+    private JLabel posicione;
 
     public static JRadioButton getVertical() {
         if (vertical == null) {
@@ -30,6 +33,13 @@ public class ConfigGrid extends JPanel {
     }
 
     public ConfigGrid() {
+        posicione = new JLabel("Posicione seus barcos.");
+        posicione.setFont(new Font("Arial", Font.PLAIN, 18));
+        posicione.setPreferredSize(new Dimension(185, 17));
+        Dimension tamPosicione = posicione.getPreferredSize();
+        posicione.setBounds(50, 18, tamPosicione.width, tamPosicione.height);
+        add(posicione);
+        
         grid = new Grid(1);
 
         setLayout(null);
