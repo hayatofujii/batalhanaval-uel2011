@@ -94,11 +94,11 @@ public class Conexao {
                         } else {
                             Jogador.getJogador().incrementaContador();
                         }
-                        
+
                         if (Jogador.getJogador().getContador() == 17) {
                             enviaAvisoReinicioJogo();
                             int resposta = JOptionPane.showConfirmDialog(Main.getJanela(), "Parabéns! Você é o vencedor!\nDeseja continuar jogando?", "Fim de jogo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                            
+
                             if (resposta == 0) {
                                 Jogador.getJogador().limpaGridLogico();
                                 Main.reiniciaJogo();
@@ -114,7 +114,7 @@ public class Conexao {
                     }
                     if (mensagem.charAt(0) == 'r') {
                         int resposta = JOptionPane.showConfirmDialog(Main.getJanela(), "Que pena! Você perdeu!\nDeseja continuar jogando?", "Fim de jogo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                        
+
                         if (resposta == 0) {
                             Jogador.getJogador().limpaGridLogico();
                             Main.reiniciaJogo();
@@ -196,17 +196,17 @@ public class Conexao {
         writer.println("p:" + pontos + ":" + icone + ":" + x + ":" + y);
         writer.flush();
     }
-    
+
     public void enviaAvisoReinicioJogo() {
         writer.println("r");
         writer.flush();
     }
-    
+
     public void enviaAvisoDesistencia() {
         writer.println("d");
         writer.flush();
     }
-    
+
     public void enviaSinalInicio() {
         writer.println("i");
         writer.flush();
@@ -226,7 +226,7 @@ public class Conexao {
 
         return enderecoIP;
     }
-    
+
     public void fechaFluxos() throws IOException {
         writer.close();
         reader.close();
@@ -236,11 +236,12 @@ public class Conexao {
             soqueteServidor.close();
         }
     }
-    
+
     public boolean writerInstanciado() {
-        if (writer == null)
+        if (writer == null) {
             return false;
-        else
+        } else {
             return true;
+        }
     }
 }
