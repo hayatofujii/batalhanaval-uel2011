@@ -36,16 +36,6 @@ public class PainelConexao extends JPanel {
     private JLabel labelStatusSv;
     private JButton botConectarSv;
 
-    private void configTesteCliente() {
-        campoPorta.setText("1717");
-        campoPortaSv.setText("1717");
-
-        campoIP.setText("localhost");
-
-        campoNome.setText("Cliente");
-        campoNomeSv.setText("Servidor");
-    }
-
     public PainelConexao() {
         abas = new JTabbedPane();
         setLayout(new BorderLayout());
