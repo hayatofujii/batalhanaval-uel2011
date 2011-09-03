@@ -110,7 +110,7 @@ public class Main {
         @Override
         public void windowClosing(WindowEvent e) {
             if (Conexao.getConexao().writerInstanciado()) {
-                Conexao.getConexao().enviarAvisoDesistencia();
+                Conexao.getConexao().enviaAvisoDesistencia();
             }
         }
     }

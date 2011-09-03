@@ -67,7 +67,7 @@ public class Conexao {
                             resultado = "sea-tile-hit";
                         }
 
-                        enviarPontuacao(pontos, resultado, x, y);
+                        enviaPontuacao(pontos, resultado, x, y);
 
                         if (resultado.charAt(0) != 's') {
                             aux = resultado.substring(1);
@@ -96,7 +96,7 @@ public class Conexao {
                         }
                         
                         if (Jogador.getJogador().getContador() == 17) {
-                            enviarAvisoReinicioJogo();
+                            enviaAvisoReinicioJogo();
                             int resposta = JOptionPane.showConfirmDialog(Main.getJanela(), "Parabéns! Você é o vencedor!\nDeseja continuar jogando?", "Fim de jogo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                             
                             if (resposta == 0) {
@@ -104,7 +104,7 @@ public class Conexao {
                                 Main.reiniciaJogo();
                             }
                             if (resposta == 1) {
-                                enviarAvisoDesistencia();
+                                enviaAvisoDesistencia();
                                 fechaFluxos();
                                 System.exit(0);
                             }
@@ -120,7 +120,7 @@ public class Conexao {
                             Main.reiniciaJogo();
                         }
                         if (resposta == 1) {
-                            enviarAvisoDesistencia();
+                            enviaAvisoDesistencia();
                             fechaFluxos();
                             System.exit(0);
                         }
@@ -131,6 +131,10 @@ public class Conexao {
                             soqueteServidor.close();
                         }
                         Main.voltaAoInicio();
+                    }
+                    if (mensagem.charAt(0) == 'i') {
+                        Jogador.getJogador().setTurno(true);
+                        Chat.getChat().colocaMensagemAreaChat("Sistema: Seu turno!");
                     }
                 }
             } catch (Exception ex) {
@@ -178,28 +182,33 @@ public class Conexao {
         }
     }
 
-    public void enviarMensagemChat(String _msg) {
+    public void enviaMensagemChat(String _msg) {
         writer.println("c:" + _msg);
         writer.flush();
     }
 
-    public void enviarCoordenadas(int x, int y) {
+    public void enviaCoordenadas(int x, int y) {
         writer.println("j:" + x + ":" + y);
         writer.flush();
     }
 
-    public void enviarPontuacao(int pontos, String icone, int x, int y) {
+    public void enviaPontuacao(int pontos, String icone, int x, int y) {
         writer.println("p:" + pontos + ":" + icone + ":" + x + ":" + y);
         writer.flush();
     }
     
-    public void enviarAvisoReinicioJogo() {
+    public void enviaAvisoReinicioJogo() {
         writer.println("r");
         writer.flush();
     }
     
-    public void enviarAvisoDesistencia() {
+    public void enviaAvisoDesistencia() {
         writer.println("d");
+        writer.flush();
+    }
+    
+    public void enviaSinalInicio() {
+        writer.println("i");
         writer.flush();
     }
 
