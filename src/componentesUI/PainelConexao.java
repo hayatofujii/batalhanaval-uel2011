@@ -204,7 +204,6 @@ public class PainelConexao extends JPanel {
         public void actionPerformed(ActionEvent ev) {
             Conexao.getConexao().conectarCliente(campoIP.getText(), Integer.parseInt(campoPorta.getText()));
             Jogador.getJogador().setNome(campoNome.getText());
-            Jogador.getJogador().setTurno(false);
             Main.mostraConfigGrid();
         }
     }
@@ -217,7 +216,6 @@ public class PainelConexao extends JPanel {
             atualizaStatusSv("Aguardando cliente...");
 
             Conexao.getConexao().inicializarServidor(Integer.parseInt(campoPortaSv.getText()));
-            Jogador.getJogador().setTurno(true);
             Jogador.getJogador().setServidor(true);
 
             // "desativa" a interface de conexão
