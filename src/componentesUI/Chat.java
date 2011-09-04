@@ -137,7 +137,7 @@ public class Chat extends JPanel {
         @Override
         public void actionPerformed(ActionEvent ev) {
             String nome = JOptionPane.showInputDialog(Main.getJanela(), "Digite seu novo nome:", "Alteração de nome", JOptionPane.QUESTION_MESSAGE);
-            if (!nome.equals(""))
+            if (!nome.equals("") && nome != null)
                 setBotNome(nome);
         }
     }

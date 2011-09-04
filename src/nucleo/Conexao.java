@@ -165,7 +165,8 @@ public class Conexao {
                         }
                     }
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+                    paraExecucao();
+                    Thread.currentThread().interrupt();
                 }
             }
         }
