@@ -1,10 +1,13 @@
 package janelas;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import java.awt.Dimension;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import nucleo.Conexao;
 
@@ -16,9 +19,15 @@ public class Main {
     private static EmJogo emJogo;
     private static final int MAX_LARGURA = 800;
     private static final int MAX_ALTURA = 600;
+    private static JButton sair;
+    private static Thread ouvinte;
 
     public static JFrame getJanela() {
         return janela;
+    }
+
+    public static JButton getSair() {
+        return sair;
     }
 
     public static void main(String[] args) {
@@ -49,7 +58,7 @@ public class Main {
 
         confGrid.revalidate();
 
-        Thread ouvinte = new Thread(Conexao.getConexao().new Ouvinte());
+        ouvinte = new Thread(Conexao.getConexao().new Ouvinte());
         ouvinte.start();
     }
 
@@ -65,7 +74,7 @@ public class Main {
 
     public static void reiniciaJogo() {
         janela.remove(emJogo);
-        
+
         emJogo = null;
         confGrid = new ConfigGrid();
         confGrid.setOpaque(true);
@@ -93,10 +102,13 @@ public class Main {
     private static void mostrar() {
         // frame
         janela = new JFrame("Batalha Naval");
-        janela.addWindowListener(new EventoFechaJanela());
         janela.setPreferredSize(new Dimension(MAX_LARGURA, MAX_ALTURA));
-        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        janela.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         janela.setResizable(false);
+        sair = new JButton("SAIR");
+        sair.setMargin(new Insets(0, 0, 0, 0));
+        sair.setPreferredSize(new Dimension(60, 27));
+        sair.addActionListener(new EventoBotaoSair());
 
         // instancia um painel ConfigConexao
         mostraConfigConexao();
@@ -105,18 +117,24 @@ public class Main {
         janela.pack();
         janela.setVisible(true);
     }
-    
-    private static class EventoFechaJanela extends WindowAdapter {
+
+    private static class EventoBotaoSair implements ActionListener {
 
         @Override
-        public void windowClosing(WindowEvent e) {
-            if (Conexao.getConexao().writerInstanciado()) {
-                Conexao.getConexao().enviaAvisoDesistencia();
-                try {
-                    Conexao.getConexao().fechaFluxos();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
+        public void actionPerformed(ActionEvent ev) {
+            int resposta = JOptionPane.showConfirmDialog(Main.getJanela(), "Tem certeza de que deseja sair?", "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (resposta == 0) {
+                if (Conexao.getConexao().writerInstanciado()) {
+                    Conexao.getConexao().enviaAvisoDesistencia();
+                    Conexao.getConexao().paraExecucao();
+                    ouvinte.interrupt();
+                    try {
+                        Conexao.getConexao().fechaFluxos();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                 }
+                System.exit(0);
             }
         }
     }
