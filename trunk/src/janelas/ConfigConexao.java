@@ -33,7 +33,7 @@ public class ConfigConexao extends JPanel {
         redes.setBounds(322, 83, tamRedes.width, tamRedes.height);
         add(redes);
         
-        andre = new JLabel("André Augusto Del Grossi");
+        andre = new JLabel("Andre Augusto Del Grossi");
         andre.setPreferredSize(new Dimension(145, 17));
         Dimension tamAndre = andre.getPreferredSize();
         andre.setBounds(328, 123, tamAndre.width, tamAndre.height);
