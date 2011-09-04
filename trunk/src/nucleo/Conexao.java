@@ -21,6 +21,7 @@ public class Conexao {
     private InputStreamReader streamReader;
     private BufferedReader reader;
     private PrintWriter writer;
+    private boolean executando;
 
     public static Conexao getConexao() {
         if (conexao == null) {
@@ -35,9 +36,14 @@ public class Conexao {
             streamReader = new InputStreamReader(soqueteCliente.getInputStream());
             reader = new BufferedReader(streamReader);
             writer = new PrintWriter(soqueteCliente.getOutputStream());
+            executando = true;
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void paraExecucao() {
+        executando = false;
     }
 
     public class Ouvinte implements Runnable {
@@ -46,65 +52,84 @@ public class Conexao {
 
         @Override
         public void run() {
-            try {
-                if (reader == null) {
-                    System.out.println("lol");
-                    Thread.currentThread().interrupt();
-                }
-                while ((mensagem = reader.readLine()) != null) {
-                    System.out.println("Recebi: " + mensagem);
-                    if (mensagem.charAt(0) == 'c') {
-                        String temp = mensagem.substring(2);
-                        Chat.getChat().colocaMensagemAreaChat(temp);
-                    }
-                    if (mensagem.charAt(0) == 'j') {
-                        int x = Integer.parseInt(Character.toString(mensagem.charAt(2)));
-                        int y = Integer.parseInt(Character.toString(mensagem.charAt(4)));
-                        String resultado = Jogador.getJogador().getPontosLogico(x, y);
-                        String aux;
-
-                        int pontos = 0;
-                        if (!resultado.equals("sea-tile")) {
-                            pontos = 10;
-                            resultado = resultado.replace('c', 'h');
-                        } else {
-                            resultado = "sea-tile-hit";
+            while (executando) {
+                try {
+                    while ((mensagem = reader.readLine()) != null) {
+                        System.out.println("Recebi: " + mensagem);
+                        if (mensagem.charAt(0) == 'c') {
+                            String temp = mensagem.substring(2);
+                            Chat.getChat().colocaMensagemAreaChat(temp);
                         }
+                        if (mensagem.charAt(0) == 'j') {
+                            int x = Integer.parseInt(Character.toString(mensagem.charAt(2)));
+                            int y = Integer.parseInt(Character.toString(mensagem.charAt(4)));
+                            String resultado = Jogador.getJogador().getPontosLogico(x, y);
+                            String aux;
 
-                        enviaPontuacao(pontos, resultado, x, y);
+                            int pontos = 0;
+                            if (!resultado.equals("sea-tile")) {
+                                pontos = 10;
+                                resultado = resultado.replace('c', 'h');
+                            } else {
+                                resultado = "sea-tile-hit";
+                            }
 
-                        if (resultado.charAt(0) != 's') {
-                            aux = resultado.substring(1);
-                            resultado = "b" + aux.replace('b', 's');
+                            enviaPontuacao(pontos, resultado, x, y);
+
+                            if (resultado.charAt(0) != 's') {
+                                aux = resultado.substring(1);
+                                resultado = "b" + aux.replace('b', 's');
+                            }
+
+                            EmJogo.getMini().setBotao(x, y, resultado);
+                            if (pontos == 0) {
+                                Jogador.getJogador().setTurno(true);
+                                Chat.getChat().colocaMensagemAreaChat("Sistema: Seu turno!");
+                            }
                         }
+                        if (mensagem.charAt(0) == 'p') {
+                            String vetor[] = mensagem.split(":");
+                            int pontos = Integer.parseInt(vetor[1]);
+                            String icone = vetor[2];
+                            int x = Integer.parseInt(vetor[3]);
+                            int y = Integer.parseInt(vetor[4]);
 
-                        EmJogo.getMini().setBotao(x, y, resultado);
-                        if (pontos == 0) {
-                            Jogador.getJogador().setTurno(true);
-                            Chat.getChat().colocaMensagemAreaChat("Sistema: Seu turno!");
+                            if (pontos == 0) {
+                                Jogador.getJogador().setTurno(false);
+                                Jogador.getJogador().zeraContadorConsecutivo();
+                                Chat.getChat().colocaMensagemAreaChat("Sistema: Turno do oponente!");
+                            } else {
+                                Jogador.getJogador().incrementaContador();
+                                Jogador.getJogador().incrementaContadorConsecutivo();
+                                Jogador.getJogador().setPontos(Jogador.getJogador().getPontos() + (pontos * Jogador.getJogador().getContadorConsecutivo()));
+                                EmJogo.setLabelPontos();
+                            }
+
+                            if (Jogador.getJogador().getContador() == 17) {
+                                enviaAvisoReinicioJogo();
+                                int resposta = JOptionPane.showConfirmDialog(Main.getJanela(), "Parabéns! Você é o vencedor!\nDeseja continuar jogando?", "Fim de jogo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+                                if (resposta == 0) {
+                                    Jogador.getJogador().limpaGridLogico();
+                                    Jogador.getJogador().setPontos(0);
+                                    Jogador.getJogador().zeraContador();
+                                    Jogador.getJogador().zeraContadorConsecutivo();
+                                    Chat.getChat().limpaAreaChat();
+                                    Main.reiniciaJogo();
+                                }
+                                if (resposta == 1) {
+                                    enviaAvisoDesistencia();
+                                    fechaFluxos();
+                                    System.exit(0);
+                                }
+                                paraExecucao();
+                                Thread.currentThread().interrupt();
+                            }
+
+                            EmJogo.getGrid().setBotao(x, y, icone);
                         }
-                    }
-                    if (mensagem.charAt(0) == 'p') {
-                        String vetor[] = mensagem.split(":");
-                        int pontos = Integer.parseInt(vetor[1]);
-                        String icone = vetor[2];
-                        int x = Integer.parseInt(vetor[3]);
-                        int y = Integer.parseInt(vetor[4]);
-
-                        if (pontos == 0) {
-                            Jogador.getJogador().setTurno(false);
-                            Jogador.getJogador().zeraContadorConsecutivo();
-                            Chat.getChat().colocaMensagemAreaChat("Sistema: Turno do oponente!");
-                        } else {
-                            Jogador.getJogador().incrementaContador();
-                            Jogador.getJogador().incrementaContadorConsecutivo();
-                            Jogador.getJogador().setPontos(Jogador.getJogador().getPontos() + (pontos * Jogador.getJogador().getContadorConsecutivo()));
-                            EmJogo.setLabelPontos();
-                        }
-
-                        if (Jogador.getJogador().getContador() == 17) {
-                            enviaAvisoReinicioJogo();
-                            int resposta = JOptionPane.showConfirmDialog(Main.getJanela(), "Parabéns! Você é o vencedor!\nDeseja continuar jogando?", "Fim de jogo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                        if (mensagem.charAt(0) == 'r') {
+                            int resposta = JOptionPane.showConfirmDialog(Main.getJanela(), "Que pena! Você perdeu!\nDeseja continuar jogando?", "Fim de jogo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
                             if (resposta == 0) {
                                 Jogador.getJogador().limpaGridLogico();
@@ -119,46 +144,31 @@ public class Conexao {
                                 fechaFluxos();
                                 System.exit(0);
                             }
+                            paraExecucao();
+                            Thread.currentThread().interrupt();
                         }
-
-                        EmJogo.getGrid().setBotao(x, y, icone);
-                    }
-                    if (mensagem.charAt(0) == 'r') {
-                        int resposta = JOptionPane.showConfirmDialog(Main.getJanela(), "Que pena! Você perdeu!\nDeseja continuar jogando?", "Fim de jogo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-
-                        if (resposta == 0) {
+                        if (mensagem.charAt(0) == 'd') {
+                            JOptionPane.showMessageDialog(Main.getJanela(), "O outro jogador desistiu!", "Fim de jogo", JOptionPane.INFORMATION_MESSAGE);
+                            if (Jogador.getJogador().getServidor()) {
+                                soqueteServidor.close();
+                            }
                             Jogador.getJogador().limpaGridLogico();
                             Jogador.getJogador().setPontos(0);
                             Jogador.getJogador().zeraContador();
                             Jogador.getJogador().zeraContadorConsecutivo();
                             Chat.getChat().limpaAreaChat();
-                            Main.reiniciaJogo();
+                            Main.voltaAoInicio();
+                            paraExecucao();
+                            Thread.currentThread().interrupt();
                         }
-                        if (resposta == 1) {
-                            enviaAvisoDesistencia();
-                            fechaFluxos();
-                            System.exit(0);
+                        if (mensagem.charAt(0) == 'i') {
+                            Jogador.getJogador().setTurno(true);
+                            Chat.getChat().colocaMensagemAreaChat("Sistema: Seu turno!");
                         }
                     }
-                    if (mensagem.charAt(0) == 'd') {
-                        JOptionPane.showMessageDialog(Main.getJanela(), "O outro jogador desistiu!", "Fim de jogo", JOptionPane.INFORMATION_MESSAGE);
-                        if (Jogador.getJogador().getServidor()) {
-                            soqueteServidor.close();
-                        }
-                        Jogador.getJogador().limpaGridLogico();
-                        Jogador.getJogador().setPontos(0);
-                        Jogador.getJogador().zeraContador();
-                        Jogador.getJogador().zeraContadorConsecutivo();
-                        Chat.getChat().limpaAreaChat();
-                        Main.voltaAoInicio();
-                    }
-                    if (mensagem.charAt(0) == 'i') {
-                        Jogador.getJogador().setTurno(true);
-                        Chat.getChat().colocaMensagemAreaChat("Sistema: Seu turno!");
-                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
-            } catch (Exception ex) {
-                ex.printStackTrace();
             }
         }
     }
@@ -199,6 +209,7 @@ public class Conexao {
             inicializarFluxos();
 
             Main.mostraConfigGrid();
+            Thread.currentThread().interrupt();
         }
     }
 

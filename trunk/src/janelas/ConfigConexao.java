@@ -1,5 +1,6 @@
 package janelas;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Dimension;
@@ -10,6 +11,7 @@ public class ConfigConexao extends JPanel {
 
     private PainelConexao form;
     private JLabel batalha, redes, andre, hayato, paulo;
+    private static JButton sair;
 
     public ConfigConexao() {
         setLayout(null);
@@ -50,5 +52,10 @@ public class ConfigConexao extends JPanel {
         Dimension tamPaulo = paulo.getPreferredSize();
         paulo.setBounds(326, 163, tamPaulo.width, tamPaulo.height);
         add(paulo);
+        
+        sair = Main.getSair();
+        Dimension tamSair = sair.getPreferredSize();
+        sair.setBounds(725, 10, tamSair.width, tamSair.height);
+        add(sair);
     }
 }

@@ -1,6 +1,7 @@
 package janelas;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -17,6 +18,7 @@ public class ConfigGrid extends JPanel {
     private static JRadioButton horizontal;
     private ButtonGroup grupoBotoes;
     private JLabel posicione;
+    private static JButton sair;
 
     public static JRadioButton getVertical() {
         if (vertical == null) {
@@ -33,6 +35,11 @@ public class ConfigGrid extends JPanel {
     }
 
     public ConfigGrid() {
+        sair = Main.getSair();
+        Dimension tamSair = sair.getPreferredSize();
+        sair.setBounds(725, 10, tamSair.width, tamSair.height);
+        add(sair);
+        
         posicione = new JLabel("Posicione seus barcos.");
         posicione.setFont(new Font("Arial", Font.PLAIN, 18));
         posicione.setPreferredSize(new Dimension(185, 19));
