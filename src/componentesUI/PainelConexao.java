@@ -3,8 +3,6 @@ package componentesUI;
 import janelas.Main;
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -189,7 +187,7 @@ public class PainelConexao extends JPanel {
     public void atualizaStatusSv(String _msg) {
         labelStatusSv.setText(_msg);
     }
-    
+
     public void atualizaStatusCl(String _msg) {
         labelStatus.setText(_msg);
     }

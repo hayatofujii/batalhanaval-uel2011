@@ -735,6 +735,7 @@ public class Grid extends JPanel {
 
                                 if (!Jogador.getJogador().getServidor()) {
                                     Conexao.getConexao().enviaSinalInicio();
+                                    Chat.getChat().colocaMensagemAreaChat("Sistema: Turno do oponente!");
                                 }
 
                                 Main.mostraEmJogo();
@@ -754,6 +755,7 @@ public class Grid extends JPanel {
 
                                 if (!Jogador.getJogador().getServidor()) {
                                     Conexao.getConexao().enviaSinalInicio();
+                                    Chat.getChat().colocaMensagemAreaChat("Sistema: Turno do oponente!");
                                 }
 
                                 Main.mostraEmJogo();

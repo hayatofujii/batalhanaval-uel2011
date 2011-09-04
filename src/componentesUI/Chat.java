@@ -19,21 +19,21 @@ import nucleo.Conexao;
 import nucleo.Jogador;
 
 public class Chat extends JPanel {
-
+    
     private static Chat chat;
     private JTextArea areaChat;
     private JScrollPane scrollChat;
     private JButton botNome;
     private JTextField areaEntrada;
     private JButton botEnviar;
-
+    
     public static Chat getChat() {
         if (chat == null) {
             chat = new Chat();
         }
         return chat;
     }
-
+    
     private Chat() {
         setLayout(null);
         setPreferredSize(new Dimension(700, 300));
@@ -45,10 +45,11 @@ public class Chat extends JPanel {
         areaChat.setAutoscrolls(false);
         areaChat.setBorder(null);
         areaChat.setCursor(new Cursor(Cursor.TEXT_CURSOR));
-
+        
         scrollChat = new JScrollPane(areaChat);
         scrollChat.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollChat.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollChat.setAutoscrolls(true);
 
         // tamanho e posicionamento da areaChat
         scrollChat.setPreferredSize(new Dimension(700, 100));
@@ -93,25 +94,25 @@ public class Chat extends JPanel {
     private void enviarMensagem(String _msg) {
         colocaMensagemAreaChat(_msg);
         Conexao.getConexao().enviaMensagemChat(_msg);
-
+        
         areaEntrada.setText("");
         areaEntrada.requestFocus();
     }
-
+    
     public void colocaMensagemAreaChat(String _msg) {
         areaChat.append(_msg + "\n");
     }
-
+    
     public void limpaAreaChat() {
         areaChat.setText("");
     }
-
+    
     public void setBotNome(String _nome) {
         botNome.setText(_nome);
     }
-
+    
     private class EventoBotEnviar implements ActionListener {
-
+        
         @Override
         public void actionPerformed(ActionEvent ev) {
             if (!areaEntrada.getText().equals("")) {
@@ -119,9 +120,9 @@ public class Chat extends JPanel {
             }
         }
     }
-
+    
     private class EventoAreaEntrada extends KeyAdapter {
-
+        
         @Override
         public void keyReleased(KeyEvent ev) {
             if (ev.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -131,14 +132,15 @@ public class Chat extends JPanel {
             }
         }
     }
-
+    
     private class EventoBotaoNome implements ActionListener {
-
+        
         @Override
         public void actionPerformed(ActionEvent ev) {
             String nome = JOptionPane.showInputDialog(Main.getJanela(), "Digite seu novo nome:", "Alteração de nome", JOptionPane.QUESTION_MESSAGE);
-            if (!nome.equals("") && nome != null)
+            if (!nome.equals("") && nome != null) {
                 setBotNome(nome);
+            }
         }
     }
 }

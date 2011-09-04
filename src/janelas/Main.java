@@ -5,7 +5,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import java.awt.Dimension;
-import java.awt.Insets;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -104,10 +103,10 @@ public class Main {
         janela = new JFrame("Batalha Naval");
         janela.setPreferredSize(new Dimension(MAX_LARGURA, MAX_ALTURA));
         janela.setResizable(false);
-        
+
         janela.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         janela.addWindowListener(new AcaoSair());
-        
+
         // instancia um painel ConfigConexao
         mostraConfigConexao();
 
@@ -115,8 +114,9 @@ public class Main {
         janela.pack();
         janela.setVisible(true);
     }
-    
+
     public static class AcaoSair extends WindowAdapter {
+
         @Override
         public void windowClosing(WindowEvent e) {
             int resposta = JOptionPane.showConfirmDialog(Main.getJanela(), "Tem certeza de que deseja sair?", "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
