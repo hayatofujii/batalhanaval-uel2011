@@ -47,6 +47,10 @@ public class Conexao {
         @Override
         public void run() {
             try {
+                if (reader == null) {
+                    System.out.println("lol");
+                    Thread.currentThread().interrupt();
+                }
                 while ((mensagem = reader.readLine()) != null) {
                     System.out.println("Recebi: " + mensagem);
                     if (mensagem.charAt(0) == 'c') {
@@ -103,6 +107,7 @@ public class Conexao {
                             if (resposta == 0) {
                                 Jogador.getJogador().limpaGridLogico();
                                 Jogador.getJogador().setPontos(0);
+                                Jogador.getJogador().zeraContador();
                                 Chat.getChat().limpaAreaChat();
                                 Main.reiniciaJogo();
                             }
@@ -121,6 +126,7 @@ public class Conexao {
                         if (resposta == 0) {
                             Jogador.getJogador().limpaGridLogico();
                             Jogador.getJogador().setPontos(0);
+                            Jogador.getJogador().zeraContador();
                             Chat.getChat().limpaAreaChat();
                             Main.reiniciaJogo();
                         }
@@ -135,6 +141,10 @@ public class Conexao {
                         if (Jogador.getJogador().getServidor()) {
                             soqueteServidor.close();
                         }
+                        Jogador.getJogador().limpaGridLogico();
+                        Jogador.getJogador().setPontos(0);
+                        Jogador.getJogador().zeraContador();
+                        Chat.getChat().limpaAreaChat();
                         Main.voltaAoInicio();
                     }
                     if (mensagem.charAt(0) == 'i') {
@@ -235,7 +245,6 @@ public class Conexao {
     public void fechaFluxos() throws IOException {
         writer.close();
         reader.close();
-        streamReader.close();
         soqueteCliente.close();
         if (Jogador.getJogador().getServidor()) {
             soqueteServidor.close();

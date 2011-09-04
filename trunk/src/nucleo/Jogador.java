@@ -72,6 +72,10 @@ public class Jogador {
         return contador;
     }
     
+    public void zeraContador() {
+        contador = 0;
+    }
+    
     public void setServidor(boolean estado) {
         this.servidor = estado;
     }
