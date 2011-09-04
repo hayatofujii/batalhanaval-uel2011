@@ -173,15 +173,9 @@ public class Conexao {
         }
     }
 
-    public void conectarCliente(String _endereco, int _porta) {
-        try {
-            soqueteCliente = new Socket(_endereco, _porta);
-        } catch (UnknownHostException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    public void conectarCliente(String _endereco, int _porta) throws UnknownHostException, IOException {
 
+        soqueteCliente = new Socket(_endereco, _porta);
         inicializarFluxos();
     }
 
