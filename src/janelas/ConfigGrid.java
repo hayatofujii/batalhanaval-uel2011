@@ -39,14 +39,14 @@ public class ConfigGrid extends JPanel {
         Dimension tamSair = sair.getPreferredSize();
         sair.setBounds(725, 10, tamSair.width, tamSair.height);
         add(sair);
-        
+
         posicione = new JLabel("Posicione seus barcos.");
         posicione.setFont(new Font("Arial", Font.PLAIN, 18));
         posicione.setPreferredSize(new Dimension(185, 19));
         Dimension tamPosicione = posicione.getPreferredSize();
         posicione.setBounds(50, 18, tamPosicione.width, tamPosicione.height);
         add(posicione);
-        
+
         grid = new Grid(1);
 
         setLayout(null);

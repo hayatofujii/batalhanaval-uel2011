@@ -15,7 +15,7 @@ import nucleo.Conexao;
 import nucleo.Jogador;
 
 public class Grid extends JPanel {
-    
+
     // ícones
     private ImageIcon sea_tile = new ImageIcon(getClass().getResource("../imagensGrid/sea-tile.jpg"));
     private ImageIcon sea_tile_temp = new ImageIcon(getClass().getResource("../imagensGrid/sea-tile-temp.jpg"));
