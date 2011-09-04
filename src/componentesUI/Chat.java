@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.text.DefaultCaret;
 import nucleo.Conexao;
 import nucleo.Jogador;
 
@@ -45,6 +46,9 @@ public class Chat extends JPanel {
         areaChat.setAutoscrolls(false);
         areaChat.setBorder(null);
         areaChat.setCursor(new Cursor(Cursor.TEXT_CURSOR));
+        
+        DefaultCaret caret = (DefaultCaret)areaChat.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         
         scrollChat = new JScrollPane(areaChat);
         scrollChat.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
