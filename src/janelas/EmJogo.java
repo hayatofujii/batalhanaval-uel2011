@@ -15,7 +15,6 @@ public class EmJogo extends JPanel {
     private static Grid grid, mini;
     private JLabel labelGrid, labelMini;
     private static JLabel pontos;
-    private static JButton sair;
 
     public static Grid getGrid() {
         return grid;
@@ -30,11 +29,6 @@ public class EmJogo extends JPanel {
     }
 
     public EmJogo() {
-        sair = Main.getSair();
-        Dimension tamSair = sair.getPreferredSize();
-        sair.setBounds(725, 10, tamSair.width, tamSair.height);
-        add(sair);
-
         labelGrid = new JLabel("Grid do oponente");
         labelGrid.setFont(new Font("Arial", Font.PLAIN, 18));
         labelGrid.setPreferredSize(new Dimension(139, 19));

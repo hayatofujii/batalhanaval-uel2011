@@ -6,8 +6,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import java.awt.Dimension;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import nucleo.Conexao;
 
@@ -103,13 +103,11 @@ public class Main {
         // frame
         janela = new JFrame("Batalha Naval");
         janela.setPreferredSize(new Dimension(MAX_LARGURA, MAX_ALTURA));
-        janela.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         janela.setResizable(false);
-        sair = new JButton("SAIR");
-        sair.setMargin(new Insets(0, 0, 0, 0));
-        sair.setPreferredSize(new Dimension(60, 27));
-        sair.addActionListener(new EventoBotaoSair());
-
+        
+        janela.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        janela.addWindowListener(new AcaoSair());
+        
         // instancia um painel ConfigConexao
         mostraConfigConexao();
 
@@ -117,11 +115,10 @@ public class Main {
         janela.pack();
         janela.setVisible(true);
     }
-
-    private static class EventoBotaoSair implements ActionListener {
-
+    
+    public static class AcaoSair extends WindowAdapter {
         @Override
-        public void actionPerformed(ActionEvent ev) {
+        public void windowClosing(WindowEvent e) {
             int resposta = JOptionPane.showConfirmDialog(Main.getJanela(), "Tem certeza de que deseja sair?", "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (resposta == 0) {
                 if (Conexao.getConexao().writerInstanciado()) {
