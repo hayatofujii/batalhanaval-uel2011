@@ -18,7 +18,7 @@ public class Jogador {
     public void limpaGridLogico() {
         gridLogico.limpa();
     }
-    
+
     public String getPosicaoLogico(int x, int y) {
         return gridLogico.getPosicao(x, y);
     }
@@ -73,27 +73,27 @@ public class Jogador {
     public int getContador() {
         return contador;
     }
-    
+
     public void zeraContador() {
         contador = 0;
     }
-    
+
     public void incrementaContadorConsecutivo() {
         contadorConsecutivo++;
     }
-    
+
     public int getContadorConsecutivo() {
         return contadorConsecutivo;
     }
-    
+
     public void zeraContadorConsecutivo() {
         contadorConsecutivo = 0;
     }
-    
+
     public void setServidor(boolean estado) {
         this.servidor = estado;
     }
-    
+
     public boolean getServidor() {
         return servidor;
     }
