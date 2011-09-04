@@ -1,13 +1,11 @@
 package janelas;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import nucleo.Conexao;
 
 public class Main {
@@ -107,13 +105,18 @@ public class Main {
         janela.pack();
         janela.setVisible(true);
     }
-
+    
     private static class EventoFechaJanela extends WindowAdapter {
 
         @Override
         public void windowClosing(WindowEvent e) {
             if (Conexao.getConexao().writerInstanciado()) {
                 Conexao.getConexao().enviaAvisoDesistencia();
+                try {
+                    Conexao.getConexao().fechaFluxos();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
     }
