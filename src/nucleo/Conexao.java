@@ -54,7 +54,7 @@ public class Conexao {
         public void run() {
             while (executando) {
                 try {
-                    while ((mensagem = reader.readLine()) != null) {
+                    while ((reader != null) && ((mensagem = reader.readLine()) != null)) {
                         System.out.println("Recebi: " + mensagem);
                         if (mensagem.charAt(0) == 'c') {
                             String temp = mensagem.substring(2);
@@ -149,9 +149,7 @@ public class Conexao {
                         }
                         if (mensagem.charAt(0) == 'd') {
                             JOptionPane.showMessageDialog(Main.getJanela(), "O outro jogador desistiu!", "Fim de jogo", JOptionPane.INFORMATION_MESSAGE);
-                            if (Jogador.getJogador().getServidor()) {
-                                soqueteServidor.close();
-                            }
+                            fechaFluxos();
                             Jogador.getJogador().limpaGridLogico();
                             Jogador.getJogador().setPontos(0);
                             Jogador.getJogador().zeraContador();
