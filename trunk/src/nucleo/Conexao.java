@@ -91,12 +91,14 @@ public class Conexao {
                         int x = Integer.parseInt(vetor[3]);
                         int y = Integer.parseInt(vetor[4]);
 
-                        Jogador.getJogador().setPontos(Jogador.getJogador().getPontos() + pontos);
                         if (pontos == 0) {
                             Jogador.getJogador().setTurno(false);
+                            Jogador.getJogador().zeraContadorConsecutivo();
                             Chat.getChat().colocaMensagemAreaChat("Sistema: Turno do oponente!");
                         } else {
                             Jogador.getJogador().incrementaContador();
+                            Jogador.getJogador().incrementaContadorConsecutivo();
+                            Jogador.getJogador().setPontos(Jogador.getJogador().getPontos() + (pontos * Jogador.getJogador().getContadorConsecutivo()));
                             EmJogo.setLabelPontos();
                         }
 
@@ -108,6 +110,7 @@ public class Conexao {
                                 Jogador.getJogador().limpaGridLogico();
                                 Jogador.getJogador().setPontos(0);
                                 Jogador.getJogador().zeraContador();
+                                Jogador.getJogador().zeraContadorConsecutivo();
                                 Chat.getChat().limpaAreaChat();
                                 Main.reiniciaJogo();
                             }
@@ -127,6 +130,7 @@ public class Conexao {
                             Jogador.getJogador().limpaGridLogico();
                             Jogador.getJogador().setPontos(0);
                             Jogador.getJogador().zeraContador();
+                            Jogador.getJogador().zeraContadorConsecutivo();
                             Chat.getChat().limpaAreaChat();
                             Main.reiniciaJogo();
                         }
@@ -144,6 +148,7 @@ public class Conexao {
                         Jogador.getJogador().limpaGridLogico();
                         Jogador.getJogador().setPontos(0);
                         Jogador.getJogador().zeraContador();
+                        Jogador.getJogador().zeraContadorConsecutivo();
                         Chat.getChat().limpaAreaChat();
                         Main.voltaAoInicio();
                     }

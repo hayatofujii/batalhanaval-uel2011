@@ -8,6 +8,7 @@ public class Jogador {
     private GridLogico gridLogico;
     private boolean turno;
     private int contador;
+    private int contadorConsecutivo;
     private boolean servidor;
 
     public void atualizaGridLogico(int x, int y, String icone) {
@@ -35,6 +36,7 @@ public class Jogador {
 
     private Jogador() {
         contador = 0;
+        contadorConsecutivo = 0;
         pontos = 0;
         servidor = false;
         gridLogico = new GridLogico();
@@ -74,6 +76,18 @@ public class Jogador {
     
     public void zeraContador() {
         contador = 0;
+    }
+    
+    public void incrementaContadorConsecutivo() {
+        contadorConsecutivo++;
+    }
+    
+    public int getContadorConsecutivo() {
+        return contadorConsecutivo;
+    }
+    
+    public void zeraContadorConsecutivo() {
+        contadorConsecutivo = 0;
     }
     
     public void setServidor(boolean estado) {
