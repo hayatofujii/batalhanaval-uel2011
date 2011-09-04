@@ -1,6 +1,8 @@
 package janelas;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import java.awt.Dimension;
@@ -65,6 +67,7 @@ public class Main {
 
     public static void reiniciaJogo() {
         janela.remove(emJogo);
+        
         emJogo = null;
         confGrid = new ConfigGrid();
         confGrid.setOpaque(true);

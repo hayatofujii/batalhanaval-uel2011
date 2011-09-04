@@ -49,7 +49,7 @@ public class Jogador {
     }
 
     public void setPontos(int pontos) {
-        this.pontos += pontos;
+        this.pontos = pontos;
     }
 
     public int getPontos() {

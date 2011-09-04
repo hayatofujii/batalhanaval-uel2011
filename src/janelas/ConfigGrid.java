@@ -35,7 +35,7 @@ public class ConfigGrid extends JPanel {
     public ConfigGrid() {
         posicione = new JLabel("Posicione seus barcos.");
         posicione.setFont(new Font("Arial", Font.PLAIN, 18));
-        posicione.setPreferredSize(new Dimension(185, 17));
+        posicione.setPreferredSize(new Dimension(185, 19));
         Dimension tamPosicione = posicione.getPreferredSize();
         posicione.setBounds(50, 18, tamPosicione.width, tamPosicione.height);
         add(posicione);

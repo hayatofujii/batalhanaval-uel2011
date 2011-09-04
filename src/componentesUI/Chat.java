@@ -102,6 +102,10 @@ public class Chat extends JPanel {
         areaChat.append(_msg + "\n");
     }
 
+    public void limpaAreaChat() {
+        areaChat.setText("");
+    }
+    
     public void setBotNome(String _nome) {
         botNome.setText(_nome);
     }

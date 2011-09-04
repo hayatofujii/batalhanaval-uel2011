@@ -93,6 +93,7 @@ public class Conexao {
                             Chat.getChat().colocaMensagemAreaChat("Sistema: Turno do oponente!");
                         } else {
                             Jogador.getJogador().incrementaContador();
+                            EmJogo.setLabelPontos();
                         }
 
                         if (Jogador.getJogador().getContador() == 17) {
@@ -101,6 +102,8 @@ public class Conexao {
 
                             if (resposta == 0) {
                                 Jogador.getJogador().limpaGridLogico();
+                                Jogador.getJogador().setPontos(0);
+                                Chat.getChat().limpaAreaChat();
                                 Main.reiniciaJogo();
                             }
                             if (resposta == 1) {
@@ -117,6 +120,8 @@ public class Conexao {
 
                         if (resposta == 0) {
                             Jogador.getJogador().limpaGridLogico();
+                            Jogador.getJogador().setPontos(0);
+                            Chat.getChat().limpaAreaChat();
                             Main.reiniciaJogo();
                         }
                         if (resposta == 1) {
